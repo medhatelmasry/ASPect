@@ -4,15 +4,18 @@ namespace Web.Models
     {
         public partial class Account
         {
-            public const string ROLE_ADMIN = "RoleAdmin";
-            public const string ADMIN_USERNAME = "Admin";
-            public const string ADMIN_EMAIL = "admin@planyourvote.com";
+            public const string ROLE_NAME = "Administrator";
+            public const string ADMIN_USERNAME = "admin";
+            public const string ADMIN_EMAIL = "admin@aspect.com";
 
-            public const string ROLE_EDITOR = "RoleEditor";
-            public const string EDITOR_USERNAME = "Editor";
-            public const string EDITOR_EMAIL = "editor@planyourvote.com";
+            public const string INSTRUCTOR_NAME = "Instructor";
+            public const string INSTRUCTOR_USERNAME = "instructor";
+            public const string INSTRUCTOR_EMAIL = "instructor@aspect.com";
 
-            public const string DEFAULT_PASSWORD = "ChangeDefaultPassword";
+            public const string STUDENT_NAME = "Student";
+            public const string STUDENT_USERNAME = "student";
+            public const string STUDENT_EMAIL = "student@aspect.com";
+
         }
     }
 }

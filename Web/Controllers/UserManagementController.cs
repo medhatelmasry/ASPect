@@ -12,7 +12,7 @@ using Web.Models;
 
 namespace Web.CmsControllers
 {
-    // [Authorize(Roles = Constants.Account.ROLE_ADMIN)]
+    //[Authorize(Roles = Constants.Account.ROLE_NAME)]
     [Authorize]
     public class UserManagementController : Controller
     {
@@ -40,19 +40,29 @@ namespace Web.CmsControllers
 
             foreach (IdentityUser identityUser in _context.Users.ToList())
             {
-                IdentityUserRole<string> identityUserRole = _context.UserRoles
-                .Where(userRole => userRole.UserId == identityUser.Id)
-                .First();
-
-                IdentityRole identityRole = await _roleManager
-                    .FindByIdAsync(identityUserRole.RoleId)
-                    .ConfigureAwait(false);
-
-                models.Add(new UserRoleViewModel()
+                if (_context.UserRoles.Count() > 0)
                 {
-                    IdentityUser = identityUser,
-                    IdentityRole = identityRole,
-                });
+                    IdentityUserRole<string> identityUserRole = _context.UserRoles
+                    .Where(userRole => userRole.UserId == identityUser.Id)
+                    .First();
+
+                    IdentityRole identityRole = await _roleManager
+                        .FindByIdAsync(identityUserRole.RoleId)
+                        .ConfigureAwait(false);
+
+                    models.Add(new UserRoleViewModel()
+                    {
+                        IdentityUser = identityUser,
+                        IdentityRole = identityRole,
+                    });
+                }
+                else
+                {
+                    models.Add(new UserRoleViewModel()
+                    {
+                        IdentityUser = identityUser,
+                    });
+                }
             }
 
             return View(models);
@@ -69,21 +79,34 @@ namespace Web.CmsControllers
 
             IdentityUser identityUser = _context.Users.Where(user => user.UserName == id).First();
 
-            IdentityUserRole<string> identityUserRole = _context.UserRoles
-                .Where(userRole => userRole.UserId == identityUser.Id)
-                .First();
-
-            IdentityRole identityRole = await _roleManager
-                .FindByIdAsync(identityUserRole.RoleId)
-                .ConfigureAwait(false);
-
-            UserRoleViewModel model = new UserRoleViewModel
+            UserRoleViewModel model;
+            IdentityRole identityRole = null;
+            if (_context.UserRoles.Count() > 0)
             {
-                IdentityUserID = identityUser.Id,
-                IdentityUser = identityUser,
-                IdentityRoleID = identityRole.Id,
-                IdentityRole = identityRole,
-            };
+                IdentityUserRole<string> identityUserRole = _context.UserRoles
+                    .Where(userRole => userRole.UserId == identityUser.Id)
+                    .First();
+
+                identityRole = await _roleManager
+                       .FindByIdAsync(identityUserRole.RoleId)
+                       .ConfigureAwait(false);
+
+                model = new UserRoleViewModel
+                {
+                    IdentityUserID = identityUser.Id,
+                    IdentityUser = identityUser,
+                    IdentityRoleID = identityRole.Id,
+                    IdentityRole = identityRole,
+                };
+            }
+            else
+            {
+                model = new UserRoleViewModel
+                {
+                    IdentityUserID = identityUser.Id,
+                    IdentityUser = identityUser,
+                };
+            }
 
             var selectItemListRoles = new List<SelectListItem>();
 
@@ -127,7 +150,7 @@ namespace Web.CmsControllers
                     var currentUser = await _userManager.GetUserAsync(HttpContext.User).ConfigureAwait(false);
                     var userRoles = await _userManager.GetRolesAsync(currentUser).ConfigureAwait(false);
                     var userRole = userRoles.First(); // Only one
-                    if (userRole != Constants.Account.ROLE_ADMIN)
+                    if (userRole != Constants.Account.ROLE_NAME)
                     {
                         await _signInManager.RefreshSignInAsync(
                             await _userManager.GetUserAsync(HttpContext.User)
@@ -151,8 +174,11 @@ namespace Web.CmsControllers
         {
             var user = await _context.Users.FindAsync(id);
 
-            var tempUserRole = _context.UserRoles.Where(userRole => userRole.UserId == id).First();
-            _context.UserRoles.Remove(tempUserRole);
+            if (_context.UserRoles.Count() > 0)
+            {
+                var tempUserRole = _context.UserRoles.Where(userRole => userRole.UserId == id).First();
+                _context.UserRoles.Remove(tempUserRole);
+            }
 
             _context.Users.Remove(user);
 
