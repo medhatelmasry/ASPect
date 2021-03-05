@@ -12,8 +12,7 @@ using Web.Models;
 
 namespace Web.CmsControllers
 {
-    //[Authorize(Roles = Constants.Account.ROLE_NAME)]
-    [Authorize]
+    [Authorize(Roles = Constants.Account.ADMIN_ROLE_NAME)]
     public class UserManagementController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -138,7 +137,7 @@ namespace Web.CmsControllers
             {
                 var identityUser = await _userManager.FindByIdAsync(userRoleViewModel.IdentityUserID);
 
-                if (identityUser.UserName != Constants.Account.ADMIN_USERNAME)
+                if (identityUser.UserName != Constants.Account.ADMIN_USER_NAME)
                 {
                     var rolesNameList = await _userManager.GetRolesAsync(identityUser);
                     await _userManager.RemoveFromRolesAsync(identityUser, rolesNameList.ToArray());
@@ -150,7 +149,7 @@ namespace Web.CmsControllers
                     var currentUser = await _userManager.GetUserAsync(HttpContext.User).ConfigureAwait(false);
                     var userRoles = await _userManager.GetRolesAsync(currentUser).ConfigureAwait(false);
                     var userRole = userRoles.First(); // Only one
-                    if (userRole != Constants.Account.ROLE_NAME)
+                    if (userRole != Constants.Account.ADMIN_ROLE_NAME)
                     {
                         await _signInManager.RefreshSignInAsync(
                             await _userManager.GetUserAsync(HttpContext.User)

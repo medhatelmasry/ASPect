@@ -34,36 +34,29 @@ namespace Web.Data
 
         public async Task InsertUserAsync()
         {
-            await CreateRole(
-                Constants.Account.ROLE_NAME,
-                Constants.Account.ROLE_NAME);
+            await CreateRole(Constants.Account.ADMIN_ROLE_NAME, Constants.Account.ADMIN_ROLE_NAME);
+
+            await CreateRole(Constants.Account.STUDENT_ROLE_NAME, Constants.Account.STUDENT_ROLE_NAME);
+
+            await CreateRole(Constants.Account.INSTRUCTOR_ROLE_NAME, Constants.Account.INSTRUCTOR_ROLE_NAME);
 
             await AddNewUserToRole(
                 Constants.Account.ADMIN_EMAIL,
-                Constants.Account.ADMIN_USERNAME,
-                _config["Users:DefaultAdminPassword"],
-                Constants.Account.ROLE_NAME);
-
-            await CreateRole(
-                Constants.Account.STUDENT_NAME,
-                Constants.Account.STUDENT_NAME);
+                Constants.Account.ADMIN_USER_NAME,
+                _config["Users:Admin:Password"],
+                Constants.Account.ADMIN_ROLE_NAME);
 
             await AddNewUserToRole(
-                Constants.Account.STUDENT_EMAIL,
-                Constants.Account.STUDENT_USERNAME,
-                _config["Users:DefaultStudentPassword"],
-                Constants.Account.STUDENT_NAME);
-
-            await CreateRole(
-            Constants.Account.STUDENT_NAME,
-            Constants.Account.STUDENT_NAME);
+                _config["Users:Instructor:Email"],
+                _config["Users:Instructor:Username"],
+                _config["Users:Instructor:Password"],
+                Constants.Account.STUDENT_ROLE_NAME);
 
             await AddNewUserToRole(
-                Constants.Account.INSTRUCTOR_EMAIL,
-                Constants.Account.INSTRUCTOR_USERNAME,
-                _config["Users:DefaultInstructorPassword"],
-                Constants.Account.INSTRUCTOR_NAME);
-
+                _config["Users:Student:Email"],
+                _config["Users:Student:Username"],
+                _config["Users:Student:Password"],
+                Constants.Account.INSTRUCTOR_ROLE_NAME);
         }
 
         private async Task CreateRole(string identityRoleName, string identityRoleNormalizedName)
@@ -82,6 +75,7 @@ namespace Web.Data
 
             if ((await _userManager.CreateAsync(user, password)).Succeeded)
             {
+                user.EmailConfirmed = true;
                 await _userManager.AddToRoleAsync(user, role);
             }
         }

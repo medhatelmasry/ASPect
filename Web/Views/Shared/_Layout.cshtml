@@ -26,8 +26,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @* @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ROLE_ADMIN)) *@
-                        @if (SignInManager.IsSignedIn(User))
+                         @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ADMIN_ROLE_NAME)) 
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" style="float: right;" asp-area="" asp-controller="UserManagement" asp-action="Index">User Management</a>
