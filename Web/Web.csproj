@@ -17,4 +17,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\API\" />
+  </ItemGroup>
 </Project>
