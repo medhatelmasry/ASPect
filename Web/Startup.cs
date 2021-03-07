@@ -12,6 +12,9 @@ using Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Web
 {
@@ -30,17 +33,43 @@ namespace Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(
-                options => {
-                    options.SignIn.RequireConfirmedAccount = true;
-                })
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-            
+             services.AddDefaultIdentity<IdentityUser>(
+                 option =>
+                 {
+                     option.SignIn.RequireConfirmedAccount = true;
+
+                     option.Password.RequireDigit = false;
+                     option.Password.RequiredLength = 6;
+                     option.Password.RequireNonAlphanumeric = false;
+                     option.Password.RequireUppercase = false;
+                     option.Password.RequireLowercase = false;
+                 })
+                 .AddRoles<IdentityRole>()
+                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = true;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Jwt:Site"],
+                    ValidIssuer = Configuration["Jwt:Site"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SigningKey"]))
+                };
+            });
+
             services.AddControllersWithViews();
         }
 

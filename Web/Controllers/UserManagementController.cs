@@ -9,6 +9,12 @@ using Web.Controllers;
 using Web.Data;
 using Web.ViewModels;
 using Web.Models;
+using System;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace Web.CmsControllers
 {
@@ -19,17 +25,20 @@ namespace Web.CmsControllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IConfiguration _configuration; //dependency injection
 
         public UserManagementController(
             ApplicationDbContext context,
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IConfiguration config)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _configuration = config;
         }
 
         // GET: UserRoleViewModels
@@ -183,6 +192,54 @@ namespace Web.CmsControllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        [Route("register")] //register endpoint, adds user. route: ' /register ' 
+        [HttpPost]
+        public async Task<ActionResult> InsertUser([FromBody] RegisterViewModel model)
+        {
+            var user = new IdentityUser
+            {
+                Email = model.Email,
+                UserName = model.Email,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            { //if the user has indeed been created
+                await _userManager.AddToRoleAsync(user, "Student"); //add the user to "Student" role
+            }
+            return Ok(new { Username = user.UserName });
+        }
+        [Route("login")] // route: ' /login '
+        [HttpPost]
+        public async Task<ActionResult> Login([FromBody] LoginViewModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                var claim = new[] {
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName)
+                    };
+                var signinKey = new SymmetricSecurityKey(
+                  Encoding.UTF8.GetBytes(_configuration["Jwt:SigningKey"]));
+
+                int expiryInMinutes = Convert.ToInt32(_configuration["Jwt:ExpiryInMinutes"]);
+
+                var token = new JwtSecurityToken(
+                  issuer: _configuration["Jwt:Site"],
+                  audience: _configuration["Jwt:Site"],
+                  expires: DateTime.UtcNow.AddMinutes(expiryInMinutes),
+                  signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
+                );
+
+                return Ok(
+                  new
+                  {
+                      token = new JwtSecurityTokenHandler().WriteToken(token),
+                      expiration = token.ValidTo
+                  });
+            }
+            return Unauthorized();
         }
     }
 }
