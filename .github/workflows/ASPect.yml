@@ -35,8 +35,9 @@ jobs:
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
+          dotnet restore
           dotnet build --configuration Release
-          dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Web/Web.csproj'
+          dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
       # Deploy to Azure Web apps
       - name: "Run Azure webapp deploy action using publish profile credentials"
@@ -44,5 +45,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
           publish-profile: ${{ secrets.OPENASPECT_WEB  }} # Define secret variable in repository settings as per action documentation
-          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Web/Web.csproj"
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp"
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
