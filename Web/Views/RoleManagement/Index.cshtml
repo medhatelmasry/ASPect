@@ -24,13 +24,19 @@
                     @Html.DisplayFor(_ => identityRole.Name)
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-controller="admin" asp-action="Edit"
-                        asp-route-id="@identityRole.Id">Edit</a>
+                    @if (identityRole.Name != Constants.Account.ADMIN_ROLE_NAME)
+                    {
+                        <a class="btn btn-primary" asp-controller="admin" asp-action="Edit"
+                            asp-route-id="@identityRole.Id">Edit</a>
+                    }
                 </td>
                 <td>
-                    <form asp-action="Delete" asp-controller="admin" asp-route-id="@identityRole.Id">
-                        <input type="submit" class="btn btn-danger" value="Delete" />
-                    </form>
+                    @if (identityRole.Name != Constants.Account.ADMIN_ROLE_NAME)
+                    {
+                        <form asp-action="Delete" asp-controller="admin" asp-route-id="@identityRole.Id">
+                            <input type="submit" class="btn btn-danger" value="Delete" />
+                        </form>
+                    }
                 </td>
             </tr>
         }
