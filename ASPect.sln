@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{A5C5EB29-B690-4637-88B2-E7E3B9799F24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{A5C5EB29-B690-4637-88B2-E7E3B9799F24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPectLibrary", "ASPectLibrary\ASPectLibrary.csproj", "{B4DCAE7C-F96D-4B12-8EE5-68C795D2099F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPectLibrary", "ASPectLibrary\ASPectLibrary.csproj", "{B4DCAE7C-F96D-4B12-8EE5-68C795D2099F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{ACC543FB-A31C-4A2D-9349-4CB6113D7263}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{ACC543FB-A31C-4A2D-9349-4CB6113D7263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPectTests", "ASPectTests\ASPectTests.csproj", "{39A80A88-44F3-4E42-9901-C812FFD13450}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPectTests", "ASPectTests\ASPectTests.csproj", "{39A80A88-44F3-4E42-9901-C812FFD13450}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactClient", "ReactClient\ReactClient.csproj", "{A873841F-95D1-4B27-B52B-9983EE7E6BE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactClient", "ReactClient\ReactClient.csproj", "{A873841F-95D1-4B27-B52B-9983EE7E6BE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,7 +38,6 @@ Global
 		{A873841F-95D1-4B27-B52B-9983EE7E6BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A873841F-95D1-4B27-B52B-9983EE7E6BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A873841F-95D1-4B27-B52B-9983EE7E6BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A873841F-95D1-4B27-B52B-9983EE7E6BE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
