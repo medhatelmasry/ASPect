@@ -1,0 +1,13 @@
+bin
+obj
+*.db
+.git
+Dockerfile
+.gitignore
+/tmp/*
+README.md
+env.*
+/devops/*
+.ipynb_checkpoints/*
+/notebooks/*
+/unused/*
