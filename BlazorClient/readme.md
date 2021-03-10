@@ -1,2 +1,11 @@
-# Blazor Client
-Built with the Blazor framework which uses the WebAssembly in the browser and consumes a .NET Core REST API
+Major Tasks:
+Once Backend team delivers REST API, it will be consumed.
+Creates pages based on UI/UX team wireframes
+Dockerize Blazor Client
+Instructor Registration
+
+Technologies:
+BlazorClient
+
+
+
