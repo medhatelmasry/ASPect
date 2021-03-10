@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ASPectLibrary;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
@@ -13,6 +14,6 @@ namespace Web.Data
             : base(options)
         {
         }
-        public DbSet<Web.Models.ProjectCategory> ProjectCategory { get; set; }
+        public DbSet<ProjectCategory> ProjectCategory { get; set; }
     }
 }

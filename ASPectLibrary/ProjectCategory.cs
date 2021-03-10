@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Web.Models
+namespace ASPectLibrary
 {
     public class ProjectCategory
     {

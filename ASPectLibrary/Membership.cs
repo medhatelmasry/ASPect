@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
-namespace Web.Models
+namespace ASPectLibrary
 {
     public class Membership
     {

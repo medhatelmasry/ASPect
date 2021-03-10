@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Web.Models
+namespace ASPectLibrary
 {
-    public class EditProjectRole
+    public class ProjectRole
     {
         [Key]
         public string Id { get; set; }
