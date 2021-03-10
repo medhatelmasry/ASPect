@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Web.Models;
 
 namespace Web.Data
 {
@@ -12,5 +13,6 @@ namespace Web.Data
             : base(options)
         {
         }
+        public DbSet<Web.Models.ProjectCategory> ProjectCategory { get; set; }
     }
 }
