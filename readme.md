@@ -1,7 +1,7 @@
 ### Containers
 1. MVC (Web) + SQLite database + Unit Tests (ASpect Tests)
-2. React Client
-3. Blazor Client
+2. React Client (student)
+3. Blazor Client (instructor)
 
 ### ASPectLibrary shared by
 1. Unit Tests (ASpect Tests)
