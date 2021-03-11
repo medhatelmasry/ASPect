@@ -11,3 +11,7 @@
 ### WebAPI will be used by
 1. React Client
 2. Blazor Client
+
+### CI/CD
+- react app deployed to https://aspectclient.z5.web.core.windows.net/
+- mvc app deployed to https://openaspect.azurewebsites.net/
