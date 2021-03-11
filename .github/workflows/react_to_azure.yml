@@ -1,0 +1,37 @@
+name: Deploy React App to Azure Storage
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+defaults:
+  run:
+    working-directory: ./ReactClient/ClientApp
+env:
+  NODE_VERSION: '12'                # set this to the node version to use
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: npm install & build
+      run: |
+        # Build and test the project, then
+        # deploy to Azure Web App.
+        npm install
+        npm run build --if-present
+    - name: 'Deploy static web app to Azure blob storage'
+      uses: lauchacarro/Azure-Storage-Action@v1.0
+      with:
+        enabled-static-website: 'true'
+        folder: 'ReactClient/ClientApp/build'
+        connection-string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }} 
