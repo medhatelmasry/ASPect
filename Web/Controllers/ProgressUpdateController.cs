@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Web.Data;
 using ASPectLibrary;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web.Controllers
 {
@@ -37,7 +38,7 @@ namespace Web.Controllers
         {
             try {
                 _context.ProgressUpdates.Add(progressUpdate);
-                await _context.ProgressUpdates.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return Accepted();
             } catch {
                 return NotFound();
@@ -55,10 +56,10 @@ namespace Web.Controllers
         {
             var progressUpdate = await _context.ProgressUpdates.FindAsync(id);
 
-            if (progressUpdate = null) { return NotFound(); }
+            if (progressUpdate == null) { return NotFound(); }
 
             _context.ProgressUpdates.Remove(progressUpdate);
-            await _context.ProgressUpdates.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             
             return Accepted();
         }
@@ -74,15 +75,16 @@ namespace Web.Controllers
         {
             var newPU = await _context.ProgressUpdates.FindAsync(progressUpdate.Id);
 
-            if (newPU = null) { return NotFound(); }
+            if (newPU == null) { return NotFound(); }
 
             _context.ProgressUpdates.Update(progressUpdate);
-            await _context.ProgressUpdates.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             
             return Ok();
         }
     }
 }
+
 
 
 
