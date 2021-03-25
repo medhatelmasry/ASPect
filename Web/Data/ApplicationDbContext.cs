@@ -14,6 +14,13 @@ namespace Web.Data
             : base(options)
         {
         }
+        protected override void OnModelCreating (ModelBuilder builder) {
+            builder.Entity<Project> ().ToTable ("Project");
+
+            base.OnModelCreating(builder);
+        }
+
+        public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectCategory> ProjectCategory { get; set; }
     }
 }
