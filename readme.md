@@ -14,4 +14,5 @@
 
 ### CI/CD
 - react app deployed to https://aspectclient.z5.web.core.windows.net/
+- blazor wasm app deployed to https://blaspect.azurewebsites.net/
 - mvc app deployed to https://openaspect.azurewebsites.net/
