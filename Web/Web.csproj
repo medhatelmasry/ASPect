@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\API\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ASPectLibrary\ASPectLibrary.csproj" />
   </ItemGroup>
 </Project>
