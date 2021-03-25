@@ -15,6 +15,7 @@ namespace Web.Data
         {
         }
         public DbSet<ProjectCategory> ProjectCategory { get; set; }
+        public DbSet<ProgressUpdate> ProgressUpdates { get; set; }
         public DbSet<ASPectLibrary.Course> Course { get; set; }
     }
 }
