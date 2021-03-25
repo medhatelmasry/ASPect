@@ -15,5 +15,6 @@ namespace Web.Data
         {
         }
         public DbSet<ProjectCategory> ProjectCategory { get; set; }
+        public DbSet<ProgressUpdate> ProgressUpdates { get; set; }
     }
 }
