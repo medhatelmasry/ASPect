@@ -1,0 +1,8 @@
+version: "3.4"
+services:
+  wasm:
+    build:
+      context: .
+      dockerfile: BlazorClient/Dockerfile
+    ports:
+      - 8888:80
