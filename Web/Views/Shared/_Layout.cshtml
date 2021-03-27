@@ -48,6 +48,19 @@
                                 </ul>
                             </li>
                         }
+
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ADMIN_ROLE_NAME))
+                        {
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><span class="nav-label">Admin</span><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" style="float: right;" asp-area=""
+                                            asp-controller="ProjectCategories" asp-action="Index">Project Categories</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
