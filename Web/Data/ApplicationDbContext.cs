@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ASPectLibrary;
+﻿using ASPectLibrary;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Web.Models;
 
 namespace Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -31,6 +28,6 @@ namespace Web.Data
         public DbSet<ProgressUpdate> ProgressUpdates { get; set; }
         public DbSet<Course> Course { get; set; }
         public DbSet<Membership> Memberships { get; set; }
-        public DbSet<ProjectRole> projectRoles { get; set; }
+        public DbSet<ProjectRole> ProjectRoles { get; set; }
     }
 }

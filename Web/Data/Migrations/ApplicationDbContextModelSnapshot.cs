@@ -2,150 +2,33 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web.Data;
 
-namespace Web.Data.migrations
+namespace Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210327185648_M1")]
-    partial class M1
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.4");
 
-            modelBuilder.Entity("ASPectLibrary.Course", b =>
-                {
-                    b.Property<int>("courseID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("courseID1")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("courseTitle")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("instructorID")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("projectOutline")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("term")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("courseID");
-
-                    b.HasIndex("courseID1");
-
-                    b.ToTable("Course");
-                });
-
-            modelBuilder.Entity("ASPectLibrary.Membership", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Memberships");
-                });
-
-            modelBuilder.Entity("ASPectLibrary.ProgressUpdate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Issues")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastWeekActivity")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NextWeekActivity")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProgressUpdates");
-                });
-
-            modelBuilder.Entity("ASPectLibrary.Project", b =>
-                {
-                    b.Property<int>("ProjectId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("AppName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("AspNetUserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProjectCategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("TeamName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ProjectId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("ProjectCategoryId");
-
-                    b.ToTable("Project");
-                });
-
-            modelBuilder.Entity("ASPectLibrary.ProjectCategory", b =>
-                {
-                    b.Property<int>("ProjectCategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ProjectCategoryName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ProjectCategoryId");
-
-                    b.ToTable("ProjectCategory");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("ASPectLibrary.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -165,30 +48,7 @@ namespace Web.Data.migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+            modelBuilder.Entity("ASPectLibrary.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -206,6 +66,12 @@ namespace Web.Data.migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
@@ -250,6 +116,285 @@ namespace Web.Data.migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("ASPectLibrary.Course", b =>
+                {
+                    b.Property<int>("courseID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("courseID1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("courseTitle")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("instructorID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("projectOutline")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("term")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("courseID");
+
+                    b.HasIndex("courseID1");
+
+                    b.ToTable("Course");
+
+                    b.HasData(
+                        new
+                        {
+                            courseID = 1,
+                            courseTitle = "COMP3800 - Practicum",
+                            instructorID = "0d56e795-1386-4462-85e7-960ef64ed67b",
+                            projectOutline = "https://www.bcit.ca/outlines/20211088135/",
+                            term = "4"
+                        },
+                        new
+                        {
+                            courseID = 2,
+                            courseTitle = "COMP4870 - Intranet Planning & Development",
+                            instructorID = "0d56e795-1386-4462-85e7-960ef64ed67b",
+                            projectOutline = "https://www.bcit.ca/outlines/20211049852/",
+                            term = "4"
+                        });
+                });
+
+            modelBuilder.Entity("ASPectLibrary.Membership", b =>
+                {
+                    b.Property<string>("StudentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("StudentId", "ProjectId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Memberships");
+                });
+
+            modelBuilder.Entity("ASPectLibrary.ProgressUpdate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Issues")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastWeekActivity")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NextWeekActivity")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProgressUpdates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2021, 3, 29, 11, 14, 56, 719, DateTimeKind.Local).AddTicks(7370),
+                            Issues = "Schema may need to be reworked",
+                            LastWeekActivity = "Finished DB Design",
+                            NextWeekActivity = "Going to work on the API",
+                            ProjectId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2021, 3, 29, 11, 14, 56, 725, DateTimeKind.Local).AddTicks(8570),
+                            Issues = "Need to find solution for deployment",
+                            LastWeekActivity = "Finished API Design",
+                            NextWeekActivity = "Going to implement the API",
+                            ProjectId = 1
+                        });
+                });
+
+            modelBuilder.Entity("ASPectLibrary.Project", b =>
+                {
+                    b.Property<int>("ProjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AppName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("AspNetUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProjectCategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TeamName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ProjectId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("ProjectCategoryId");
+
+                    b.ToTable("Project");
+
+                    b.HasData(
+                        new
+                        {
+                            ProjectId = 1,
+                            AppName = "Twitter",
+                            AspNetUserId = new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
+                            CourseId = 1,
+                            Description = "An app for tweeting",
+                            ProjectCategoryId = 1,
+                            TeamName = "RA"
+                        },
+                        new
+                        {
+                            ProjectId = 2,
+                            AppName = "PlaneGo",
+                            AspNetUserId = new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
+                            CourseId = 1,
+                            Description = "It's like uber but for planes",
+                            ProjectCategoryId = 2,
+                            TeamName = "Team Fly"
+                        });
+                });
+
+            modelBuilder.Entity("ASPectLibrary.ProjectCategory", b =>
+                {
+                    b.Property<int>("ProjectCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ProjectCategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ProjectCategoryId");
+
+                    b.ToTable("ProjectCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            ProjectCategoryId = 1,
+                            ProjectCategoryName = "Blockchain"
+                        },
+                        new
+                        {
+                            ProjectCategoryId = 2,
+                            ProjectCategoryName = "React"
+                        });
+                });
+
+            modelBuilder.Entity("ASPectLibrary.ProjectRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "Arch",
+                            RoleName = "Software Architect"
+                        },
+                        new
+                        {
+                            Id = "DBA",
+                            RoleName = "Database Administrator"
+                        },
+                        new
+                        {
+                            Id = "UIUIX",
+                            RoleName = "UI/UX Designer"
+                        },
+                        new
+                        {
+                            Id = "SD",
+                            RoleName = "Software Developer"
+                        },
+                        new
+                        {
+                            Id = "PM",
+                            RoleName = "Project Manager"
+                        },
+                        new
+                        {
+                            Id = "SA",
+                            RoleName = "System Administrator"
+                        },
+                        new
+                        {
+                            Id = "FE",
+                            RoleName = "Front End Developer"
+                        },
+                        new
+                        {
+                            Id = "BE",
+                            RoleName = "Back End Developer"
+                        },
+                        new
+                        {
+                            Id = "QA",
+                            RoleName = "Quality Assurance"
+                        },
+                        new
+                        {
+                            Id = "TE",
+                            RoleName = "Software Tester"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -346,15 +491,15 @@ namespace Web.Data.migrations
 
             modelBuilder.Entity("ASPectLibrary.Membership", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Student")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ASPectLibrary.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASPectLibrary.ApplicationUser", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -395,7 +540,7 @@ namespace Web.Data.migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("ASPectLibrary.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -404,7 +549,7 @@ namespace Web.Data.migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ASPectLibrary.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -413,7 +558,7 @@ namespace Web.Data.migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ASPectLibrary.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -422,13 +567,13 @@ namespace Web.Data.migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("ASPectLibrary.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ASPectLibrary.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -437,7 +582,7 @@ namespace Web.Data.migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ASPectLibrary.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -12,6 +12,7 @@ using Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ASPectLibrary;
 
 namespace Web
 {
@@ -27,24 +28,26 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseSqlite(
+            //         Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(
-                options => {
-                    options.SignIn.RequireConfirmedAccount = true;
-                })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            // services.AddDefaultIdentity<IdentityUser>(
+            //     options => {
+            //         options.SignIn.RequireConfirmedAccount = true;
+            //     })
+            //     .AddRoles<IdentityRole>()
+            //     .AddEntityFrameworkStores<ApplicationDbContext>()
+            //     .AddDefaultTokenProviders();
             
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context,
+                                 RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager )
         {
             if (env.IsDevelopment())
             {
@@ -65,7 +68,7 @@ namespace Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            context.Database.Migrate();
+            // context.Database.Migrate();
 
             app.UseEndpoints(endpoints =>
             {
@@ -75,8 +78,10 @@ namespace Web
                 endpoints.MapRazorPages();
             });
 
-            AccountsInit account = new AccountsInit();
-            account.InitializeAsync(app);
+            IdentityDummyData.Initialize(context, userManager, roleManager).Wait();
+
+            // AccountsInit account = new AccountsInit();
+            // account.InitializeAsync(app);
         }
     }
 }

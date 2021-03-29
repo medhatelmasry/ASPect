@@ -8,9 +8,9 @@ public static class DummyData {
       modelBuilder.Entity<Course>().HasData (
           GetCourses()
       );
-      modelBuilder.Entity<Membership>().HasData (
-          GetMemberships()
-      );
+    //   modelBuilder.Entity<Membership>().HasData (
+    //       GetMemberships()
+    //   );
       modelBuilder.Entity<ProgressUpdate>().HasData (
           GetProgressUpdates()
       );
@@ -57,7 +57,6 @@ public static List<Course> GetCourses () {
             ProjectId = 2          
         }
     };
-
         return memberships;
     }
     public static List<ProgressUpdate> GetProgressUpdates () {
