@@ -33,7 +33,7 @@ public static List<Course> GetCourses () {
             courseTitle = "COMP3800 - Practicum",
             term = "4",
             projectOutline = "https://www.bcit.ca/outlines/20211088135/",
-            instructorID = "0d56e795-1386-4462-85e7-960ef64ed67b	",
+            instructorID = "0d56e795-1386-4462-85e7-960ef64ed67b",
         },
         new Course {
             courseID = 2,
@@ -49,7 +49,7 @@ public static List<Course> GetCourses () {
     public static List<Membership> GetMemberships () {
     List<Membership> memberships = new List<Membership> () {
         new Membership {
-            StudentId = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f	",
+            StudentId = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
             ProjectId = 1
         }, 
         new Membership {
@@ -90,7 +90,7 @@ public static List<Course> GetCourses () {
                 ProjectCategoryId = 1,
                 AppName = "Twitter",
                 Description = "An app for tweeting",
-                AspNetUserId = new Guid("Guide5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
+                AspNetUserId = new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
                 CourseId = 1
             },
             new Project {
@@ -99,7 +99,7 @@ public static List<Course> GetCourses () {
                 ProjectCategoryId = 2,
                 AppName = "PlaneGo",
                 Description = "It's like uber but for planes",
-                AspNetUserId = new Guid("Guide5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
+                AspNetUserId = new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
                 CourseId = 1
             }
 

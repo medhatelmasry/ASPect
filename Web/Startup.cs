@@ -37,7 +37,6 @@ namespace Web
                 options => {
                     options.SignIn.RequireConfirmedAccount = true;
                 })
-                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             
