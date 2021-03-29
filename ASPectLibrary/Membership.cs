@@ -8,7 +8,7 @@ namespace ASPectLibrary
         public string StudentId { get; set; }
 
         [ForeignKey("Id")]
-        public IdentityUser Student { get; set; }
+        public ApplicationUser Student { get; set; }
 
         public int ProjectId { get; set; }
 
