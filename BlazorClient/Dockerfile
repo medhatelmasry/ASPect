@@ -3,6 +3,7 @@ WORKDIR /app
 
 # Copy BlazorClient to container working directory
 COPY BlazorClient ./BlazorClient
+COPY ASPectLibrary ./ASPectLibrary
 
 # Build and publish BlazorClient
 RUN dotnet publish BlazorClient/BlazorClient.csproj -c Release -o output
