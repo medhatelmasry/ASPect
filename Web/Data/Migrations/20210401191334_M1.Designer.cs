@@ -9,7 +9,7 @@ using Web.Data;
 namespace Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210401183015_M1")]
+    [Migration("20210401191334_M1")]
     partial class M1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,21 +52,30 @@ namespace Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bb84ad36-3e80-4225-acb7-493ec8f358f1",
-                            ConcurrencyStamp = "bb84ad36-3e80-4225-acb7-493ec8f358f1",
-                            CreatedDate = new DateTime(2021, 4, 1, 11, 30, 14, 932, DateTimeKind.Local).AddTicks(1950),
+                            Id = "644dbc4b-93d5-49d1-ba3d-b29294e92027",
+                            ConcurrencyStamp = "644dbc4b-93d5-49d1-ba3d-b29294e92027",
+                            CreatedDate = new DateTime(2021, 4, 1, 12, 13, 34, 78, DateTimeKind.Local).AddTicks(5730),
                             Description = "This is the admin role",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "60620cf0-2c4f-43c8-a203-99c7aa104fe6",
-                            ConcurrencyStamp = "60620cf0-2c4f-43c8-a203-99c7aa104fe6",
-                            CreatedDate = new DateTime(2021, 4, 1, 11, 30, 14, 937, DateTimeKind.Local).AddTicks(3900),
-                            Description = "This is the members role",
-                            Name = "Member",
-                            NormalizedName = "Member"
+                            Id = "4edb04b6-9f18-4608-a725-7bb859679400",
+                            ConcurrencyStamp = "4edb04b6-9f18-4608-a725-7bb859679400",
+                            CreatedDate = new DateTime(2021, 4, 1, 12, 13, 34, 83, DateTimeKind.Local).AddTicks(6000),
+                            Description = "This is the teacher role",
+                            Name = "Teacher",
+                            NormalizedName = "Teacher"
+                        },
+                        new
+                        {
+                            Id = "d6fda128-2e67-495f-930f-36b6fdbdfa88",
+                            ConcurrencyStamp = "d6fda128-2e67-495f-930f-36b6fdbdfa88",
+                            CreatedDate = new DateTime(2021, 4, 1, 12, 13, 34, 83, DateTimeKind.Local).AddTicks(6040),
+                            Description = "This is the student role",
+                            Name = "Student",
+                            NormalizedName = "Student"
                         });
                 });
 
@@ -144,33 +153,55 @@ namespace Web.Data.Migrations
                         {
                             Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3fcbfeab-0e9d-4786-a963-c931d24fffdb",
-                            Email = "aa@aa.aa",
+                            ConcurrencyStamp = "a57f6b41-9633-4c00-b990-cac8d1a9c7f4",
+                            Email = "admin@aspect.com",
                             EmailConfirmed = true,
                             FirstName = "Adam",
                             LastName = "Aldridge",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEDtT2pF4MkOR5jsGd7pxJcAo64ThkVn4fzb++6kUWvPofK18mZqPGYhpJVYVBA3ydA==",
+                            NormalizedEmail = "admin@aspect.com",
+                            NormalizedUserName = "admin@aspect.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGfyX47+B8fy+DOIrckAKnneGvyRd+vRWM6jgmnFIMLbqTfLcI4I9ax+F43n1DNngg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "45bb58dc-9c49-4aef-bb58-b97807ef92ce",
+                            SecurityStamp = "ec1af968-d374-4e37-b601-a78574f19b81",
                             TwoFactorEnabled = false,
-                            UserName = "aa@aa.aa"
+                            UserName = "admin@aspect.com"
                         },
                         new
                         {
                             Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bb617d90-96fc-44b4-bb17-6abaaa7d0a41",
-                            Email = "mm@mm.mm",
+                            ConcurrencyStamp = "798d07a7-755f-45c3-8fc0-04da59849d47",
+                            Email = "instructor@aspect.com",
+                            EmailConfirmed = true,
+                            FirstName = "Ted",
+                            LastName = "Smith",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "instructor@aspect.com",
+                            NormalizedUserName = "instructor@aspect.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAADEQvvk1u3w4/Tj0fs7YPttSDGzzVA5dyuR5CVAUlN8/lmuWn2aUHHLIcgD9ebdw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5d3f5924-fc45-49c4-8a46-056a6193ad14",
+                            TwoFactorEnabled = false,
+                            UserName = "instructor@aspect.com"
+                        },
+                        new
+                        {
+                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "98c91fff-a172-4ef8-91cb-6cc75148c988",
+                            Email = "student@aspect.com",
                             EmailConfirmed = true,
                             FirstName = "Mike",
                             LastName = "Myers",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEMzUhojrOjwr3Jju/1D8w2GRLSoqQLtuQXbKi++smMoNxFaR9thXk9kyw0InCRSo8A==",
+                            NormalizedEmail = "student@aspect.com",
+                            NormalizedUserName = "student@aspect.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHx67D3BIWYuLiChSwfAPgvglCfPpghA1TmNUik2KRSCb0Q+fWamBw1luRDRTjZmug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e2f036dc-a817-4f6a-ab7d-0837a3b59d2c",
+                            SecurityStamp = "c37105da-afd9-4b6a-a654-ac33718d750e",
                             TwoFactorEnabled = false,
-                            UserName = "mm@mm.mm"
+                            UserName = "student@aspect.com"
                         });
                 });
 
@@ -206,7 +237,7 @@ namespace Web.Data.Migrations
                         {
                             courseID = 1,
                             courseTitle = "COMP3800 - Practicum",
-                            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
+                            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
                             projectOutline = "https://www.bcit.ca/outlines/20211088135/",
                             term = "4"
                         },
@@ -214,7 +245,7 @@ namespace Web.Data.Migrations
                         {
                             courseID = 2,
                             courseTitle = "COMP4870 - Intranet Planning & Development",
-                            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
+                            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
                             projectOutline = "https://www.bcit.ca/outlines/20211049852/",
                             term = "4"
                         });
@@ -237,12 +268,12 @@ namespace Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
                             ProjectId = 1
                         },
                         new
                         {
-                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
                             ProjectId = 2
                         });
                 });
@@ -278,7 +309,7 @@ namespace Web.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 4, 1, 11, 30, 14, 972, DateTimeKind.Local).AddTicks(1270),
+                            Date = new DateTime(2021, 4, 1, 12, 13, 34, 119, DateTimeKind.Local).AddTicks(9160),
                             Issues = "Schema may need to be reworked",
                             LastWeekActivity = "Finished DB Design",
                             NextWeekActivity = "Going to work on the API",
@@ -287,7 +318,7 @@ namespace Web.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2021, 4, 1, 11, 30, 14, 972, DateTimeKind.Local).AddTicks(3370),
+                            Date = new DateTime(2021, 4, 1, 12, 13, 34, 120, DateTimeKind.Local).AddTicks(1090),
                             Issues = "Need to find solution for deployment",
                             LastWeekActivity = "Finished API Design",
                             NextWeekActivity = "Going to implement the API",
@@ -332,7 +363,7 @@ namespace Web.Data.Migrations
                         {
                             ProjectId = 1,
                             AppName = "Twitter",
-                            AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                            AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
                             CourseId = 1,
                             Description = "An app for tweeting",
                             ProjectCategoryId = 1,
@@ -342,7 +373,7 @@ namespace Web.Data.Migrations
                         {
                             ProjectId = 2,
                             AppName = "PlaneGo",
-                            AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                            AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
                             CourseId = 1,
                             Description = "It's like uber but for planes",
                             ProjectCategoryId = 2,
@@ -530,12 +561,17 @@ namespace Web.Data.Migrations
                         new
                         {
                             UserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
-                            RoleId = "bb84ad36-3e80-4225-acb7-493ec8f358f1"
+                            RoleId = "644dbc4b-93d5-49d1-ba3d-b29294e92027"
                         },
                         new
                         {
                             UserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
-                            RoleId = "60620cf0-2c4f-43c8-a203-99c7aa104fe6"
+                            RoleId = "4edb04b6-9f18-4608-a725-7bb859679400"
+                        },
+                        new
+                        {
+                            UserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
+                            RoleId = "d6fda128-2e67-495f-930f-36b6fdbdfa88"
                         });
                 });
 

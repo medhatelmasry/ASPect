@@ -33,14 +33,14 @@ public static List<Course> GetCourses () {
             courseTitle = "COMP3800 - Practicum",
             term = "4",
             projectOutline = "https://www.bcit.ca/outlines/20211088135/",
-            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
+            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
         },
         new Course {
             courseID = 2,
             courseTitle = "COMP4870 - Intranet Planning & Development",
             term = "4",
             projectOutline = "https://www.bcit.ca/outlines/20211049852/",
-            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f"
+            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e"
         }
     };
         return courses;
@@ -49,11 +49,11 @@ public static List<Course> GetCourses () {
     public static List<Membership> GetMemberships () {
     List<Membership> memberships = new List<Membership> () {
         new Membership {
-            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
             ProjectId = 1
         }, 
         new Membership {
-            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
             ProjectId = 2          
         }
     };
@@ -89,7 +89,7 @@ public static List<Course> GetCourses () {
                 ProjectCategoryId = 1,
                 AppName = "Twitter",
                 Description = "An app for tweeting",
-                AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
                 CourseId = 1
             },
             new Project {
@@ -98,7 +98,7 @@ public static List<Course> GetCourses () {
                 ProjectCategoryId = 2,
                 AppName = "PlaneGo",
                 Description = "It's like uber but for planes",
-                AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
                 CourseId = 1
             }
 
