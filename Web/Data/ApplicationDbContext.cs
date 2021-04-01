@@ -3,6 +3,7 @@ using ASPectLibrary;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Web.Models;
 
 namespace Web.Data
 {
@@ -22,30 +23,31 @@ namespace Web.Data
             string ADMIN_ROLE_ID = Guid.NewGuid().ToString();
             var adminRole = new ApplicationRole()
             {
-                Name = "Admin",
-                NormalizedName = "Admin",
+               
+                Name = Constants.Account.ADMIN_ROLE_NAME,
+                NormalizedName = Constants.Account.ADMIN_ROLE_NAME,
                 Description = "This is the admin role",
                 Id = ADMIN_ROLE_ID,
                 ConcurrencyStamp = ADMIN_ROLE_ID,
                 CreatedDate = DateTime.Now,
             };
 
-            string TEACHER_ROLE_ID = Guid.NewGuid().ToString();
-            var teacherRole = new ApplicationRole()
+            string INSTRUCTOR_ROLE_ID = Guid.NewGuid().ToString();
+            var instructorRole = new ApplicationRole()
             {
-                Name = "Teacher",
-                NormalizedName = "Teacher",
+                Name = Constants.Account.INSTRUCTOR_ROLE_NAME,
+                NormalizedName = Constants.Account.INSTRUCTOR_ROLE_NAME,
                 Description = "This is the teacher role",
-                Id = TEACHER_ROLE_ID,
-                ConcurrencyStamp = TEACHER_ROLE_ID,
+                Id = INSTRUCTOR_ROLE_ID,
+                ConcurrencyStamp = INSTRUCTOR_ROLE_ID,
                 CreatedDate = DateTime.Now,
             };
     
             string STUDENT_ROLE_ID = Guid.NewGuid().ToString();
-            var memberRole = new ApplicationRole()
+            var studentRole = new ApplicationRole()
             {
-                Name = "Student",
-                NormalizedName = "Student",
+                Name = Constants.Account.STUDENT_ROLE_NAME,
+                NormalizedName = Constants.Account.STUDENT_ROLE_NAME,
                 Description = "This is the student role",
                 Id = STUDENT_ROLE_ID,
                 ConcurrencyStamp = STUDENT_ROLE_ID,
@@ -55,8 +57,8 @@ namespace Web.Data
             //seed admin role
             builder.Entity<ApplicationRole>().HasData(
                 adminRole,
-                teacherRole,
-                memberRole
+                instructorRole,
+                studentRole
             );
  
             /* ----------------- Add Admin User ----------------- */
@@ -122,7 +124,7 @@ namespace Web.Data
                 },
                 new IdentityUserRole<string>()
                 {
-                    RoleId = TEACHER_ROLE_ID,
+                    RoleId = INSTRUCTOR_ROLE_ID,
                     UserId = TEACHER_USER_ID
                 },
                 new IdentityUserRole<string>()

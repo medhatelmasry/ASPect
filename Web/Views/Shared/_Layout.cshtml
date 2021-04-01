@@ -16,7 +16,8 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav
+            class="navbar navbar-inverse navbar-fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
@@ -36,7 +37,8 @@
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ADMIN_ROLE_NAME))
                         {
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><span class="nav-label">Permissions</span><span class="caret"></span></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><span
+                                        class="nav-label">Permissions</span><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <a class="dropdown-item" style="float: right;" asp-area=""
@@ -53,7 +55,8 @@
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ADMIN_ROLE_NAME))
                         {
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><span class="nav-label">Admin</span><span class="caret"></span></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><span
+                                        class="nav-label">Admin</span><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <a class="dropdown-item" style="float: right;" asp-area=""
