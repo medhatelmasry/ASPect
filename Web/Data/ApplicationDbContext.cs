@@ -66,12 +66,12 @@ namespace Web.Data
             {
                 Id = ADMIN_USER_ID,
                 Email = "admin@aspect.com",
-                NormalizedEmail = "admin@aspect.com",
+                NormalizedEmail = "ADMIN@ASPECT.COM",
                 EmailConfirmed = true,
                 FirstName = "Adam",
                 LastName = "Aldridge",
                 UserName = "admin@aspect.com",
-                NormalizedUserName = "admin@aspect.com"
+                NormalizedUserName = "ADMIN@ASPECT.COM"
             };
             //set adminUser password
             adminUser.PasswordHash = ph.HashPassword(adminUser, PASSWORD);
@@ -83,12 +83,12 @@ namespace Web.Data
             {
                 Id = TEACHER_USER_ID,
                 Email = "instructor@aspect.com",
-                NormalizedEmail = "instructor@aspect.com",
+                NormalizedEmail = "INSTRUCTOR@ASPECT.COM",
                 EmailConfirmed = true,
                 FirstName = "Ted",
                 LastName = "Smith",
                 UserName = "instructor@aspect.com",
-                NormalizedUserName = "instructor@aspect.com"
+                NormalizedUserName = "INSTRUCTOR@ASPECT.COM"
             };
             //set memberUser password
             teacherUser.PasswordHash = ph.HashPassword(teacherUser, PASSWORD);
@@ -100,12 +100,12 @@ namespace Web.Data
             {
                 Id = MEMBER_USER_ID,
                 Email = "student@aspect.com",
-                NormalizedEmail = "student@aspect.com",
+                NormalizedEmail = "STUDENT@ASPECT.COM",
                 EmailConfirmed = true,
                 FirstName = "Mike",
                 LastName = "Myers",
                 UserName = "student@aspect.com",
-                NormalizedUserName = "student@aspect.com"
+                NormalizedUserName = "STUDENT@ASPECT.COM"
             };
             //set memberUser password
             memberUser.PasswordHash = ph.HashPassword(memberUser, PASSWORD);
