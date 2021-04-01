@@ -15,7 +15,7 @@ namespace ASPectLibrary
         public ProjectCategory ProjectCategory { get; set; }
         public string AppName { get; set; }
         public string Description { get; set; }
-        public Guid AspNetUserId { get; set; }
+        public string AspNetUserId { get; set; }
         public int CourseId { get; set; }
 
         [ForeignKey("CourseId")]
