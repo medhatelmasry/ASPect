@@ -33,14 +33,14 @@ public static List<Course> GetCourses () {
             courseTitle = "COMP3800 - Practicum",
             term = "4",
             projectOutline = "https://www.bcit.ca/outlines/20211088135/",
-            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+            instructorID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
         },
         new Course {
             courseID = 2,
             courseTitle = "COMP4870 - Intranet Planning & Development",
             term = "4",
             projectOutline = "https://www.bcit.ca/outlines/20211049852/",
-            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e"
+            instructorID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7"
         }
     };
         return courses;
@@ -49,11 +49,11 @@ public static List<Course> GetCourses () {
     public static List<Membership> GetMemberships () {
     List<Membership> memberships = new List<Membership> () {
         new Membership {
-            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
+            Id = "363624a6-0978-4866-b5ee-b135a6fc3870", //student
             ProjectId = 1
         }, 
         new Membership {
-            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
+            Id = "363624a6-0978-4866-b5ee-b135a6fc3870", //student
             ProjectId = 2          
         }
     };
@@ -89,7 +89,7 @@ public static List<Course> GetCourses () {
                 ProjectCategoryId = 1,
                 AppName = "Twitter",
                 Description = "An app for tweeting",
-                AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
+                AspNetUserId = "363624a6-0978-4866-b5ee-b135a6fc3870", // student
                 CourseId = 1
             },
             new Project {
@@ -98,7 +98,7 @@ public static List<Course> GetCourses () {
                 ProjectCategoryId = 2,
                 AppName = "PlaneGo",
                 Description = "It's like uber but for planes",
-                AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z",
+                AspNetUserId = "363624a6-0978-4866-b5ee-b135a6fc3870", // student
                 CourseId = 1
             }
 

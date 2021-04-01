@@ -69,7 +69,7 @@ namespace Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // context.Database.Migrate();
+            context.Database.Migrate();
 
             app.UseEndpoints(endpoints =>
             {

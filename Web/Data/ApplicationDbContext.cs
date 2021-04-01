@@ -41,14 +41,14 @@ namespace Web.Data
                 CreatedDate = DateTime.Now,
             };
     
-            string MEMBER_ROLE_ID = Guid.NewGuid().ToString();
+            string STUDENT_ROLE_ID = Guid.NewGuid().ToString();
             var memberRole = new ApplicationRole()
             {
                 Name = "Student",
                 NormalizedName = "Student",
                 Description = "This is the student role",
-                Id = MEMBER_ROLE_ID,
-                ConcurrencyStamp = MEMBER_ROLE_ID,
+                Id = STUDENT_ROLE_ID,
+                ConcurrencyStamp = STUDENT_ROLE_ID,
                 CreatedDate = DateTime.Now,
             };
  
@@ -60,52 +60,52 @@ namespace Web.Data
             );
  
             /* ----------------- Add Admin User ----------------- */
-            string ADMIN_USER_ID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f";
+            string ADMIN_USER_ID = "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3";
             //create adminUser
             var adminUser = new ApplicationUser
             {
                 Id = ADMIN_USER_ID,
                 Email = "admin@aspect.com",
-                NormalizedEmail = "admin@aspect.com",
+                NormalizedEmail = "ADMIN@ASPECT.COM",
                 EmailConfirmed = true,
                 FirstName = "Adam",
                 LastName = "Aldridge",
                 UserName = "admin@aspect.com",
-                NormalizedUserName = "admin@aspect.com"
+                NormalizedUserName = "ADMIN@ASPECT.COM"
             };
             //set adminUser password
             adminUser.PasswordHash = ph.HashPassword(adminUser, PASSWORD);
  
             /* ----------------- Add Teacher User ----------------- */
-            string TEACHER_USER_ID = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e";
+            string TEACHER_USER_ID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7";
             //create memberUser
             var teacherUser = new ApplicationUser
             {
                 Id = TEACHER_USER_ID,
                 Email = "instructor@aspect.com",
-                NormalizedEmail = "instructor@aspect.com",
+                NormalizedEmail = "INSTRUCTOR@ASPECT.COM",
                 EmailConfirmed = true,
                 FirstName = "Ted",
                 LastName = "Smith",
                 UserName = "instructor@aspect.com",
-                NormalizedUserName = "instructor@aspect.com"
+                NormalizedUserName = "INSTRUCTOR@ASPECT.COM"
             };
             //set memberUser password
             teacherUser.PasswordHash = ph.HashPassword(teacherUser, PASSWORD);
 
             /* ----------------- Add Student User ----------------- */
-            string MEMBER_USER_ID = "e5d3d34e-9263-43cb-b3ea-52356fb3b66z";
+            string STUDENT_USER_ID = "363624a6-0978-4866-b5ee-b135a6fc3870";
             //create memberUser
             var memberUser = new ApplicationUser
             {
-                Id = MEMBER_USER_ID,
+                Id = STUDENT_USER_ID,
                 Email = "student@aspect.com",
-                NormalizedEmail = "student@aspect.com",
+                NormalizedEmail = "STUDENT@ASPECT.COM",
                 EmailConfirmed = true,
                 FirstName = "Mike",
                 LastName = "Myers",
                 UserName = "student@aspect.com",
-                NormalizedUserName = "student@aspect.com"
+                NormalizedUserName = "STUDENT@ASPECT.COM"
             };
             //set memberUser password
             memberUser.PasswordHash = ph.HashPassword(memberUser, PASSWORD);
@@ -127,8 +127,8 @@ namespace Web.Data
                 },
                 new IdentityUserRole<string>()
                 {
-                    RoleId = MEMBER_ROLE_ID,
-                    UserId = MEMBER_USER_ID
+                    RoleId = STUDENT_ROLE_ID,
+                    UserId = STUDENT_USER_ID
                 }
             );
 
