@@ -1,3 +1,4 @@
+using ASPectLibrary;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,12 +10,12 @@ namespace Web.ViewModels
         public string IdentityUserID { get; set; }
 
         [Display(Name = "Username")]
-        public IdentityUser IdentityUser { get; set; }
+        public ApplicationUser IdentityUser { get; set; }
 
         [Display(Name = "Role ID")]
         public string IdentityRoleID { get; set; }
 
         [Display(Name = "Role")]
-        public IdentityRole IdentityRole { get; set; }
+        public ApplicationRole IdentityRole { get; set; }
     }
 }

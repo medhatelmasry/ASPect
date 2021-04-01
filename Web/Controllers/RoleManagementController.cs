@@ -15,10 +15,10 @@ namespace Web.Controllers
     [Authorize(Roles = Constants.Account.ADMIN_ROLE_NAME)]
     public class RoleManagementController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public RoleManagementController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public RoleManagementController(RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -35,7 +35,7 @@ namespace Web.Controllers
             var roleExist = await _roleManager.RoleExistsAsync(role.RoleName);
             if (!roleExist)
             {
-                var result = await _roleManager.CreateAsync(new IdentityRole(role.RoleName));
+                var result = await _roleManager.CreateAsync(new ApplicationRole(role.RoleName));
                 return RedirectToAction("Index", "Admin");
             }
             return View();
@@ -44,8 +44,8 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var models = new List<IdentityRole>();
-            foreach (IdentityRole identityRole in _roleManager.Roles.ToList())
+            var models = new List<ApplicationRole>();
+            foreach (ApplicationRole identityRole in _roleManager.Roles.ToList())
             {
                 models.Add(identityRole);
             }

@@ -5,10 +5,10 @@ namespace ASPectLibrary
 {
     public class Membership
     {
-        public string StudentId { get; set; }
+        public string Id { get; set; }
 
         [ForeignKey("Id")]
-        public IdentityUser Student { get; set; }
+        public ApplicationUser Student { get; set; }
 
         public int ProjectId { get; set; }
 
