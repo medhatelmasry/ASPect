@@ -28,19 +28,20 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlite(
-            //         Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            // services.AddDefaultIdentity<IdentityUser>(
-            //     options => {
-            //         options.SignIn.RequireConfirmedAccount = true;
-            //     })
-            //     .AddRoles<IdentityRole>()
-            //     .AddEntityFrameworkStores<ApplicationDbContext>()
-            //     .AddDefaultTokenProviders();
+          services.AddIdentity<ApplicationUser, ApplicationRole>( options =>
+            {
+                options.Stores.MaxLengthForKeys = 128;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddRoles<ApplicationRole>()
+            .AddDefaultUI()
+            .AddDefaultTokenProviders();
             
             services.AddControllersWithViews();
         }
@@ -77,11 +78,6 @@ namespace Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-
-            IdentityDummyData.Initialize(context, userManager, roleManager).Wait();
-
-            // AccountsInit account = new AccountsInit();
-            // account.InitializeAsync(app);
         }
     }
 }

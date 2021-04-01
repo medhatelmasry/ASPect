@@ -46,6 +46,26 @@ namespace Web.Data.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "bb84ad36-3e80-4225-acb7-493ec8f358f1",
+                            ConcurrencyStamp = "bb84ad36-3e80-4225-acb7-493ec8f358f1",
+                            CreatedDate = new DateTime(2021, 4, 1, 11, 30, 14, 932, DateTimeKind.Local).AddTicks(1950),
+                            Description = "This is the admin role",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "60620cf0-2c4f-43c8-a203-99c7aa104fe6",
+                            ConcurrencyStamp = "60620cf0-2c4f-43c8-a203-99c7aa104fe6",
+                            CreatedDate = new DateTime(2021, 4, 1, 11, 30, 14, 937, DateTimeKind.Local).AddTicks(3900),
+                            Description = "This is the members role",
+                            Name = "Member",
+                            NormalizedName = "Member"
+                        });
                 });
 
             modelBuilder.Entity("ASPectLibrary.ApplicationUser", b =>
@@ -116,6 +136,40 @@ namespace Web.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3fcbfeab-0e9d-4786-a963-c931d24fffdb",
+                            Email = "aa@aa.aa",
+                            EmailConfirmed = true,
+                            FirstName = "Adam",
+                            LastName = "Aldridge",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEDtT2pF4MkOR5jsGd7pxJcAo64ThkVn4fzb++6kUWvPofK18mZqPGYhpJVYVBA3ydA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "45bb58dc-9c49-4aef-bb58-b97807ef92ce",
+                            TwoFactorEnabled = false,
+                            UserName = "aa@aa.aa"
+                        },
+                        new
+                        {
+                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bb617d90-96fc-44b4-bb17-6abaaa7d0a41",
+                            Email = "mm@mm.mm",
+                            EmailConfirmed = true,
+                            FirstName = "Mike",
+                            LastName = "Myers",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEMzUhojrOjwr3Jju/1D8w2GRLSoqQLtuQXbKi++smMoNxFaR9thXk9kyw0InCRSo8A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e2f036dc-a817-4f6a-ab7d-0837a3b59d2c",
+                            TwoFactorEnabled = false,
+                            UserName = "mm@mm.mm"
+                        });
                 });
 
             modelBuilder.Entity("ASPectLibrary.Course", b =>
@@ -150,7 +204,7 @@ namespace Web.Data.Migrations
                         {
                             courseID = 1,
                             courseTitle = "COMP3800 - Practicum",
-                            instructorID = "0d56e795-1386-4462-85e7-960ef64ed67b",
+                            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
                             projectOutline = "https://www.bcit.ca/outlines/20211088135/",
                             term = "4"
                         },
@@ -158,7 +212,7 @@ namespace Web.Data.Migrations
                         {
                             courseID = 2,
                             courseTitle = "COMP4870 - Intranet Planning & Development",
-                            instructorID = "0d56e795-1386-4462-85e7-960ef64ed67b",
+                            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
                             projectOutline = "https://www.bcit.ca/outlines/20211049852/",
                             term = "4"
                         });
@@ -166,17 +220,29 @@ namespace Web.Data.Migrations
 
             modelBuilder.Entity("ASPectLibrary.Membership", b =>
                 {
-                    b.Property<string>("StudentId")
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("StudentId", "ProjectId");
+                    b.HasKey("Id", "ProjectId");
 
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Memberships");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                            ProjectId = 1
+                        },
+                        new
+                        {
+                            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                            ProjectId = 2
+                        });
                 });
 
             modelBuilder.Entity("ASPectLibrary.ProgressUpdate", b =>
@@ -210,7 +276,7 @@ namespace Web.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 29, 11, 14, 56, 719, DateTimeKind.Local).AddTicks(7370),
+                            Date = new DateTime(2021, 4, 1, 11, 30, 14, 972, DateTimeKind.Local).AddTicks(1270),
                             Issues = "Schema may need to be reworked",
                             LastWeekActivity = "Finished DB Design",
                             NextWeekActivity = "Going to work on the API",
@@ -219,7 +285,7 @@ namespace Web.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2021, 3, 29, 11, 14, 56, 725, DateTimeKind.Local).AddTicks(8570),
+                            Date = new DateTime(2021, 4, 1, 11, 30, 14, 972, DateTimeKind.Local).AddTicks(3370),
                             Issues = "Need to find solution for deployment",
                             LastWeekActivity = "Finished API Design",
                             NextWeekActivity = "Going to implement the API",
@@ -236,7 +302,7 @@ namespace Web.Data.Migrations
                     b.Property<string>("AppName")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("AspNetUserId")
+                    b.Property<string>("AspNetUserId")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("CourseId")
@@ -264,7 +330,7 @@ namespace Web.Data.Migrations
                         {
                             ProjectId = 1,
                             AppName = "Twitter",
-                            AspNetUserId = new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
+                            AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
                             CourseId = 1,
                             Description = "An app for tweeting",
                             ProjectCategoryId = 1,
@@ -274,7 +340,7 @@ namespace Web.Data.Migrations
                         {
                             ProjectId = 2,
                             AppName = "PlaneGo",
-                            AspNetUserId = new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
+                            AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
                             CourseId = 1,
                             Description = "It's like uber but for planes",
                             ProjectCategoryId = 2,
@@ -457,6 +523,18 @@ namespace Web.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
+                            RoleId = "bb84ad36-3e80-4225-acb7-493ec8f358f1"
+                        },
+                        new
+                        {
+                            UserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
+                            RoleId = "60620cf0-2c4f-43c8-a203-99c7aa104fe6"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -491,15 +569,15 @@ namespace Web.Data.Migrations
 
             modelBuilder.Entity("ASPectLibrary.Membership", b =>
                 {
-                    b.HasOne("ASPectLibrary.Project", "Project")
+                    b.HasOne("ASPectLibrary.ApplicationUser", "Student")
                         .WithMany()
-                        .HasForeignKey("ProjectId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ASPectLibrary.ApplicationUser", "Student")
+                    b.HasOne("ASPectLibrary.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("StudentId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

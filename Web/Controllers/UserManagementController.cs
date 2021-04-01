@@ -9,6 +9,7 @@ using Web.Controllers;
 using Web.Data;
 using Web.ViewModels;
 using Web.Models;
+using ASPectLibrary;
 
 namespace Web.CmsControllers
 {
@@ -16,15 +17,15 @@ namespace Web.CmsControllers
     public class UserManagementController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public UserManagementController(
             ApplicationDbContext context,
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
@@ -37,7 +38,7 @@ namespace Web.CmsControllers
         {
             var models = new List<UserRoleViewModel>();
 
-            foreach (IdentityUser identityUser in _context.Users.ToList())
+            foreach (ApplicationUser identityUser in _context.Users.ToList())
             {
                 if (_context.UserRoles.Count() > 0)
                 {
@@ -45,7 +46,7 @@ namespace Web.CmsControllers
                     .Where(userRole => userRole.UserId == identityUser.Id)
                     .First();
 
-                    IdentityRole identityRole = await _roleManager
+                    ApplicationRole identityRole = await _roleManager
                         .FindByIdAsync(identityUserRole.RoleId)
                         .ConfigureAwait(false);
 
@@ -76,10 +77,10 @@ namespace Web.CmsControllers
 
             var roles = _context.Roles.ToList();
 
-            IdentityUser identityUser = _context.Users.Where(user => user.UserName == id).First();
+            ApplicationUser identityUser = _context.Users.Where(user => user.UserName == id).First();
 
             UserRoleViewModel model;
-            IdentityRole identityRole = null;
+            ApplicationRole identityRole = null;
             if (_context.UserRoles.Count() > 0)
             {
                 IdentityUserRole<string> identityUserRole = _context.UserRoles

@@ -8,9 +8,6 @@ public static class DummyData {
       modelBuilder.Entity<Course>().HasData (
           GetCourses()
       );
-    //   modelBuilder.Entity<Membership>().HasData (
-    //       GetMemberships()
-    //   );
       modelBuilder.Entity<ProgressUpdate>().HasData (
           GetProgressUpdates()
       );
@@ -23,6 +20,9 @@ public static class DummyData {
       modelBuilder.Entity<ProjectRole>().HasData (
           GetProjectRoles()
       );
+      modelBuilder.Entity<Membership>().HasData (
+          GetMemberships()
+      );
   }
 
 
@@ -33,14 +33,14 @@ public static List<Course> GetCourses () {
             courseTitle = "COMP3800 - Practicum",
             term = "4",
             projectOutline = "https://www.bcit.ca/outlines/20211088135/",
-            instructorID = "0d56e795-1386-4462-85e7-960ef64ed67b",
+            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
         },
         new Course {
             courseID = 2,
             courseTitle = "COMP4870 - Intranet Planning & Development",
             term = "4",
             projectOutline = "https://www.bcit.ca/outlines/20211049852/",
-            instructorID = "0d56e795-1386-4462-85e7-960ef64ed67b"
+            instructorID = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f"
         }
     };
         return courses;
@@ -49,11 +49,11 @@ public static List<Course> GetCourses () {
     public static List<Membership> GetMemberships () {
     List<Membership> memberships = new List<Membership> () {
         new Membership {
-            StudentId = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
+            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
             ProjectId = 1
         }, 
         new Membership {
-            StudentId = "e5d3d34e-9263-43cb-b3ea-52356fb3b44f",
+            Id = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
             ProjectId = 2          
         }
     };
@@ -89,7 +89,7 @@ public static List<Course> GetCourses () {
                 ProjectCategoryId = 1,
                 AppName = "Twitter",
                 Description = "An app for tweeting",
-                AspNetUserId = new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
+                AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
                 CourseId = 1
             },
             new Project {
@@ -98,7 +98,7 @@ public static List<Course> GetCourses () {
                 ProjectCategoryId = 2,
                 AppName = "PlaneGo",
                 Description = "It's like uber but for planes",
-                AspNetUserId = new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"),
+                AspNetUserId = "e5d3d34e-9263-43cb-b3ea-52356fb3b45e",
                 CourseId = 1
             }
 

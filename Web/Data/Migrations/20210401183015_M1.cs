@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web.Data.Migrations
 {
-    public partial class M2 : Migration
+    public partial class M1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -214,7 +214,7 @@ namespace Web.Data.Migrations
                     ProjectCategoryId = table.Column<int>(type: "INTEGER", nullable: false),
                     AppName = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    AspNetUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    AspNetUserId = table.Column<string>(type: "TEXT", nullable: true),
                     CourseId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -238,15 +238,15 @@ namespace Web.Data.Migrations
                 name: "Memberships",
                 columns: table => new
                 {
-                    StudentId = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Memberships", x => new { x.StudentId, x.ProjectId });
+                    table.PrimaryKey("PK_Memberships", x => new { x.Id, x.ProjectId });
                     table.ForeignKey(
-                        name: "FK_Memberships_AspNetUsers_StudentId",
-                        column: x => x.StudentId,
+                        name: "FK_Memberships_AspNetUsers_Id",
+                        column: x => x.Id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -282,14 +282,34 @@ namespace Web.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Course",
-                columns: new[] { "courseID", "courseID1", "courseTitle", "instructorID", "projectOutline", "term" },
-                values: new object[] { 1, null, "COMP3800 - Practicum", "0d56e795-1386-4462-85e7-960ef64ed67b", "https://www.bcit.ca/outlines/20211088135/", "4" });
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
+                values: new object[] { "bb84ad36-3e80-4225-acb7-493ec8f358f1", "bb84ad36-3e80-4225-acb7-493ec8f358f1", new DateTime(2021, 4, 1, 11, 30, 14, 932, DateTimeKind.Local).AddTicks(1950), "This is the admin role", "Admin", "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
+                values: new object[] { "60620cf0-2c4f-43c8-a203-99c7aa104fe6", "60620cf0-2c4f-43c8-a203-99c7aa104fe6", new DateTime(2021, 4, 1, 11, 30, 14, 937, DateTimeKind.Local).AddTicks(3900), "This is the members role", "Member", "Member" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "e5d3d34e-9263-43cb-b3ea-52356fb3b44f", 0, "3fcbfeab-0e9d-4786-a963-c931d24fffdb", "aa@aa.aa", true, "Adam", "Aldridge", false, null, null, null, "AQAAAAEAACcQAAAAEDtT2pF4MkOR5jsGd7pxJcAo64ThkVn4fzb++6kUWvPofK18mZqPGYhpJVYVBA3ydA==", null, false, "45bb58dc-9c49-4aef-bb58-b97807ef92ce", false, "aa@aa.aa" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "e5d3d34e-9263-43cb-b3ea-52356fb3b45e", 0, "bb617d90-96fc-44b4-bb17-6abaaa7d0a41", "mm@mm.mm", true, "Mike", "Myers", false, null, null, null, "AQAAAAEAACcQAAAAEMzUhojrOjwr3Jju/1D8w2GRLSoqQLtuQXbKi++smMoNxFaR9thXk9kyw0InCRSo8A==", null, false, "e2f036dc-a817-4f6a-ab7d-0837a3b59d2c", false, "mm@mm.mm" });
 
             migrationBuilder.InsertData(
                 table: "Course",
                 columns: new[] { "courseID", "courseID1", "courseTitle", "instructorID", "projectOutline", "term" },
-                values: new object[] { 2, null, "COMP4870 - Intranet Planning & Development", "0d56e795-1386-4462-85e7-960ef64ed67b", "https://www.bcit.ca/outlines/20211049852/", "4" });
+                values: new object[] { 1, null, "COMP3800 - Practicum", "e5d3d34e-9263-43cb-b3ea-52356fb3b44f", "https://www.bcit.ca/outlines/20211088135/", "4" });
+
+            migrationBuilder.InsertData(
+                table: "Course",
+                columns: new[] { "courseID", "courseID1", "courseTitle", "instructorID", "projectOutline", "term" },
+                values: new object[] { 2, null, "COMP4870 - Intranet Planning & Development", "e5d3d34e-9263-43cb-b3ea-52356fb3b44f", "https://www.bcit.ca/outlines/20211049852/", "4" });
 
             migrationBuilder.InsertData(
                 table: "ProjectCategory",
@@ -304,32 +324,7 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "ProjectRoles",
                 columns: new[] { "Id", "RoleName" },
-                values: new object[] { "Arch", "Software Architect" });
-
-            migrationBuilder.InsertData(
-                table: "ProjectRoles",
-                columns: new[] { "Id", "RoleName" },
-                values: new object[] { "DBA", "Database Administrator" });
-
-            migrationBuilder.InsertData(
-                table: "ProjectRoles",
-                columns: new[] { "Id", "RoleName" },
-                values: new object[] { "UIUIX", "UI/UX Designer" });
-
-            migrationBuilder.InsertData(
-                table: "ProjectRoles",
-                columns: new[] { "Id", "RoleName" },
-                values: new object[] { "SD", "Software Developer" });
-
-            migrationBuilder.InsertData(
-                table: "ProjectRoles",
-                columns: new[] { "Id", "RoleName" },
-                values: new object[] { "PM", "Project Manager" });
-
-            migrationBuilder.InsertData(
-                table: "ProjectRoles",
-                columns: new[] { "Id", "RoleName" },
-                values: new object[] { "SA", "System Administrator" });
+                values: new object[] { "BE", "Back End Developer" });
 
             migrationBuilder.InsertData(
                 table: "ProjectRoles",
@@ -339,7 +334,27 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "ProjectRoles",
                 columns: new[] { "Id", "RoleName" },
-                values: new object[] { "BE", "Back End Developer" });
+                values: new object[] { "SA", "System Administrator" });
+
+            migrationBuilder.InsertData(
+                table: "ProjectRoles",
+                columns: new[] { "Id", "RoleName" },
+                values: new object[] { "PM", "Project Manager" });
+
+            migrationBuilder.InsertData(
+                table: "ProjectRoles",
+                columns: new[] { "Id", "RoleName" },
+                values: new object[] { "Arch", "Software Architect" });
+
+            migrationBuilder.InsertData(
+                table: "ProjectRoles",
+                columns: new[] { "Id", "RoleName" },
+                values: new object[] { "UIUIX", "UI/UX Designer" });
+
+            migrationBuilder.InsertData(
+                table: "ProjectRoles",
+                columns: new[] { "Id", "RoleName" },
+                values: new object[] { "DBA", "Database Administrator" });
 
             migrationBuilder.InsertData(
                 table: "ProjectRoles",
@@ -349,27 +364,52 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "ProjectRoles",
                 columns: new[] { "Id", "RoleName" },
+                values: new object[] { "SD", "Software Developer" });
+
+            migrationBuilder.InsertData(
+                table: "ProjectRoles",
+                columns: new[] { "Id", "RoleName" },
                 values: new object[] { "TE", "Software Tester" });
 
             migrationBuilder.InsertData(
-                table: "Project",
-                columns: new[] { "ProjectId", "AppName", "AspNetUserId", "CourseId", "Description", "ProjectCategoryId", "TeamName" },
-                values: new object[] { 1, "Twitter", new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"), 1, "An app for tweeting", 1, "RA" });
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "bb84ad36-3e80-4225-acb7-493ec8f358f1", "e5d3d34e-9263-43cb-b3ea-52356fb3b44f" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "60620cf0-2c4f-43c8-a203-99c7aa104fe6", "e5d3d34e-9263-43cb-b3ea-52356fb3b45e" });
 
             migrationBuilder.InsertData(
                 table: "Project",
                 columns: new[] { "ProjectId", "AppName", "AspNetUserId", "CourseId", "Description", "ProjectCategoryId", "TeamName" },
-                values: new object[] { 2, "PlaneGo", new Guid("e5d3d34e-9263-43cb-b3ea-52356fb3b44f"), 1, "It's like uber but for planes", 2, "Team Fly" });
+                values: new object[] { 1, "Twitter", "e5d3d34e-9263-43cb-b3ea-52356fb3b45e", 1, "An app for tweeting", 1, "RA" });
+
+            migrationBuilder.InsertData(
+                table: "Project",
+                columns: new[] { "ProjectId", "AppName", "AspNetUserId", "CourseId", "Description", "ProjectCategoryId", "TeamName" },
+                values: new object[] { 2, "PlaneGo", "e5d3d34e-9263-43cb-b3ea-52356fb3b45e", 1, "It's like uber but for planes", 2, "Team Fly" });
+
+            migrationBuilder.InsertData(
+                table: "Memberships",
+                columns: new[] { "Id", "ProjectId" },
+                values: new object[] { "e5d3d34e-9263-43cb-b3ea-52356fb3b45e", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Memberships",
+                columns: new[] { "Id", "ProjectId" },
+                values: new object[] { "e5d3d34e-9263-43cb-b3ea-52356fb3b45e", 2 });
 
             migrationBuilder.InsertData(
                 table: "ProgressUpdates",
                 columns: new[] { "Id", "Date", "Issues", "LastWeekActivity", "NextWeekActivity", "ProjectId" },
-                values: new object[] { 1, new DateTime(2021, 3, 29, 11, 14, 56, 719, DateTimeKind.Local).AddTicks(7370), "Schema may need to be reworked", "Finished DB Design", "Going to work on the API", 1 });
+                values: new object[] { 1, new DateTime(2021, 4, 1, 11, 30, 14, 972, DateTimeKind.Local).AddTicks(1270), "Schema may need to be reworked", "Finished DB Design", "Going to work on the API", 1 });
 
             migrationBuilder.InsertData(
                 table: "ProgressUpdates",
                 columns: new[] { "Id", "Date", "Issues", "LastWeekActivity", "NextWeekActivity", "ProjectId" },
-                values: new object[] { 2, new DateTime(2021, 3, 29, 11, 14, 56, 725, DateTimeKind.Local).AddTicks(8570), "Need to find solution for deployment", "Finished API Design", "Going to implement the API", 1 });
+                values: new object[] { 2, new DateTime(2021, 4, 1, 11, 30, 14, 972, DateTimeKind.Local).AddTicks(3370), "Need to find solution for deployment", "Finished API Design", "Going to implement the API", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

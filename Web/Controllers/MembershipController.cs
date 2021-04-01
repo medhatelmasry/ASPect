@@ -47,7 +47,7 @@ namespace Web.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMembership(string id, Membership membership)
         {
-            if (id != membership.StudentId)
+            if (id != membership.Id)
             {
                 return BadRequest();
             }
@@ -85,7 +85,7 @@ namespace Web.Controllers
             }
             catch (DbUpdateException)
             {
-                if (MembershipExists(membership.StudentId))
+                if (MembershipExists(membership.Id))
                 {
                     return Conflict();
                 }
@@ -95,7 +95,7 @@ namespace Web.Controllers
                 }
             }
 
-            return CreatedAtAction("GetMembership", new { id = membership.StudentId }, membership);
+            return CreatedAtAction("GetMembership", new { id = membership.Id }, membership);
         }
 
         // DELETE: api/Membership/5
@@ -116,7 +116,7 @@ namespace Web.Controllers
 
         private bool MembershipExists(string id)
         {
-            return _context.Memberships.Any(e => e.StudentId == id);
+            return _context.Memberships.Any(e => e.Id == id);
         }
     }
 }
