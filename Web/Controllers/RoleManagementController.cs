@@ -12,7 +12,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    [Authorize(Roles = Constants.Account.ADMIN_ROLE_NAME)]
+    [Authorize(Roles = Constants.ASPectRoles.Admin.RoleName)]
     public class RoleManagementController : Controller
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
