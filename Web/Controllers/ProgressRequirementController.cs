@@ -25,34 +25,28 @@ namespace Web.Controllers
             _context = context;
         }
 
-        /// GET
-        /// Summary: Returns for all ProjectRequirements in the System
-        /// Produces: 
-        ///     application/json
-        /// Parameters: None
-        /// Responses: 
-        ///     200 : Success
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectRequirement>>> GetProjectRequirment()
-        {
-            return await _context.ProjectRequirements.ToListAsync();
-        }
 
         /// GET
-        /// Summary: Returns for all ProjectRequirements in the System with the ProjectName
+        /// Summary: Returns all ProjectRequirements in the System with the ProjectName, if no name
+        ///             is specified will return ALL ProjectRequirements from the db
         /// Produces: 
         ///     application/json
         /// Parameters: 
         ///     in: body
         ///     description: The ProjectName of the Requirment
-        ///     required: True
+        ///     required: false
         ///     type: String
         /// Responses: 
         ///     200 : Success
         ///     404 : NoContent if there are no results
-        public async Task<ActionResult<IEnumerable<ProjectRequirement>>> GetProjectRequirmentByName(string ProjectName)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProjectRequirement>>> GetProjectRequirmentByName(string projectName)
         {
-            var results = await _context.ProjectRequirements.Where(x => x.ProjectName == ProjectName).ToListAsync();
+            if (projectName == null) {
+                return await _context.ProjectRequirements.ToListAsync();
+            }
+
+            var results = await _context.ProjectRequirements.Where(x => x.ProjectName == projectName).ToListAsync();
 
             if (results.Count > 0) {
                 return NotFound();
