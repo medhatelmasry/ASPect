@@ -32,7 +32,7 @@ namespace Web.Controllers
         /// Produces: 
         ///     application/json
         /// Parameters: 
-        ///     in: body
+        ///     in: QueryParam
         ///     description: The ProjectName of the Requirment
         ///     required: false
         ///     type: String
@@ -40,7 +40,8 @@ namespace Web.Controllers
         ///     200 : Success
         ///     404 : NoContent if there are no results
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectRequirement>>> GetProjectRequirmentByName(string projectName)
+        public async Task<ActionResult<IEnumerable<ProjectRequirement>>> GetProjectRequirmentByName(
+                            [FromQuery] string projectName)
         {
             if (projectName == null) {
                 return await _context.ProjectRequirements.ToListAsync();
