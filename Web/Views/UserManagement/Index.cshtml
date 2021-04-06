@@ -35,13 +35,13 @@
                     @Html.DisplayFor(_ => userRoleViewModel.IdentityRole.Name)
                 </td>
                 <td>
-                    @if (userRoleViewModel.IdentityUser.UserName != Constants.Account.ADMIN_USER_NAME)
+                    @if (userRoleViewModel.IdentityUser.UserName != Constants.ASPectRoles.Admin.UserName)
                     {
                         <a class="btn btn-primary" asp-action="Edit" asp-route-id="@userRoleViewModel.IdentityUser.UserName">Edit</a>
                     }
                 </td>
                 <td>
-                    @if (userRoleViewModel.IdentityUser.UserName != Constants.Account.ADMIN_USER_NAME)
+                    @if (userRoleViewModel.IdentityUser.UserName != Constants.ASPectRoles.Admin.UserName)
                     {
                         <form asp-action="Delete" asp-route-id="@userRoleViewModel.IdentityUser.Id">
                             <input type="submit" class="btn btn-danger" value="Delete" />
