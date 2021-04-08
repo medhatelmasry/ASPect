@@ -371,32 +371,32 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "693f20c7-80c5-40c2-bb0d-ee69ffea6364", "693f20c7-80c5-40c2-bb0d-ee69ffea6364", new DateTime(2021, 4, 8, 12, 45, 7, 871, DateTimeKind.Local).AddTicks(6970), "This is the administrator role.", "Administrator", "Administrator" });
+                values: new object[] { "3b953e5d-3a5a-4bb3-af01-5d2e501891c8", "3b953e5d-3a5a-4bb3-af01-5d2e501891c8", new DateTime(2021, 4, 8, 15, 4, 49, 707, DateTimeKind.Local).AddTicks(4010), "This is the administrator role.", "Administrator", "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "529f974a-b495-4f32-a221-8fef4b1a31af", "529f974a-b495-4f32-a221-8fef4b1a31af", new DateTime(2021, 4, 8, 12, 45, 7, 876, DateTimeKind.Local).AddTicks(2770), "This is the instructor role.", "Instructor", "Instructor" });
+                values: new object[] { "92e02188-e8ac-4c60-94bb-b4aaf63ace86", "92e02188-e8ac-4c60-94bb-b4aaf63ace86", new DateTime(2021, 4, 8, 15, 4, 49, 711, DateTimeKind.Local).AddTicks(119), "This is the instructor role.", "Instructor", "Instructor" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "a18cce0e-2cb3-493a-a58b-19c8120cee01", "a18cce0e-2cb3-493a-a58b-19c8120cee01", new DateTime(2021, 4, 8, 12, 45, 7, 876, DateTimeKind.Local).AddTicks(2810), "This is the student role.", "Student", "Student" });
+                values: new object[] { "06f9e8dd-41b2-4086-9c6d-34be6e234a26", "06f9e8dd-41b2-4086-9c6d-34be6e234a26", new DateTime(2021, 4, 8, 15, 4, 49, 711, DateTimeKind.Local).AddTicks(159), "This is the student role.", "Student", "Student" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3", 0, "590b9710-8cbf-4c9b-a2b0-e4e1cff95bee", "admin@aspect.com", true, "Adam", "Aldridge", false, null, "ADMIN@ASPECT.COM", "ADMIN@ASPECT.COM", "AQAAAAEAACcQAAAAEPFSiTJU6snq4yvnpE/gkhfdspL9WeYUgLTJdd0SKynheOGoNXbU3lPpHMQEjFkliQ==", null, false, "7c4bad8b-6b30-4998-b6f0-e40abddde666", false, "admin@aspect.com" });
+                values: new object[] { "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3", 0, "75070967-b6df-47ca-8b4a-1dc8f841a5fc", "admin@aspect.com", true, "Adam", "Aldridge", false, null, "ADMIN@ASPECT.COM", "ADMIN@ASPECT.COM", "AQAAAAEAACcQAAAAENDCPhjVeBSnAu9USOLmhxYzc+lE2+dJPKszkA0hWYkdzGxEz5WLrxbu3r+cZjwe3w==", null, false, "e62ae3b9-cc22-4252-b328-ce7b476488e4", false, "admin@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", 0, "54159817-a6b2-49b2-a74c-33d6b00b19f0", "instructor@aspect.com", true, "Ted", "Smith", false, null, "INSTRUCTOR@ASPECT.COM", "INSTRUCTOR@ASPECT.COM", "AQAAAAEAACcQAAAAEN11hcbW4TgPh3rLJke2QMMhCIO1BDsBpuvu3/93iETWlmpwO/ve7kTsOpq23fOzcA==", null, false, "62671e62-37d4-4406-b1e7-7813f117dfdd", false, "instructor@aspect.com" });
+                values: new object[] { "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", 0, "5ab413cb-22d4-437c-a616-3df1a2c354c9", "instructor@aspect.com", true, "Ted", "Smith", false, null, "INSTRUCTOR@ASPECT.COM", "INSTRUCTOR@ASPECT.COM", "AQAAAAEAACcQAAAAEGJu3M5JjrkX4iCFH0I8PccOCZBsnQuth83rbs6myimz5s+50gPA4oz9zn1Y2jqifQ==", null, false, "69bfb376-31d8-4f67-beb2-4241fe2fb1f5", false, "instructor@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "363624a6-0978-4866-b5ee-b135a6fc3870", 0, "93bbaf1d-2ead-4baa-bbb6-31c22c59ae08", "student@aspect.com", true, "Mike", "Myers", false, null, "STUDENT@ASPECT.COM", "STUDENT@ASPECT.COM", "AQAAAAEAACcQAAAAENmWVebGxb3EgmhfHhGaC2nYVJH1RFQn4YCIV7KI0jZkKjFvnzEHue1tnkrqU32qfA==", null, false, "dd7cfa28-cd1d-400c-98f2-bceecccc1c20", false, "student@aspect.com" });
+                values: new object[] { "363624a6-0978-4866-b5ee-b135a6fc3870", 0, "0b1d19d9-def1-4434-bc13-ad9a85940c80", "student@aspect.com", true, "Mike", "Myers", false, null, "STUDENT@ASPECT.COM", "STUDENT@ASPECT.COM", "AQAAAAEAACcQAAAAEF3Y2okSlR20GFAkRILcc4PJbDQvEtfuonAxzdlxni5421yOpJ404cjbvZGMWCbrYg==", null, false, "16fb9ce7-74de-4f36-8e36-02f647ccc32f", false, "student@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "Course",
@@ -471,17 +471,17 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "693f20c7-80c5-40c2-bb0d-ee69ffea6364", "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3" });
+                values: new object[] { "3b953e5d-3a5a-4bb3-af01-5d2e501891c8", "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "529f974a-b495-4f32-a221-8fef4b1a31af", "9216a976-f1ba-4d73-aff6-f818b4b5c6a7" });
+                values: new object[] { "92e02188-e8ac-4c60-94bb-b4aaf63ace86", "9216a976-f1ba-4d73-aff6-f818b4b5c6a7" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "a18cce0e-2cb3-493a-a58b-19c8120cee01", "363624a6-0978-4866-b5ee-b135a6fc3870" });
+                values: new object[] { "06f9e8dd-41b2-4086-9c6d-34be6e234a26", "363624a6-0978-4866-b5ee-b135a6fc3870" });
 
             migrationBuilder.InsertData(
                 table: "Project",
@@ -506,12 +506,12 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "ProgressUpdates",
                 columns: new[] { "Id", "Date", "Issues", "LastWeekActivity", "NextWeekActivity", "ProjectId" },
-                values: new object[] { 1, new DateTime(2021, 4, 8, 12, 45, 7, 908, DateTimeKind.Local).AddTicks(5760), "Schema may need to be reworked", "Finished DB Design", "Going to work on the API", 1 });
+                values: new object[] { 1, new DateTime(2021, 4, 8, 15, 4, 49, 738, DateTimeKind.Local).AddTicks(241), "Schema may need to be reworked", "Finished DB Design", "Going to work on the API", 1 });
 
             migrationBuilder.InsertData(
                 table: "ProgressUpdates",
                 columns: new[] { "Id", "Date", "Issues", "LastWeekActivity", "NextWeekActivity", "ProjectId" },
-                values: new object[] { 2, new DateTime(2021, 4, 8, 12, 45, 7, 908, DateTimeKind.Local).AddTicks(7510), "Need to find solution for deployment", "Finished API Design", "Going to implement the API", 1 });
+                values: new object[] { 2, new DateTime(2021, 4, 8, 15, 4, 49, 738, DateTimeKind.Local).AddTicks(2340), "Need to find solution for deployment", "Finished API Design", "Going to implement the API", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

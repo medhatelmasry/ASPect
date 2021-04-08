@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Web.Data;
 
 namespace Web
@@ -35,6 +36,12 @@ namespace Web
       }));
 
       services.AddDatabaseDeveloperPageExceptionFilter();
+
+            // Adding Cors
+            services.AddCors(o => o.AddPolicy("CORSPolicy", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
 
       services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
       {
@@ -90,6 +97,8 @@ namespace Web
 
       app.UseAuthentication();
       app.UseAuthorization();
+
+            app.UseCors("CORSPolicy");
 
       context.Database.Migrate();
       app.UseCors("CORSPolicy");
