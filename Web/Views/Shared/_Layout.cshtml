@@ -34,7 +34,7 @@
                                 asp-action="Privacy">Privacy</a>
                         </li>
 
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ADMIN_ROLE_NAME))
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.ASPectRoles.Admin.RoleName))
                         {
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><span
@@ -52,7 +52,7 @@
                             </li>
                         }
 
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ADMIN_ROLE_NAME))
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.ASPectRoles.Admin.RoleName))
                         {
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><span
