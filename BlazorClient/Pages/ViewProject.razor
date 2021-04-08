@@ -1,0 +1,34 @@
+@page "/projects/{id}"
+@using ASPectLibrary
+@inject HttpClient httpClient
+@inject NavigationManager NavManager
+
+
+<h1>Project</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (project == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h2>@project.ProjectId</h2>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    Project project;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await load();
+    }
+
+    protected async Task load()
+    {
+        project = await httpClient.GetFromJsonAsync<Project>($"{Constants.API.DEV_URL}/Project/{Id}");
+    }
+}
