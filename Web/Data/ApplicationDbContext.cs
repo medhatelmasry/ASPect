@@ -178,6 +178,8 @@ namespace Web.Data
         public DbSet<Course> Course { get; set; }
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<ProjectRole> ProjectRoles { get; set; }
+        public DbSet<PeerEvaluation> PeerEvaluations { get; set; }
         public DbSet<ProjectRequirement> ProjectRequirements { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
     }
 }
