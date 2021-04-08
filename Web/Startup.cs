@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ASPectLibrary;
+using Microsoft.AspNetCore.Authentication.Certificate;
 
 namespace Web
 {
@@ -34,7 +35,13 @@ namespace Web
             
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-          services.AddIdentity<ApplicationUser, ApplicationRole>( options =>
+            // Adding Cors
+            services.AddCors(o => o.AddPolicy("CORSPolicy", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>( options =>
             {
                 options.Stores.MaxLengthForKeys = 128;
             })
@@ -42,7 +49,7 @@ namespace Web
             .AddRoles<ApplicationRole>()
             .AddDefaultUI()
             .AddDefaultTokenProviders();
-            
+
             services.AddControllersWithViews();
         }
 
@@ -68,6 +75,8 @@ namespace Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("CORSPolicy");
 
             context.Database.Migrate();
 

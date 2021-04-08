@@ -1,34 +1,49 @@
 @page "/studentlist"
+@inject HttpClient httpClient
+@using ASPectLibrary
 
 <h1>Student List</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Student ID</th>
-            <th>Student Email</th>
-            <th>Student Name</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>A01181039</td>
-            <td>sna4@my.bcit.ca</td>
-            <td>Sung Na</td>
-            <td><a type="submit" class="btn btn-primary" href="/editstudents">Edit Student</a></td>
-        </tr>
-        <tr>
-            <td>A01181123</td>
-            <td>yverma5@my.bcit.ca</td>
-            <td>Yogesh Verma</td>
-            <td><a type="submit" class="btn btn-primary" href="/editstudents">Edit Student</a></td>
-        </tr>
-        <tr>
-            <td>A01181124</td>
-            <td>aharoon10@my.bcit.ca</td>
-            <td>Abeer Haroon</td>
-            <td><a type="submit" class="btn btn-primary" href="/editstudents">Edit Student</a></td>
-        </tr>
-    </tbody>
-</table>
+@if (users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Email</th>
+                <th>Student Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in users) 
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Email</td>
+                    <td>@item.FirstName @item.LastName</td>
+                    <td><a type="submit" class="btn btn-primary" href="/editstudents">Edit Student</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    ApplicationUser[] users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await load();
+    }
+
+    protected async Task load()
+    {
+        users = await httpClient.GetFromJsonAsync<ApplicationUser[]>("https://localhost:5001/api/Student");
+        StateHasChanged();
+    }
+}
