@@ -33,7 +33,7 @@ namespace Web.Controllers
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 
             };
-            var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ToListAsync(), options);
+            var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ThenInclude(m => m.Student).Include(i => i.Memberships).ThenInclude(m => m.Project).ToListAsync(), options);
             //Console.WriteLine("json: " + projJson);
             List<Project> projDeserialized = System.Text.Json.JsonSerializer.Deserialize<List<Project>>(projJson);
             return projDeserialized;
@@ -55,7 +55,7 @@ namespace Web.Controllers
             {
                 return NotFound();
             } else {
-                var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).FirstOrDefaultAsync(i => i.ProjectId == id), options);
+                var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ThenInclude(m => m.Student).FirstOrDefaultAsync(i => i.ProjectId == id), options);
                 Project projDeserialized = System.Text.Json.JsonSerializer.Deserialize<Project>(projJson);
                 return projDeserialized;
             }
