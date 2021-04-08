@@ -47,7 +47,7 @@ namespace Web.Controllers
                 return await _context.ProjectRequirements.ToListAsync();
             }
 
-            var results = await _context.ProjectRequirements.Where(x => x.assignmentId == id).ToListAsync();
+            var results = await _context.ProjectRequirements.Where(x => x.AssignmentId == id).ToListAsync();
 
             if (results.Count > 0) {
                 return NotFound();

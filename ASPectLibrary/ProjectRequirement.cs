@@ -18,7 +18,7 @@ namespace ASPectLibrary {
         /// A brief description of the requirement
         public string Requirement { get; set; }
         /// The id of the assignment that is being referenced
-        public int assignmentId  { get; set; }
+        public int AssignmentId  { get; set; }
 
         [ForeignKey("AssignmentId")]
         public Assignment Assignment { get; set; }

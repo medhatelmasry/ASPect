@@ -11,7 +11,7 @@ namespace ASPectLibrary {
         /// The Assignment ID
         [Key]
         public int AssignmentId { get; set; }
-        
+
         /// The date of creation of the assignment
         public DateTime DateCreated { get; set; }
 
@@ -22,10 +22,10 @@ namespace ASPectLibrary {
         public string description { get; set; }
 
         /// The Id of the Course associated with the Assignment 
-        public int CourseId { get; set; }
+        public int courseId { get; set; }
 
         /// The Course that has the Assignment
-        [ForeignKey("CourseId")]
+        [ForeignKey("courseId")]
         public Course Course { get; set; }
 
         public List<Assignment> Assignments { get; set; }
