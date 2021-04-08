@@ -1,1 +1,1 @@
-dotnet-ef migrations add M1 -o Data/migrations
+dotnet-ef migrations add M1 -o Data/Migrations
