@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
@@ -15,6 +16,8 @@ namespace ASPectLibrary {
             think its important so here it is.
         */
         public Course course {get; set;}
+
+        public IList<Membership> Memberships { get; set; }
     }
 
 }

@@ -15,6 +15,18 @@ namespace Web.Data
         }
         protected override void OnModelCreating (ModelBuilder builder) {
             base.OnModelCreating(builder);
+            //Scott added for m <> m relation
+            builder.Entity<Membership>().HasKey(mb => new { mb.Id, mb.ProjectId });
+
+            builder.Entity<Membership>()
+            .HasOne<ApplicationUser>(mb => mb.Student)
+            .WithMany(au => au.Memberships)
+            .HasForeignKey(mb => mb.Id);
+
+            builder.Entity<Membership>()
+            .HasOne<Project>(mb => mb.Project)
+            .WithMany(p => p.Memberships)
+            .HasForeignKey(mb => mb.ProjectId);
 
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
             string PASSWORD = "P@$$w0rd";

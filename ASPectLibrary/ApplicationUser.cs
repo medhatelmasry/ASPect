@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace ASPectLibrary {
@@ -6,6 +7,7 @@ namespace ASPectLibrary {
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public IList<Membership> Memberships { get; set; }
         
     }
 }
