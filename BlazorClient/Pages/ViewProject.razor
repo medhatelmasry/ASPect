@@ -3,18 +3,16 @@
 @inject HttpClient httpClient
 @inject NavigationManager NavManager
 
-
-<h1>Project</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
 @if (project == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <h2>@project.ProjectId</h2>
+    <h1>Project Name: @project.AppName</h1>
+    <p>ID: @project.ProjectId</p>
+    <p>Description: @project.Description</p>
+    <p>Team Name: @project.TeamName</p>
 }
 
 @code {
