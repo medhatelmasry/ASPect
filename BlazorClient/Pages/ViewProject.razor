@@ -27,6 +27,6 @@ else
 
     protected async Task load()
     {
-        project = await httpClient.GetFromJsonAsync<Project>($"{Constants.API.DEV_URL}/Project/{Id}");
+        project = await httpClient.GetFromJsonAsync<Project>($"{Constants.API.API_URL}/Project/{Id}");
     }
 }
