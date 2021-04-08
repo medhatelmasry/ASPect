@@ -13,6 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ASPectLibrary;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Web
 {
@@ -31,24 +34,44 @@ namespace Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-          services.AddIdentity<ApplicationUser, ApplicationRole>( options =>
-            {
-                options.Stores.MaxLengthForKeys = 128;
-            })
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddRoles<ApplicationRole>()
-            .AddDefaultUI()
-            .AddDefaultTokenProviders();
-            
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+             {
+                 options.Stores.MaxLengthForKeys = 128;
+             })
+              .AddEntityFrameworkStores<ApplicationDbContext>()
+              .AddRoles<ApplicationRole>()
+              .AddDefaultUI()
+              .AddDefaultTokenProviders();
+
             services.AddControllersWithViews();
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = true;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Jwt:Site"],
+                    ValidIssuer = Configuration["Jwt:Site"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SigningKey"]))
+                };
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context,
-                                RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager )
+                                RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
