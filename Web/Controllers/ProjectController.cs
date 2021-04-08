@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ASPectLibrary;
 using Web.Data;
+using Microsoft.AspNetCore.Cors;
 
 namespace Web.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("CORSPolicy")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
