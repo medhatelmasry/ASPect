@@ -27,27 +27,27 @@ namespace Web.Controllers
 
 
         /// GET
-        /// Summary: Returns all ProjectRequirements in the System with the ProjectName, if no name
+        /// Summary: Returns all ProjectRequirements in the System with the AssignmentId, if no id
         ///             is specified will return ALL ProjectRequirements from the db
         /// Produces: 
         ///     application/json
         /// Parameters: 
         ///     in: QueryParam
-        ///     description: The ProjectName of the Requirment
+        ///     description: The id of the Assignment
         ///     required: false
-        ///     type: String
+        ///     type: Int
         /// Responses: 
         ///     200 : Success
         ///     404 : NoContent if there are no results
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectRequirement>>> GetProjectRequirmentByName(
-                            [FromQuery] string projectName)
+        public async Task<ActionResult<IEnumerable<ProjectRequirement>>> GetProjectRequirmentByAssignmentId(
+                            [FromQuery] int? id)
         {
-            if (projectName == null) {
+            if (id == null) {
                 return await _context.ProjectRequirements.ToListAsync();
             }
 
-            var results = await _context.ProjectRequirements.Where(x => x.ProjectName == projectName).ToListAsync();
+            var results = await _context.ProjectRequirements.Where(x => x.AssignmentId == id).ToListAsync();
 
             if (results.Count > 0) {
                 return NotFound();

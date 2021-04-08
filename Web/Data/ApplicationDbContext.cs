@@ -151,5 +151,6 @@ namespace Web.Data
         public DbSet<ProjectRole> ProjectRoles { get; set; }
         public DbSet<PeerEvaluation> PeerEvaluations { get; set; }
         public DbSet<ProjectRequirement> ProjectRequirements { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
     }
 }
