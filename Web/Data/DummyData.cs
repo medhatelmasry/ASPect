@@ -53,6 +53,10 @@ public static List<Course> GetCourses () {
             ProjectId = 1
         }, 
         new Membership {
+            Id = "363624a6-1111-4866-b5ee-b135a6fc3870", //student
+            ProjectId = 1
+        }, 
+        new Membership {
             Id = "363624a6-0978-4866-b5ee-b135a6fc3870", //student
             ProjectId = 2          
         }

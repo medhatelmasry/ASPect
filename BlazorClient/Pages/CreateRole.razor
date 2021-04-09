@@ -24,6 +24,6 @@
   private async void HandleAdd()
   {
     role.Id = Guid.NewGuid().ToString();
-    await httpClient.PostAsJsonAsync(Constants.API.DEV_URL, role);
+    await httpClient.PostAsJsonAsync(httpClient.BaseAddress, role);
   }
 }

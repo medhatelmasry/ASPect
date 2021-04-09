@@ -43,7 +43,7 @@ else
 
     protected async Task load()
     {
-        users = await httpClient.GetFromJsonAsync<ApplicationUser[]>("https://localhost:5001/api/Student");
+        users = await httpClient.GetFromJsonAsync<ApplicationUser[]>($"{httpClient.BaseAddress}/Student");
         StateHasChanged();
     }
 }
