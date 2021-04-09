@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useField, Field } from "formik";
-import "../../index.css";
+import "../index.css";
 
 const TextInputLiveFeedback = ({ label, helpText, ...props }) => {
   const [field, meta] = useField(props);
