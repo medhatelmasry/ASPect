@@ -3,8 +3,8 @@ import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import { useFormik, FormikProvider, Form } from "formik";
 import { Button, Alert, Row } from "react-bootstrap";
-import FormContainer from "./common/FormContainer";
-import TextInputLiveFeedback from "./common/TextInputLiveFeedback";
+import FormContainer from "../components/FormContainer";
+import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
 import { nameRegex, emailRegex, passwordRegex } from "../util/regex";
 import bcrypt from "bcryptjs";
 import axios from "axios";
@@ -106,7 +106,7 @@ const Signup = ({ onSubmit }) => {
     <FormikProvider value={formik}>
       <FormContainer>
         <Row className="text-center">
-          <h1 className="mb-4 mx-auto">Sign up for a Student account</h1>
+          <h1 className="mb-4 mx-auto">Sign Up</h1>
         </Row>
 
         {error && showAlert && (
