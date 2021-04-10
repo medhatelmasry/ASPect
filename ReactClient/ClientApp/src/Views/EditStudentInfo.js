@@ -75,14 +75,16 @@ const EditStudentInfo = ({ studentId }) => {
   useEffect(() => {
     if (studentId !== null) {
       const getUserInfo = async () => {
-        await axios.get(`/api/Student/${studentId}`).then((res) => {
-          const { firstName, lastName, userName } = res.data;
-          setUserInfo({
-            firstName: firstName,
-            lastName: lastName,
-            userName: userName,
+        await axios
+          .get(`https://openaspect.azurewebsites.net/api/Student/${studentId}`)
+          .then((res) => {
+            const { firstName, lastName, userName } = res.data;
+            setUserInfo({
+              firstName: firstName,
+              lastName: lastName,
+              userName: userName,
+            });
           });
-        });
       };
       getUserInfo();
     }

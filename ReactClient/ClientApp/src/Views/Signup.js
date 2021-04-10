@@ -77,7 +77,10 @@ const Signup = () => {
       values.passwordHash = passwordHash;
       console.log(values);
 
-      const result = await axios.get("/api/Student", config);
+      const result = await axios.get(
+        "https://openaspect.azurewebsites.net/api/Student",
+        config
+      );
       const studentList = result.data;
       let studentUserNameList = [];
 

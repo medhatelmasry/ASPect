@@ -38,7 +38,9 @@ export const Dashboard = ({ studentId }) => {
   useEffect(() => {
     if (studentId !== null) {
       const getUserInfo = async () => {
-        const { data } = await axios.get(`/api/Student/${studentId}`);
+        const { data } = await axios.get(
+          `https://openaspect.azurewebsites.net/api/Student/${studentId}`
+        );
         console.log(data);
         const { firstName, lastName, userName } = data;
         setUserInfo({
