@@ -47,7 +47,7 @@ namespace Web.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCourse(int id, Course course)
         {
-            if (id != course.courseID)
+            if (id != course.CourseID)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace Web.Controllers
             _context.Course.Add(course);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.courseID }, course);
+            return CreatedAtAction("GetCourse", new { id = course.CourseID }, course);
         }
 
         // DELETE: api/Courses/5
@@ -102,7 +102,7 @@ namespace Web.Controllers
 
         private bool CourseExists(int id)
         {
-            return _context.Course.Any(e => e.courseID == id);
+            return _context.Course.Any(e => e.CourseID == id);
         }
     }
 }

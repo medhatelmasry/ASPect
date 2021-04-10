@@ -23,24 +23,28 @@ public static class DummyData {
       modelBuilder.Entity<Membership>().HasData (
           GetMemberships()
       );
+      modelBuilder.Entity<Enrollment>().HasData (
+          GetEnrollments()
+      );
+
   }
 
 
 public static List<Course> GetCourses () {
     List<Course> courses = new List<Course> () {
         new Course {
-            courseID = 1,
-            courseTitle = "COMP3800 - Practicum",
-            term = "4",
-            projectOutline = "https://www.bcit.ca/outlines/20211088135/",
-            instructorID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
+            CourseID = 1,
+            CourseTitle = "COMP3800 - Practicum",
+            Term = "4",
+            ProjectOutline = "https://www.bcit.ca/outlines/20211088135/",
+            InstructorID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7"
         },
         new Course {
-            courseID = 2,
-            courseTitle = "COMP4870 - Intranet Planning & Development",
-            term = "4",
-            projectOutline = "https://www.bcit.ca/outlines/20211049852/",
-            instructorID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7"
+            CourseID = 2,
+            CourseTitle = "COMP4870 - Intranet Planning & Development",
+            Term = "4",
+            ProjectOutline = "https://www.bcit.ca/outlines/20211049852/",
+            InstructorID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7"
         }
     };
         return courses;
@@ -168,6 +172,28 @@ public static List<Course> GetCourses () {
             }
         };
         return projectRoles;
+    }
+
+    public static List<Enrollment> GetEnrollments () {
+
+        List<Enrollment> list = new List<Enrollment>() {
+            new Enrollment {
+                EnrollmentId = 1,
+                Id = "363624a6-0978-4866-b5ee-b135a6fc3870",
+                CourseID = 1,
+                Semester = "Fall",
+                Year = 2020,
+            },
+            new Enrollment {
+                EnrollmentId = 2,
+                Id = "363624a6-0978-4866-b5ee-b135a6fc3870",
+                CourseID = 2,
+                Semester = "Winter",
+                Year = 2021,
+            }
+        };
+
+        return list;
     }
 }
 

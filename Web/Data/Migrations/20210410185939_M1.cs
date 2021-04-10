@@ -51,29 +51,6 @@ namespace Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Course",
-                columns: table => new
-                {
-                    courseID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    courseTitle = table.Column<string>(type: "TEXT", nullable: true),
-                    term = table.Column<string>(type: "TEXT", nullable: true),
-                    projectOutline = table.Column<string>(type: "TEXT", nullable: true),
-                    instructorID = table.Column<string>(type: "TEXT", nullable: true),
-                    courseID1 = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Course", x => x.courseID);
-                    table.ForeignKey(
-                        name: "FK_Course_Course_courseID1",
-                        column: x => x.courseID1,
-                        principalTable: "Course",
-                        principalColumn: "courseID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProjectCategory",
                 columns: table => new
                 {
@@ -205,6 +182,29 @@ namespace Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Course",
+                columns: table => new
+                {
+                    CourseID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CourseTitle = table.Column<string>(type: "TEXT", nullable: true),
+                    Term = table.Column<string>(type: "TEXT", nullable: true),
+                    ProjectOutline = table.Column<string>(type: "TEXT", nullable: true),
+                    InstructorID = table.Column<string>(type: "TEXT", nullable: true),
+                    Id = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Course", x => x.CourseID);
+                    table.ForeignKey(
+                        name: "FK_Course_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Assignments",
                 columns: table => new
                 {
@@ -229,7 +229,34 @@ namespace Web.Data.Migrations
                         name: "FK_Assignments_Course_courseId",
                         column: x => x.courseId,
                         principalTable: "Course",
-                        principalColumn: "courseID",
+                        principalColumn: "CourseID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Enrollments",
+                columns: table => new
+                {
+                    EnrollmentId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    CourseID = table.Column<int>(type: "INTEGER", nullable: false),
+                    Semester = table.Column<string>(type: "TEXT", nullable: true),
+                    Year = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Enrollments", x => new { x.EnrollmentId, x.CourseID, x.Id });
+                    table.ForeignKey(
+                        name: "FK_Enrollments_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Enrollments_Course_CourseID",
+                        column: x => x.CourseID,
+                        principalTable: "Course",
+                        principalColumn: "CourseID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -253,7 +280,7 @@ namespace Web.Data.Migrations
                         name: "FK_Project_Course_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Course",
-                        principalColumn: "courseID",
+                        principalColumn: "CourseID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Project_ProjectCategory_ProjectCategoryId",
@@ -291,7 +318,7 @@ namespace Web.Data.Migrations
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false),
-                    courseID = table.Column<int>(type: "INTEGER", nullable: true)
+                    CourseID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -303,10 +330,10 @@ namespace Web.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Memberships_Course_courseID",
-                        column: x => x.courseID,
+                        name: "FK_Memberships_Course_CourseID",
+                        column: x => x.CourseID,
                         principalTable: "Course",
-                        principalColumn: "courseID",
+                        principalColumn: "CourseID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Memberships_Project_ProjectId",
@@ -378,47 +405,47 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "b1cea577-0bcb-4e9e-ac98-b35761857707", "b1cea577-0bcb-4e9e-ac98-b35761857707", new DateTime(2021, 4, 8, 15, 19, 17, 816, DateTimeKind.Local).AddTicks(362), "This is the administrator role.", "Administrator", "Administrator" });
+                values: new object[] { "753f9bb8-0959-4bd3-b898-adf5be03f284", "753f9bb8-0959-4bd3-b898-adf5be03f284", new DateTime(2021, 4, 10, 11, 59, 39, 24, DateTimeKind.Local).AddTicks(6098), "This is the administrator role.", "Administrator", "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "d8dd5f57-f1be-4b39-8547-9da1b1e0942e", "d8dd5f57-f1be-4b39-8547-9da1b1e0942e", new DateTime(2021, 4, 8, 15, 19, 17, 818, DateTimeKind.Local).AddTicks(7004), "This is the instructor role.", "Instructor", "Instructor" });
+                values: new object[] { "dac3fba2-8e81-41c5-b098-e1d9d8249ed6", "dac3fba2-8e81-41c5-b098-e1d9d8249ed6", new DateTime(2021, 4, 10, 11, 59, 39, 27, DateTimeKind.Local).AddTicks(627), "This is the instructor role.", "Instructor", "Instructor" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "3fac9747-06e9-4c99-8b1e-483fff77635f", "3fac9747-06e9-4c99-8b1e-483fff77635f", new DateTime(2021, 4, 8, 15, 19, 17, 818, DateTimeKind.Local).AddTicks(7050), "This is the student role.", "Student", "Student" });
+                values: new object[] { "88c2c71a-7a93-45dd-abcb-037bd4921295", "88c2c71a-7a93-45dd-abcb-037bd4921295", new DateTime(2021, 4, 10, 11, 59, 39, 27, DateTimeKind.Local).AddTicks(662), "This is the student role.", "Student", "Student" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3", 0, "7ac89dc8-db32-4232-b4d8-f049cddcfb08", "admin@aspect.com", true, "Adam", "Aldridge", false, null, "ADMIN@ASPECT.COM", "ADMIN@ASPECT.COM", "AQAAAAEAACcQAAAAEBAE1+vzhp1GzVvqMn9tAz9+Rr2Q8FnGBcvMF9NeoUv/N/I/iPBvz02aqa00Dp76mA==", null, false, "1f04eec1-b48f-4fc1-8417-4de86edf08cb", false, "admin@aspect.com" });
+                values: new object[] { "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3", 0, "36fb1dae-9848-4eb3-b286-fa264483bb53", "admin@aspect.com", true, "Adam", "Aldridge", false, null, "ADMIN@ASPECT.COM", "ADMIN@ASPECT.COM", "AQAAAAEAACcQAAAAELZVKK8j0h7HRYGMOh1AVYF5Dq9tuETz0BXwQrgBbFn4NHuWQGdnjXGKvw87keGIHQ==", null, false, "ad867b58-e173-4ee7-9d22-178233969baa", false, "admin@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", 0, "2fc27e78-f447-4445-8e00-1c403111eca0", "instructor@aspect.com", true, "Ted", "Smith", false, null, "INSTRUCTOR@ASPECT.COM", "INSTRUCTOR@ASPECT.COM", "AQAAAAEAACcQAAAAEPygdikTwfBDM3n3eclf32P9eC518qVvkZBvkcgK8erH504L7NuN69I53zmEHYIl9g==", null, false, "1c8ae68a-335c-4c8d-847d-398d647cbc7f", false, "instructor@aspect.com" });
+                values: new object[] { "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", 0, "05d50200-3386-473c-895b-4f4bf4dd33c7", "instructor@aspect.com", true, "Ted", "Smith", false, null, "INSTRUCTOR@ASPECT.COM", "INSTRUCTOR@ASPECT.COM", "AQAAAAEAACcQAAAAECfXz/drBXpw97Mam9LWHqXXA7Wi+05RbAWJMCgCVV0hMX/vEyFIf3qQZ2rCVY6r9w==", null, false, "9ffa6f11-2eb8-42e6-b1cb-b3f18c596e0f", false, "instructor@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "363624a6-0978-4866-b5ee-b135a6fc3870", 0, "00189347-d110-41d4-846d-af4b900cc644", "student@aspect.com", true, "Mike", "Myers", false, null, "STUDENT@ASPECT.COM", "STUDENT@ASPECT.COM", "AQAAAAEAACcQAAAAEP+ixrWnRGTsef9aQb2vqvpz83TbXtqaiygK8kzgn/u64dFrs7mMq7nWvAWQcwXe4A==", null, false, "4030ac1f-cc11-42fd-a4d9-6d5c4acbf407", false, "student@aspect.com" });
+                values: new object[] { "363624a6-0978-4866-b5ee-b135a6fc3870", 0, "5a7e36a9-ba9e-488a-870e-c5e03aba5ea4", "student@aspect.com", true, "Mike", "Myers", false, null, "STUDENT@ASPECT.COM", "STUDENT@ASPECT.COM", "AQAAAAEAACcQAAAAECeAQFPD8oe0/JGPWDX8od8TyqdZhXyV4Ewo0D1Ob6zNhvdq9Nu3gOl+H+5dnPnZSg==", null, false, "1dee832d-499e-4e97-a4b7-ab38da8d4b3a", false, "student@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "363624a6-1111-4866-b5ee-b135a6fc3870", 0, "12ae812b-ae23-4322-9e45-7d4cdcdc3d3e", "student2@aspect.com", true, "Mike2", "Myers2", false, null, "STUDENT2@ASPECT.COM", "STUDENT2@ASPECT.COM", "AQAAAAEAACcQAAAAEK7nfBCWQtXeoV7uhK/65nGJIpo4196CVwUbKf35baNEg4wrtByz4Pyv7CAL5JToDg==", null, false, "49a5828d-2229-4f05-99db-23afd3150855", false, "student2@aspect.com" });
+                values: new object[] { "363624a6-1111-4866-b5ee-b135a6fc3870", 0, "50f01edd-d0be-4282-bc97-ed10e0d51ce7", "student2@aspect.com", true, "Mike2", "Myers2", false, null, "STUDENT2@ASPECT.COM", "STUDENT2@ASPECT.COM", "AQAAAAEAACcQAAAAEG+DZcdFNvwR+6zF3ouZVuLSNSrMgjMfGLpC2ctGi78cLWgYQ5HHOOd57ZCpDUag1w==", null, false, "3c64c315-c6a3-4e12-9273-6e0f560e38f9", false, "student2@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "Course",
-                columns: new[] { "courseID", "courseID1", "courseTitle", "instructorID", "projectOutline", "term" },
-                values: new object[] { 1, null, "COMP3800 - Practicum", "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", "https://www.bcit.ca/outlines/20211088135/", "4" });
+                columns: new[] { "CourseID", "CourseTitle", "Id", "InstructorID", "ProjectOutline", "Term" },
+                values: new object[] { 1, "COMP3800 - Practicum", null, "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", "https://www.bcit.ca/outlines/20211088135/", "4" });
 
             migrationBuilder.InsertData(
                 table: "Course",
-                columns: new[] { "courseID", "courseID1", "courseTitle", "instructorID", "projectOutline", "term" },
-                values: new object[] { 2, null, "COMP4870 - Intranet Planning & Development", "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", "https://www.bcit.ca/outlines/20211049852/", "4" });
+                columns: new[] { "CourseID", "CourseTitle", "Id", "InstructorID", "ProjectOutline", "Term" },
+                values: new object[] { 2, "COMP4870 - Intranet Planning & Development", null, "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", "https://www.bcit.ca/outlines/20211049852/", "4" });
 
             migrationBuilder.InsertData(
                 table: "ProjectCategory",
@@ -483,17 +510,27 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "b1cea577-0bcb-4e9e-ac98-b35761857707", "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3" });
+                values: new object[] { "753f9bb8-0959-4bd3-b898-adf5be03f284", "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "d8dd5f57-f1be-4b39-8547-9da1b1e0942e", "9216a976-f1ba-4d73-aff6-f818b4b5c6a7" });
+                values: new object[] { "dac3fba2-8e81-41c5-b098-e1d9d8249ed6", "9216a976-f1ba-4d73-aff6-f818b4b5c6a7" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "3fac9747-06e9-4c99-8b1e-483fff77635f", "363624a6-0978-4866-b5ee-b135a6fc3870" });
+                values: new object[] { "88c2c71a-7a93-45dd-abcb-037bd4921295", "363624a6-0978-4866-b5ee-b135a6fc3870" });
+
+            migrationBuilder.InsertData(
+                table: "Enrollments",
+                columns: new[] { "CourseID", "EnrollmentId", "Id", "Semester", "Year" },
+                values: new object[] { 1, 1, "363624a6-0978-4866-b5ee-b135a6fc3870", "Fall", 2020 });
+
+            migrationBuilder.InsertData(
+                table: "Enrollments",
+                columns: new[] { "CourseID", "EnrollmentId", "Id", "Semester", "Year" },
+                values: new object[] { 2, 2, "363624a6-0978-4866-b5ee-b135a6fc3870", "Winter", 2021 });
 
             migrationBuilder.InsertData(
                 table: "Project",
@@ -507,28 +544,28 @@ namespace Web.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Memberships",
-                columns: new[] { "Id", "ProjectId", "courseID" },
+                columns: new[] { "Id", "ProjectId", "CourseID" },
                 values: new object[] { "363624a6-0978-4866-b5ee-b135a6fc3870", 1, null });
 
             migrationBuilder.InsertData(
                 table: "Memberships",
-                columns: new[] { "Id", "ProjectId", "courseID" },
+                columns: new[] { "Id", "ProjectId", "CourseID" },
                 values: new object[] { "363624a6-1111-4866-b5ee-b135a6fc3870", 1, null });
 
             migrationBuilder.InsertData(
                 table: "Memberships",
-                columns: new[] { "Id", "ProjectId", "courseID" },
+                columns: new[] { "Id", "ProjectId", "CourseID" },
                 values: new object[] { "363624a6-0978-4866-b5ee-b135a6fc3870", 2, null });
 
             migrationBuilder.InsertData(
                 table: "ProgressUpdates",
                 columns: new[] { "Id", "Date", "Issues", "LastWeekActivity", "NextWeekActivity", "ProjectId" },
-                values: new object[] { 1, new DateTime(2021, 4, 8, 15, 19, 17, 849, DateTimeKind.Local).AddTicks(9538), "Schema may need to be reworked", "Finished DB Design", "Going to work on the API", 1 });
+                values: new object[] { 1, new DateTime(2021, 4, 10, 11, 59, 39, 59, DateTimeKind.Local).AddTicks(2233), "Schema may need to be reworked", "Finished DB Design", "Going to work on the API", 1 });
 
             migrationBuilder.InsertData(
                 table: "ProgressUpdates",
                 columns: new[] { "Id", "Date", "Issues", "LastWeekActivity", "NextWeekActivity", "ProjectId" },
-                values: new object[] { 2, new DateTime(2021, 4, 8, 15, 19, 17, 850, DateTimeKind.Local).AddTicks(1608), "Need to find solution for deployment", "Finished API Design", "Going to implement the API", 1 });
+                values: new object[] { 2, new DateTime(2021, 4, 10, 11, 59, 39, 59, DateTimeKind.Local).AddTicks(4348), "Need to find solution for deployment", "Finished API Design", "Going to implement the API", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -578,14 +615,24 @@ namespace Web.Data.Migrations
                 column: "courseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Course_courseID1",
+                name: "IX_Course_Id",
                 table: "Course",
-                column: "courseID1");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Memberships_courseID",
+                name: "IX_Enrollments_CourseID",
+                table: "Enrollments",
+                column: "CourseID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Enrollments_Id",
+                table: "Enrollments",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Memberships_CourseID",
                 table: "Memberships",
-                column: "courseID");
+                column: "CourseID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Memberships_ProjectId",
@@ -646,6 +693,9 @@ namespace Web.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Enrollments");
+
+            migrationBuilder.DropTable(
                 name: "Memberships");
 
             migrationBuilder.DropTable(
@@ -664,9 +714,6 @@ namespace Web.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Project");
 
             migrationBuilder.DropTable(
@@ -677,6 +724,9 @@ namespace Web.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Course");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }
