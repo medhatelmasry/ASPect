@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Collapse,
-  Container,
-  Navbar,
-  NavbarBrand,
-  NavbarToggler,
-  NavItem,
-  NavLink,
-} from "reactstrap";
+import { Container, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./NavMenu.css";
 
@@ -31,8 +22,8 @@ const NavMenu = () => {
 
           <ul className="navbar-nav flex-grow">
             <NavItem>
-              <NavLink tag={Link} className="text-dark" to="/">
-                Home
+              <NavLink tag={Link} className="text-dark" to="/dashboard">
+                Dashboard
               </NavLink>
             </NavItem>
             <NavItem>

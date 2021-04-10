@@ -16,6 +16,18 @@ namespace Web.Data
         }
         protected override void OnModelCreating (ModelBuilder builder) {
             base.OnModelCreating(builder);
+            //Scott added for m <> m relation
+            builder.Entity<Membership>().HasKey(mb => new { mb.Id, mb.ProjectId });
+
+            builder.Entity<Membership>()
+            .HasOne<ApplicationUser>(mb => mb.Student)
+            .WithMany(au => au.Memberships)
+            .HasForeignKey(mb => mb.Id);
+
+            builder.Entity<Membership>()
+            .HasOne<Project>(mb => mb.Project)
+            .WithMany(p => p.Memberships)
+            .HasForeignKey(mb => mb.ProjectId);
 
             builder.Entity<Enrollment>().HasKey(er => new { er.EnrollmentId, er.CourseID, er.Id });
 
@@ -115,8 +127,25 @@ namespace Web.Data
             //set memberUser password
             memberUser.PasswordHash = ph.HashPassword(memberUser, PASSWORD);
 
+            /* ----------------- Add Student User ----------------- */
+            string studentUserId2 = "363624a6-1111-4866-b5ee-b135a6fc3870";
+            //create memberUser
+            var memberUser2 = new ApplicationUser
+            {
+                Id = studentUserId2,
+                Email = "student2@aspect.com",
+                NormalizedEmail = "STUDENT2@ASPECT.COM",
+                EmailConfirmed = true,
+                FirstName = "Mike2",
+                LastName = "Myers2",
+                UserName = "student2@aspect.com",
+                NormalizedUserName = "STUDENT2@ASPECT.COM"
+            };
+            //set memberUser password
+            memberUser2.PasswordHash = ph.HashPassword(memberUser, PASSWORD);
+
             //seed users
-            builder.Entity<ApplicationUser>().HasData(adminUser, teacherUser, memberUser);
+            builder.Entity<ApplicationUser>().HasData(adminUser, teacherUser, memberUser, memberUser2);
 
             /* ----------------- Add UserRoles ----------------- */
             builder.Entity<IdentityUserRole<string>>().HasData(

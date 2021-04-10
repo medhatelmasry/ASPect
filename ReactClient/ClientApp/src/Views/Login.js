@@ -3,8 +3,8 @@ import * as Yup from "yup";
 import { useFormik, FormikProvider, Form } from "formik";
 import { Button, Image, Row, Alert } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import FormContainer from "../components/common/FormContainer";
-import TextInputLiveFeedback from "../components/common/TextInputLiveFeedback";
+import FormContainer from "../components/FormContainer";
+import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
 import { emailRegex } from "../util/regex";
 
 const schema = Yup.object({

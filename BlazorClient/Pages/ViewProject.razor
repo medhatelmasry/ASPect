@@ -1,0 +1,32 @@
+@page "/projects/{id}"
+@using ASPectLibrary
+@inject HttpClient httpClient
+@inject NavigationManager NavManager
+
+@if (project == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>Project Name: @project.AppName</h1>
+    <p>ID: @project.ProjectId</p>
+    <p>Description: @project.Description</p>
+    <p>Team Name: @project.TeamName</p>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    Project project;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await load();
+    }
+
+    protected async Task load()
+    {
+        project = await httpClient.GetFromJsonAsync<Project>($"{httpClient.BaseAddress}/Project/{Id}");
+    }
+}

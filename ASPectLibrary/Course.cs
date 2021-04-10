@@ -10,6 +10,8 @@ namespace ASPectLibrary {
         {
             Enrollments = new List<Enrollment>();
         }
+        
+        public IList<Membership> Memberships { get; set; }
 
         [Key]
         public int CourseID{get; set;}

@@ -10,10 +10,12 @@ using Web.Data;
 using Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Cors;
 
 namespace Web.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("CORSPolicy")]
     [ApiController]
     public class StudentController : ControllerBase
     {

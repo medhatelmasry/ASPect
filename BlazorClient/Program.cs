@@ -17,7 +17,14 @@ namespace BlazorClient
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            string API_URL;
+            if (builder.HostEnvironment.IsDevelopment()) {
+                API_URL = Constants.API.DEV_URL;
+            } else {
+                API_URL = Constants.API.PRODUCTION_URL;
+            }
+            
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(API_URL) });
 
             await builder.Build().RunAsync();
         }

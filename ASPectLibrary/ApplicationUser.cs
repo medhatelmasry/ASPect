@@ -10,5 +10,6 @@ namespace ASPectLibrary {
         public string LastName { get; set; }
 
         public ICollection<Enrollment> Enrollments { get; set; }
+        public IList<Membership> Memberships { get; set; }
     }
 }
