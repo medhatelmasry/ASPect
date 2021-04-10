@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container, Button } from "react-bootstrap";
 
 export class Home extends Component {
   static displayName = Home.name;

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik, FormikProvider, Form } from "formik";
-import { Button, Image, Row, Alert } from "react-bootstrap";
+import { Button, Row, Alert } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
 import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
 import { emailRegex } from "../util/regex";
+import axios from "axios";
 
 const schema = Yup.object({
   email: Yup.string()
@@ -14,9 +15,18 @@ const schema = Yup.object({
   password: Yup.string().required("Password is required"),
 });
 
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  },
+};
+
 const Login = () => {
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -25,6 +35,28 @@ const Login = () => {
     },
     onSubmit: async (values) => {
       console.log(values);
+      const credentials = {
+        Username: values.email,
+        Password: values.password,
+      };
+      console.log(credentials);
+      try {
+        await axios.post("/api/Auth/login", credentials, config).then((res) => {
+          console.log(res.data);
+          const { id, token, expiration, hashPassword } = res.data;
+          localStorage.setItem("id", id);
+          localStorage.setItem("token", token);
+          localStorage.setItem("expiration", expiration);
+          localStorage.setItem("hashPassword", hashPassword);
+        });
+        history.push("/dashboard");
+        window.location.reload(false);
+        console.log(`user: ${credentials.Username}. logged-in`);
+      } catch (error) {
+        setError("Invalid Credentials");
+        setShowAlert(true);
+        console.log(error);
+      }
     },
     validationSchema: schema,
   });

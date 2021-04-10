@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
@@ -24,20 +24,20 @@ const schema = Yup.object({
     .max(20, "Must be less than 20 characters")
     .required("Last name is required")
     .matches(nameRegex, "Invalid"),
-  password: Yup.string()
-    .min(8, "Must be at least 8 characters")
-    .max(20, "Must be less than 20 characters")
-    .required("Password is required")
-    .matches(passwordRegex, "Invalid"),
-  confirmPassword: Yup.string()
-    .min(8, "Must be at least 8 characters")
-    .max(20, "Must be less than 20 characters")
-    .required("Confirm password is required")
-    .matches(passwordRegex, "Invalid")
-    .when("password", {
-      is: (val) => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf([Yup.ref("password")], "Passwords do not match"),
-    }),
+  // password: Yup.string()
+  //   .min(8, "Must be at least 8 characters")
+  //   .max(20, "Must be less than 20 characters")
+  //   .required("Password is required")
+  //   .matches(passwordRegex, "Invalid"),
+  // confirmPassword: Yup.string()
+  //   .min(8, "Must be at least 8 characters")
+  //   .max(20, "Must be less than 20 characters")
+  //   .required("Confirm password is required")
+  //   .matches(passwordRegex, "Invalid")
+  //   .when("password", {
+  //     is: (val) => (val && val.length > 0 ? true : false),
+  //     then: Yup.string().oneOf([Yup.ref("password")], "Passwords do not match"),
+  //   }),
 });
 
 const config = {
@@ -48,30 +48,68 @@ const config = {
   },
 };
 
-const EditStudentInfo = () => {
-  const studentId = "6b2f89de-3324-4cc9-964f-35b2dca5c5ce";
-  const studentEmail = "test3@gmail.com";
+const EditStudentInfo = ({ studentId }) => {
+  const history = useHistory();
+  const authenticated =
+    localStorage.getItem("id") &&
+    localStorage.getItem("token") &&
+    localStorage.getItem("expiration")
+      ? true
+      : false;
 
+  if (authenticated) {
+    // console.log("logged in");
+  } else {
+    // console.log("not logged in");
+    history.push("/login");
+  }
+
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  useEffect(() => {
+    if (studentId !== null) {
+      const getUserInfo = async () => {
+        await axios.get(`/api/Student/${studentId}`).then((res) => {
+          const { firstName, lastName, userName } = res.data;
+          setUserInfo({
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
+          });
+        });
+      };
+      getUserInfo();
+    }
+  }, [studentId]);
+
+  const { firstName, lastName, userName } = userInfo;
+  // console.log(userInfo);
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const history = useHistory();
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      email: "",
-      userName: "",
+      email: userName,
+      userName: userName,
       normalizedUserName: "",
       normalizedEmail: "",
-      firstname: "",
-      lastname: "",
+      firstname: firstName,
+      lastname: lastName,
       password: "",
       confirmPassword: "",
       emailConfirmed: true,
-      passwordHash: "",
+      passwordHash: localStorage.getItem("hashPassword"),
     },
     onSubmit: async (values) => {
       values.id = studentId;
-      values.email = studentEmail;
+      values.email = userName;
       values.userName = values.email;
       values.firstname =
         values.firstname.charAt(0).toUpperCase() + values.firstname.slice(1);
@@ -79,8 +117,8 @@ const EditStudentInfo = () => {
         values.lastname.charAt(0).toUpperCase() + values.lastname.slice(1);
       values.normalizedUserName = values.email.toUpperCase();
       values.normalizedEmail = values.email.toUpperCase();
-      const passwordHash = await bcrypt.hash(values.password, 10);
-      values.passwordHash = passwordHash;
+      // const passwordHash = await bcrypt.hash(values.password, 10);
+      // values.passwordHash = passwordHash;
       console.log(values);
 
       try {
@@ -100,9 +138,7 @@ const EditStudentInfo = () => {
         <Row className="text-center">
           <h1 className="mb-4 mx-auto">Edit Student Info</h1>
         </Row>
-        <p>TESTING</p>
-        <p>email: test3@gmail.com</p>
-        <p>studentId: 6b2f89de-3324-4cc9-964f-35b2dca5c5ce</p>
+        <p>Email: {userName}</p>
 
         {error && showAlert && (
           <Alert
@@ -136,7 +172,7 @@ const EditStudentInfo = () => {
             type="text"
           />
 
-          <TextInputLiveFeedback
+          {/* <TextInputLiveFeedback
             label="New Password"
             id="password"
             name="password"
@@ -156,7 +192,7 @@ const EditStudentInfo = () => {
               character, at least 1 lowercase letter, at least 1 uppercase
               letter, and at least 1 special character.
             </p>
-          </Row>
+          </Row> */}
 
           <Button type="submit" variant="primary" block className="rounded">
             Save Changes
