@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ASPectLibrary;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,6 +16,8 @@ namespace Web.Data
         }
         protected override void OnModelCreating (ModelBuilder builder) {
             base.OnModelCreating(builder);
+
+            builder.Entity<Enrollment>().HasKey(er => new { er.EnrollmentId, er.CourseID, er.Id });
 
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
             string PASSWORD = "P@$$w0rd";
@@ -107,7 +110,7 @@ namespace Web.Data
                 FirstName = "Mike",
                 LastName = "Myers",
                 UserName = "student@aspect.com",
-                NormalizedUserName = "STUDENT@ASPECT.COM"
+                NormalizedUserName = "STUDENT@ASPECT.COM",
             };
             //set memberUser password
             memberUser.PasswordHash = ph.HashPassword(memberUser, PASSWORD);
@@ -152,5 +155,7 @@ namespace Web.Data
         public DbSet<PeerEvaluation> PeerEvaluations { get; set; }
         public DbSet<ProjectRequirement> ProjectRequirements { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
+
+        public DbSet<Enrollment> Enrollments { get; set; }
     }
 }
