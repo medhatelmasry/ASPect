@@ -8,8 +8,11 @@ export class Home extends Component {
     return (
       <>
         <h3 className="text-center pt-3">Welcome to ASPECT Student Portal</h3>
-        <hr />
-        <div className="ml-5">
+
+        <div className="ml-5 mt-5">
+          <p style={{ color: "red" }}>
+            <strong>Authentication is not implemented yet.</strong>
+          </p>
           <p>
             <strong>Home</strong> routing: /
           </p>
