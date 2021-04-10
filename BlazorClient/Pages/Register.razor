@@ -1,22 +1,41 @@
 ﻿@page "/Instregister"
+@inject HttpClient httpClient
+@inject NavigationManager navigateManager 
 
 <h1>Instructor Register</h1>
 
-<div class="form-element"> @* method="post" *@
+<EditForm Model="@user" OnValidSubmit="@HandleAdd">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
     <div class="form-elements">
-        <label for="email">Email</label>
-        <input type="text" placeholder="email">
+        <label>First Name</label>
+        <InputText placeholder="First Name" id="firstName" @bind-Value="@user.FirstName" />
+    </div>
+    <br />
+    <div class="form-elements">
+        <label>Last Name</label>
+        <InputText placeholder="Last Name" id="lastName" @bind-Value="@user.LastName" />
     </div>
     <div class="form-elements">
-        <label for="Password">Password</label>
-        <input type="password" placeholder="Password">
+        <label>Email</label>
+        <InputText placeholder="Email" id="email" @bind-Value="@user.Email" />
     </div>
     <div class="form-elements">
-        <label for="ConfirmPassword">Confirm Password</label>
-        <input type="password" placeholder="Confirm Password">
+        <label>Password</label>
+        <InputText placeholder="Password" id="password" @bind-Value="@user." /> 
     </div>
-    <div>
-        <button id="submit-btn">Register</button>
-    </div>
-</div>
+</EditForm>
+
+@functions {
+    string baseUrl = "https://localhost:5001/";
+    ApplicationUser user = new ApplicationUser();
+
+    private async void HandleAdd()
+    {
+        string endpoint = $"{baseUrl}api/Auth/register";
+        await httpClient.PostAsJsonAsync(endpoint, user);
+        navigateManager.NavigateTo("/studentlist");
+    }
+}
 
