@@ -94,7 +94,11 @@ const Signup = () => {
         history.push("/signup");
       } else {
         try {
-          await axios.post("/api/Auth/register", values, config);
+          await axios.post(
+            "https://openaspect.azurewebsites.net/api/Auth/register",
+            values,
+            config
+          );
           history.push("/dashboard");
           console.log("created a student account");
         } catch (error) {

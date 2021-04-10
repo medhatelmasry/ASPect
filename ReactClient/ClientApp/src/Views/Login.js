@@ -41,14 +41,20 @@ const Login = () => {
       };
       console.log(credentials);
       try {
-        await axios.post("/api/Auth/login", credentials, config).then((res) => {
-          console.log(res.data);
-          const { id, token, expiration, hashPassword } = res.data;
-          localStorage.setItem("id", id);
-          localStorage.setItem("token", token);
-          localStorage.setItem("expiration", expiration);
-          localStorage.setItem("hashPassword", hashPassword);
-        });
+        await axios
+          .post(
+            "https://openaspect.azurewebsites.net/api/Auth/login",
+            credentials,
+            config
+          )
+          .then((res) => {
+            console.log(res.data);
+            const { id, token, expiration, hashPassword } = res.data;
+            localStorage.setItem("id", id);
+            localStorage.setItem("token", token);
+            localStorage.setItem("expiration", expiration);
+            localStorage.setItem("hashPassword", hashPassword);
+          });
         history.push("/dashboard");
         window.location.reload(false);
         console.log(`user: ${credentials.Username}. logged-in`);
