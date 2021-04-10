@@ -47,7 +47,7 @@ const config = {
   },
 };
 
-const Signup = ({ onSubmit }) => {
+const Signup = () => {
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const history = useHistory();
@@ -163,13 +163,7 @@ const Signup = ({ onSubmit }) => {
             </p>
           </Row>
 
-          <Button
-            type="submit"
-            variant="primary"
-            block
-            className="rounded"
-            onClick={onSubmit}
-          >
+          <Button type="submit" variant="primary" block className="rounded">
             Create an account
           </Button>
         </Form>

@@ -22,8 +22,8 @@ const NavMenu = () => {
 
           <ul className="navbar-nav flex-grow">
             <NavItem>
-              <NavLink tag={Link} className="text-dark" to="/">
-                Home
+              <NavLink tag={Link} className="text-dark" to="/dashboard">
+                Dashboard
               </NavLink>
             </NavItem>
             <NavItem>
