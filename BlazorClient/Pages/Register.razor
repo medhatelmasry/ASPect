@@ -1,40 +1,42 @@
-﻿@page "/Instregister"
+﻿@page "/register"
 @inject HttpClient httpClient
 @inject NavigationManager navigateManager 
 
 <h1>Instructor Register</h1>
 
-<EditForm Model="@user" OnValidSubmit="@HandleAdd">
+<EditForm Model="@model" OnValidSubmit="@HandleAdd">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <div class="form-elements">
         <label>First Name</label>
-        <InputText placeholder="First Name" id="firstName" @bind-Value="@user.FirstName" />
+        <InputText placeholder="First Name" id="firstName" @bind-Value="@model.FirstName" />
     </div>
     <br />
     <div class="form-elements">
         <label>Last Name</label>
-        <InputText placeholder="Last Name" id="lastName" @bind-Value="@user.LastName" />
+        <InputText placeholder="Last Name" id="lastName" @bind-Value="@model.LastName" />
     </div>
     <div class="form-elements">
         <label>Email</label>
-        <InputText placeholder="Email" id="email" @bind-Value="@user.Email" />
+        <InputText placeholder="Email" id="email" @bind-Value="@model.Email" />
     </div>
     <div class="form-elements">
         <label>Password</label>
-        <InputText placeholder="Password" id="password" @bind-Value="@user." /> 
+        <InputText placeholder="Password" id="password" @bind-Value="@model.Password" /> 
     </div>
+
+    <button type="submit" class="btn btn-success">Register</button>
 </EditForm>
 
 @functions {
     string baseUrl = "https://localhost:5001/";
-    ApplicationUser user = new ApplicationUser();
+    RegisterViewModel model = new RegisterViewModel();
 
     private async void HandleAdd()
     {
         string endpoint = $"{baseUrl}api/Auth/register";
-        await httpClient.PostAsJsonAsync(endpoint, user);
+        await httpClient.PostAsJsonAsync(endpoint, model);
         navigateManager.NavigateTo("/studentlist");
     }
 }
