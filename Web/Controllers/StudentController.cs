@@ -9,6 +9,7 @@ using ASPectLibrary;
 using Web.Data;
 using Web.Models;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
 
 namespace Web.Controllers
@@ -29,21 +30,38 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            JsonSerializerSettings options = new()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            };
+
+            var studentsJson = JsonConvert.SerializeObject(await _context.Users.Include(u => u.Enrollments).ToListAsync(), options);
+            List<ApplicationUser> studentsDeserialized = System.Text.Json.JsonSerializer.Deserialize<List<ApplicationUser>>(studentsJson);
+
+            return studentsDeserialized;
         }
 
         // GET: api/Student/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ApplicationUser>> GetApplicationUser(string id)
         {
-            var applicationUser = await _context.Users.FindAsync(id);
+            var applicationUser = await _context.Users.Include(u => u.Enrollments).FirstOrDefaultAsync(u => u.Id == id);
+
+            JsonSerializerSettings options = new()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            };
+
 
             if (applicationUser == null)
             {
                 return NotFound();
             }
 
-            return applicationUser;
+            var studentJson = JsonConvert.SerializeObject(applicationUser, options);
+            ApplicationUser studentDeserialized = System.Text.Json.JsonSerializer.Deserialize<ApplicationUser>(studentJson);
+            
+            return studentDeserialized;
         }
 
         // PUT: api/Student/5
@@ -130,22 +148,6 @@ namespace Web.Controllers
 
             return CreatedAtAction("GetApplicationUser", new { id = applicationUser.Id }, applicationUser);
         }
-
-        // // DELETE: api/Student/5
-        // [HttpDelete("{id}")]
-        // public async Task<IActionResult> DeleteApplicationUser(string id)
-        // {
-        //     var applicationUser = await _context.Users.FindAsync(id);
-        //     if (applicationUser == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     _context.Users.Remove(applicationUser);
-        //     await _context.SaveChangesAsync();
-
-        //     return NoContent();
-        // }
 
         private bool ApplicationUserExists(string id)
         {

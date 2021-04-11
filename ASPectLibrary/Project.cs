@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,5 +21,7 @@ namespace ASPectLibrary
 
         [ForeignKey("CourseId")]
         public Course Course{ get; set; }
+
+        public IList<Membership> Memberships { get; set; }
     }
 }

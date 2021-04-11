@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ASPectLibrary;
 using Web.Data;
+using System.Text.Json;
 using Microsoft.AspNetCore.Cors;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Web.Controllers
 {
@@ -27,7 +30,15 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
         {
-            return await _context.Projects.ToListAsync();
+            JsonSerializerSettings options = new()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                
+            };
+            var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ThenInclude(m => m.Student).Include(i => i.Memberships).ThenInclude(m => m.Project).ToListAsync(), options);
+            //Console.WriteLine("json: " + projJson);
+            List<Project> projDeserialized = System.Text.Json.JsonSerializer.Deserialize<List<Project>>(projJson);
+            return projDeserialized;
         }
 
         // GET: api/Project/5
@@ -36,10 +47,22 @@ namespace Web.Controllers
         {
             var project = await _context.Projects.FindAsync(id);
 
+            JsonSerializerSettings options = new()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                
+            };
+
             if (project == null)
             {
                 return NotFound();
+            } else {
+                var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ThenInclude(m => m.Student).FirstOrDefaultAsync(i => i.ProjectId == id), options);
+                Project projDeserialized = System.Text.Json.JsonSerializer.Deserialize<Project>(projJson);
+                return projDeserialized;
             }
+
+
 
             return project;
         }
