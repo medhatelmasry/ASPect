@@ -9,7 +9,7 @@ using Web.Data;
 namespace Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210410185939_M1")]
+    [Migration("20210411192224_M1")]
     partial class M1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,27 +52,27 @@ namespace Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "753f9bb8-0959-4bd3-b898-adf5be03f284",
-                            ConcurrencyStamp = "753f9bb8-0959-4bd3-b898-adf5be03f284",
-                            CreatedDate = new DateTime(2021, 4, 10, 11, 59, 39, 24, DateTimeKind.Local).AddTicks(6098),
+                            Id = "2d33cc5d-5ef4-41b9-a5ea-0dd205ddc69f",
+                            ConcurrencyStamp = "2d33cc5d-5ef4-41b9-a5ea-0dd205ddc69f",
+                            CreatedDate = new DateTime(2021, 4, 11, 12, 22, 23, 792, DateTimeKind.Local).AddTicks(8550),
                             Description = "This is the administrator role.",
                             Name = "Administrator",
                             NormalizedName = "Administrator"
                         },
                         new
                         {
-                            Id = "dac3fba2-8e81-41c5-b098-e1d9d8249ed6",
-                            ConcurrencyStamp = "dac3fba2-8e81-41c5-b098-e1d9d8249ed6",
-                            CreatedDate = new DateTime(2021, 4, 10, 11, 59, 39, 27, DateTimeKind.Local).AddTicks(627),
+                            Id = "a4d11734-85c1-42bf-9b5d-eb17aaa534b6",
+                            ConcurrencyStamp = "a4d11734-85c1-42bf-9b5d-eb17aaa534b6",
+                            CreatedDate = new DateTime(2021, 4, 11, 12, 22, 23, 797, DateTimeKind.Local).AddTicks(9280),
                             Description = "This is the instructor role.",
                             Name = "Instructor",
                             NormalizedName = "Instructor"
                         },
                         new
                         {
-                            Id = "88c2c71a-7a93-45dd-abcb-037bd4921295",
-                            ConcurrencyStamp = "88c2c71a-7a93-45dd-abcb-037bd4921295",
-                            CreatedDate = new DateTime(2021, 4, 10, 11, 59, 39, 27, DateTimeKind.Local).AddTicks(662),
+                            Id = "e9485476-5548-4c6a-9f88-74cad46d5dd0",
+                            ConcurrencyStamp = "e9485476-5548-4c6a-9f88-74cad46d5dd0",
+                            CreatedDate = new DateTime(2021, 4, 11, 12, 22, 23, 797, DateTimeKind.Local).AddTicks(9310),
                             Description = "This is the student role.",
                             Name = "Student",
                             NormalizedName = "Student"
@@ -153,7 +153,7 @@ namespace Web.Data.Migrations
                         {
                             Id = "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "36fb1dae-9848-4eb3-b286-fa264483bb53",
+                            ConcurrencyStamp = "211598e8-8944-4daa-9542-e4e929f9537b",
                             Email = "admin@aspect.com",
                             EmailConfirmed = true,
                             FirstName = "Adam",
@@ -161,9 +161,9 @@ namespace Web.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ASPECT.COM",
                             NormalizedUserName = "ADMIN@ASPECT.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELZVKK8j0h7HRYGMOh1AVYF5Dq9tuETz0BXwQrgBbFn4NHuWQGdnjXGKvw87keGIHQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGPq1iZ+f7K7qa+kTswt2+/wgd5K2nLy9QZSkO7yE7kNyDET3k9TlxEKNbuqk7PV+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ad867b58-e173-4ee7-9d22-178233969baa",
+                            SecurityStamp = "2bdc69d1-c1dd-4326-bc46-5eb5f35b5d09",
                             TwoFactorEnabled = false,
                             UserName = "admin@aspect.com"
                         },
@@ -171,7 +171,7 @@ namespace Web.Data.Migrations
                         {
                             Id = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05d50200-3386-473c-895b-4f4bf4dd33c7",
+                            ConcurrencyStamp = "a2ef17a4-48cd-43f4-a0c2-fa34d244b9b7",
                             Email = "instructor@aspect.com",
                             EmailConfirmed = true,
                             FirstName = "Ted",
@@ -179,9 +179,9 @@ namespace Web.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "INSTRUCTOR@ASPECT.COM",
                             NormalizedUserName = "INSTRUCTOR@ASPECT.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECfXz/drBXpw97Mam9LWHqXXA7Wi+05RbAWJMCgCVV0hMX/vEyFIf3qQZ2rCVY6r9w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECWg3JH0S7Kp5ngeltUI5zZFxgAQOjRFQytdz2XRRiKhrA2sOnRNoCB97ganHRMwhQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9ffa6f11-2eb8-42e6-b1cb-b3f18c596e0f",
+                            SecurityStamp = "f69dc59b-905f-4d26-94e8-5ec58b624dba",
                             TwoFactorEnabled = false,
                             UserName = "instructor@aspect.com"
                         },
@@ -189,7 +189,7 @@ namespace Web.Data.Migrations
                         {
                             Id = "363624a6-0978-4866-b5ee-b135a6fc3870",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5a7e36a9-ba9e-488a-870e-c5e03aba5ea4",
+                            ConcurrencyStamp = "56a111f0-1e5f-4367-9a47-a5b71c8d2e6a",
                             Email = "student@aspect.com",
                             EmailConfirmed = true,
                             FirstName = "Mike",
@@ -197,9 +197,9 @@ namespace Web.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT@ASPECT.COM",
                             NormalizedUserName = "STUDENT@ASPECT.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECeAQFPD8oe0/JGPWDX8od8TyqdZhXyV4Ewo0D1Ob6zNhvdq9Nu3gOl+H+5dnPnZSg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK4SaokSgS5bwaBtj+zOLGoENmE0BL+FyqnJscJShSO3aR5np2UV+u47viaqOq1B1Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1dee832d-499e-4e97-a4b7-ab38da8d4b3a",
+                            SecurityStamp = "1e47e80e-7539-4ed2-8237-e795b5926f65",
                             TwoFactorEnabled = false,
                             UserName = "student@aspect.com"
                         },
@@ -207,7 +207,7 @@ namespace Web.Data.Migrations
                         {
                             Id = "363624a6-1111-4866-b5ee-b135a6fc3870",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "50f01edd-d0be-4282-bc97-ed10e0d51ce7",
+                            ConcurrencyStamp = "c8d58bbb-6bbf-49b2-a6e4-39bb5a7229ff",
                             Email = "student2@aspect.com",
                             EmailConfirmed = true,
                             FirstName = "Mike2",
@@ -215,9 +215,9 @@ namespace Web.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT2@ASPECT.COM",
                             NormalizedUserName = "STUDENT2@ASPECT.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG+DZcdFNvwR+6zF3ouZVuLSNSrMgjMfGLpC2ctGi78cLWgYQ5HHOOd57ZCpDUag1w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC63sN96h+H1PcrZwkVyDqzPZDPf1sB8XNYdfky8orl79Ze1LWEA1cE3KRvoKuoB/A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3c64c315-c6a3-4e12-9273-6e0f560e38f9",
+                            SecurityStamp = "54fa7c4a-c4e6-4612-899d-98fc14c19a2a",
                             TwoFactorEnabled = false,
                             UserName = "student2@aspect.com"
                         });
@@ -227,9 +227,6 @@ namespace Web.Data.Migrations
                 {
                     b.Property<int>("AssignmentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AssignmentId1")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateCreated")
@@ -245,8 +242,6 @@ namespace Web.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("AssignmentId");
-
-                    b.HasIndex("AssignmentId1");
 
                     b.HasIndex("courseId");
 
@@ -446,7 +441,7 @@ namespace Web.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 4, 10, 11, 59, 39, 59, DateTimeKind.Local).AddTicks(2233),
+                            Date = new DateTime(2021, 4, 11, 12, 22, 23, 843, DateTimeKind.Local).AddTicks(4450),
                             Issues = "Schema may need to be reworked",
                             LastWeekActivity = "Finished DB Design",
                             NextWeekActivity = "Going to work on the API",
@@ -455,7 +450,7 @@ namespace Web.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2021, 4, 10, 11, 59, 39, 59, DateTimeKind.Local).AddTicks(4348),
+                            Date = new DateTime(2021, 4, 11, 12, 22, 23, 843, DateTimeKind.Local).AddTicks(6310),
                             Issues = "Need to find solution for deployment",
                             LastWeekActivity = "Finished API Design",
                             NextWeekActivity = "Going to implement the API",
@@ -723,17 +718,17 @@ namespace Web.Data.Migrations
                         new
                         {
                             UserId = "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3",
-                            RoleId = "753f9bb8-0959-4bd3-b898-adf5be03f284"
+                            RoleId = "2d33cc5d-5ef4-41b9-a5ea-0dd205ddc69f"
                         },
                         new
                         {
                             UserId = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
-                            RoleId = "dac3fba2-8e81-41c5-b098-e1d9d8249ed6"
+                            RoleId = "a4d11734-85c1-42bf-9b5d-eb17aaa534b6"
                         },
                         new
                         {
                             UserId = "363624a6-0978-4866-b5ee-b135a6fc3870",
-                            RoleId = "88c2c71a-7a93-45dd-abcb-037bd4921295"
+                            RoleId = "e9485476-5548-4c6a-9f88-74cad46d5dd0"
                         });
                 });
 
@@ -760,12 +755,8 @@ namespace Web.Data.Migrations
 
             modelBuilder.Entity("ASPectLibrary.Assignment", b =>
                 {
-                    b.HasOne("ASPectLibrary.Assignment", null)
-                        .WithMany("Assignments")
-                        .HasForeignKey("AssignmentId1");
-
                     b.HasOne("ASPectLibrary.Course", "Course")
-                        .WithMany()
+                        .WithMany("Assignments")
                         .HasForeignKey("courseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -946,13 +937,10 @@ namespace Web.Data.Migrations
                     b.Navigation("Memberships");
                 });
 
-            modelBuilder.Entity("ASPectLibrary.Assignment", b =>
-                {
-                    b.Navigation("Assignments");
-                });
-
             modelBuilder.Entity("ASPectLibrary.Course", b =>
                 {
+                    b.Navigation("Assignments");
+
                     b.Navigation("Enrollments");
 
                     b.Navigation("Memberships");

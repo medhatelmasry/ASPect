@@ -27,7 +27,5 @@ namespace ASPectLibrary {
         /// The Course that has the Assignment
         [ForeignKey("courseId")]
         public Course Course { get; set; }
-
-        public List<Assignment> Assignments { get; set; }
     }
 }
