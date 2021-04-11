@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -46,15 +47,17 @@ public class AuthController : ControllerBase
         var user = await _userManager.FindByEmailAsync(model.Username);
         if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
         {
-            var claim = new[] {
-        new Claim(JwtRegisteredClaimNames.Sub, user.UserName)
-      };
+            // var claim = new[] {
+            //     new Claim(JwtRegisteredClaimNames.Sub, user.UserName)
+            // };
+
             var signinKey = new SymmetricSecurityKey(
               Encoding.UTF8.GetBytes(_configuration["Jwt:SigningKey"]));
 
             int expiryInMinutes = Convert.ToInt32(_configuration["Jwt:ExpiryInMinutes"]);
 
             var token = new JwtSecurityToken(
+              claims: new List<Claim> { new Claim(JwtRegisteredClaimNames.Sub, user.Id), new Claim(JwtRegisteredClaimNames.Sub, user.UserName) },
               issuer: _configuration["Jwt:Site"],
               audience: _configuration["Jwt:Site"],
               expires: DateTime.UtcNow.AddMinutes(expiryInMinutes),
@@ -64,7 +67,6 @@ public class AuthController : ControllerBase
             return Ok(
               new
               {
-                  id = user.Id,
                   hashPassword = user.PasswordHash,
                   token = new JwtSecurityTokenHandler().WriteToken(token),
                   expiration = token.ValidTo

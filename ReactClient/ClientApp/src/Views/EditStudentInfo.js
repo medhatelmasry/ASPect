@@ -124,7 +124,11 @@ const EditStudentInfo = ({ studentId }) => {
       console.log(values);
 
       try {
-        await axios.put(`/api/Student/${studentId}`, values, config);
+        await axios.put(
+          `https://openaspect.azurewebsites.net/api/Student/${studentId}`,
+          values,
+          config
+        );
         history.push("/dashboard");
         console.log("saved changes");
       } catch (error) {

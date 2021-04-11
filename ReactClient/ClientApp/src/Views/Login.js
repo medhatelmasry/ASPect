@@ -7,6 +7,7 @@ import FormContainer from "../components/FormContainer";
 import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
 import { emailRegex } from "../util/regex";
 import axios from "axios";
+import jwt from "jwt-decode";
 
 const schema = Yup.object({
   email: Yup.string()
@@ -34,12 +35,12 @@ const Login = () => {
       password: "",
     },
     onSubmit: async (values) => {
-      console.log(values);
+      // console.log(values);
       const credentials = {
         Username: values.email,
         Password: values.password,
       };
-      console.log(credentials);
+      // console.log(credentials);
       try {
         await axios
           .post(
@@ -48,12 +49,15 @@ const Login = () => {
             config
           )
           .then((res) => {
-            console.log(res.data);
-            const { id, token, expiration, hashPassword } = res.data;
-            localStorage.setItem("id", id);
+            // console.log(res.data);
+            const { token, expiration, hashPassword } = res.data;
             localStorage.setItem("token", token);
             localStorage.setItem("expiration", expiration);
             localStorage.setItem("hashPassword", hashPassword);
+            const user = jwt(token);
+            const userId = user.sub[0];
+            console.log(userId);
+            localStorage.setItem("id", userId);
           });
         history.push("/dashboard");
         window.location.reload(false);
