@@ -184,7 +184,7 @@ namespace Web.Data
         public DbSet<PeerEvaluation> PeerEvaluations { get; set; }
         public DbSet<ProjectRequirement> ProjectRequirements { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
-
         public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Offering> Offerings { get; set; }
     }
 }
