@@ -13,10 +13,10 @@ namespace ASPectLibrary
         public DateTime Year { get; set; }
 
         /// Student Id
-        public string StudentId { get; set; }
+        public string InstructorID { get; set; }
 
-        [ForeignKey("StudentId")]
-        public ApplicationUser User { get; set; }
+        [ForeignKey("Id")]
+        public ApplicationUser Instructor { get; set; }
         public int CourseID { get; set; }
         [ForeignKey("CourseID")]
         public Course Course { get; set; }
