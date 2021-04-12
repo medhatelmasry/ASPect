@@ -33,7 +33,10 @@ namespace Web.Controllers
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             };
 
-            var instructorsJson = JsonConvert.SerializeObject(await _context.Users.Include(u => u.Enrollments).ToListAsync(), options);
+            var instructorsJson = JsonConvert.SerializeObject(await _context.Users
+                                                                .Include(u => u.Enrollments)
+                                                                .Include(u => u.Offerings)
+                                                                .ToListAsync(), options);
             List<ApplicationUser> instructorsDeserialized = System.Text.Json.JsonSerializer.Deserialize<List<ApplicationUser>>(instructorsJson);
 
             return instructorsDeserialized;
