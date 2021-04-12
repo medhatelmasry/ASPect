@@ -23,6 +23,9 @@ public static class DummyData {
       modelBuilder.Entity<Membership>().HasData (
           GetMemberships()
       );
+      modelBuilder.Entity<Offering>().HasData (
+          GetOfferings()
+      );
       modelBuilder.Entity<Enrollment>().HasData (
           GetEnrollments()
       );
@@ -174,22 +177,41 @@ public static List<Course> GetCourses () {
         return projectRoles;
     }
 
+    public static List<Offering> GetOfferings () {
+
+        List<Offering> list = new List<Offering>() {
+            new Offering {
+                OfferingId = 1,
+                Id = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
+                Year = new DateTime(),
+                Semester = "Fall",
+                CourseID = 2
+            },
+            new Offering {
+                OfferingId = 2,
+                Id = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
+                Year = new DateTime(),
+                CourseID = 1,
+                Semester = "Winter"
+            }
+        };
+        return list;
+    }
+
     public static List<Enrollment> GetEnrollments () {
 
         List<Enrollment> list = new List<Enrollment>() {
             new Enrollment {
                 EnrollmentId = 1,
+                //The students id
                 Id = "363624a6-0978-4866-b5ee-b135a6fc3870",
-                CourseID = 1,
-                Semester = "Fall",
-                Year = 2020,
+                OfferingId = 1
             },
             new Enrollment {
                 EnrollmentId = 2,
+                //The students id
                 Id = "363624a6-0978-4866-b5ee-b135a6fc3870",
-                CourseID = 2,
-                Semester = "Winter",
-                Year = 2021,
+                OfferingId = 1
             }
         };
 

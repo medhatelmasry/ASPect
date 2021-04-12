@@ -11,5 +11,6 @@ namespace ASPectLibrary {
 
         public ICollection<Enrollment> Enrollments { get; set; }
         public IList<Membership> Memberships { get; set; }
+        public IList<Offering> Offerings { get; set; }
     }
 }
