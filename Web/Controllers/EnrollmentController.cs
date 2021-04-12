@@ -37,7 +37,17 @@ namespace Web.Controllers
         public async Task<ActionResult<IEnumerable<Enrollment>>> GetEnrollments(
                             [FromQuery] int? id)
         {
-            var results = await _context.Enrollments.ToListAsync();
+            var results = await _context.Enrollments
+                         .Include(e => e.Offering)
+                         .Include(e => e.Student)
+                         .Select(o => new {
+                             EnrollmentId = o.EnrollmentId,
+                             Offering = o.Offering,
+                             StudentId = o.Student.Id,
+                             StudentFirstName = o.Student.FirstName,
+                             StudentLastName = o.Student.LastName
+                         })
+                         .ToListAsync();
 
             if (results.Count > 0) {
                 return Ok(results);
@@ -62,7 +72,9 @@ namespace Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Enrollment>> GetEnrollment(int id)
         {
-            var enrollment = await _context.Enrollments.FindAsync(id);
+            var enrollment = await _context.Enrollments
+                                            .Include(e => e.Offering)
+                                            .FirstOrDefaultAsync(i => i.EnrollmentId == id);
 
             if (enrollment == null)
             {

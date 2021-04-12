@@ -9,11 +9,17 @@ namespace ASPectLibrary
     {
         [Key]
         public int OfferingId { get; set; }
+
+        /// <summary>
+        /// Winter, Fall, Summer, Spring
+        /// </summary>
         public string Semester { get; set; }
         public DateTime Year { get; set; }
 
-        /// Student Id
-        public string InstructorID { get; set; }
+        /// <summary>
+        /// Id of the STUDENT (application User).
+        /// </summary>
+        public string Id { get; set; }
 
         [ForeignKey("Id")]
         public ApplicationUser Instructor { get; set; }

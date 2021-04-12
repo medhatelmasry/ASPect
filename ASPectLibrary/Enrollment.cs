@@ -11,7 +11,10 @@ namespace ASPectLibrary
         public int OfferingId { get; set; }
         [ForeignKey("OfferingId")]
         public Offering Offering { get; set; }
-        public string StudentId { get; set; }
+        /// <summary>
+        /// Id of the STUDENT (ApplicationUser).
+        /// </summary>
+        public string Id { get; set; }
         [ForeignKey("Id")]
         public ApplicationUser Student { get; set; }
     }

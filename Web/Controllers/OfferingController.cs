@@ -34,10 +34,19 @@ namespace Web.Controllers
         ///     200 : Success
         ///     404 : NoContent if there are no results
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Offering>>> GetOfferings(
-                            [FromQuery] int? id)
+        public async Task<ActionResult<IEnumerable<Offering>>> GetOfferings()
         {
-            var results = await _context.Offerings.ToListAsync();
+            var results = await _context.Offerings
+                                        .Include(o => o.Instructor)
+                                        .Include(o => o.Course)
+                                        .Select(p => new {
+                                            Course = p.Course,
+                                            Instructor = p.Instructor.Id,
+                                            Semester = p.Semester,
+                                            Year = p.Year,
+                                            OfferingId = p.OfferingId
+                                        })
+                                        .ToListAsync();
 
             if (results.Count > 0) {
                 return Ok(results);

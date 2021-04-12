@@ -182,14 +182,14 @@ public static List<Course> GetCourses () {
         List<Offering> list = new List<Offering>() {
             new Offering {
                 OfferingId = 1,
-                InstructorID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
+                Id = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
                 Year = new DateTime(),
                 Semester = "Fall",
                 CourseID = 2
             },
             new Offering {
                 OfferingId = 2,
-                InstructorID = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
+                Id = "9216a976-f1ba-4d73-aff6-f818b4b5c6a7",
                 Year = new DateTime(),
                 CourseID = 1,
                 Semester = "Winter"
@@ -203,12 +203,14 @@ public static List<Course> GetCourses () {
         List<Enrollment> list = new List<Enrollment>() {
             new Enrollment {
                 EnrollmentId = 1,
-                StudentId = "363624a6-0978-4866-b5ee-b135a6fc3870",
+                //The students id
+                Id = "363624a6-0978-4866-b5ee-b135a6fc3870",
                 OfferingId = 1
             },
             new Enrollment {
                 EnrollmentId = 2,
-                StudentId = "363624a6-0978-4866-b5ee-b135a6fc3870",
+                //The students id
+                Id = "363624a6-0978-4866-b5ee-b135a6fc3870",
                 OfferingId = 1
             }
         };
