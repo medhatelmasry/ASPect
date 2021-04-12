@@ -19,13 +19,27 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path="/" component={Home} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route
+          exact
+          path="/dashboard"
+          component={(studentId) => {
+            studentId = localStorage.getItem("id");
+            return <Dashboard studentId={studentId} />;
+          }}
+        />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/project-status" component={ProjectStatus} />
         <Route exact path="/create-project" component={CreateProject} />
-        <Route exact path="/edit-student" component={EditStudentInfo} />
+        <Route
+          exact
+          path="/edit-student"
+          component={(studentId) => {
+            studentId = localStorage.getItem("id");
+            return <EditStudentInfo studentId={studentId} />;
+          }}
+        />
         <Route exact path="/peer-evaluation" component={PeerEvaluation} />
       </Layout>
     );

@@ -77,7 +77,10 @@ const Signup = () => {
       values.passwordHash = passwordHash;
       console.log(values);
 
-      const result = await axios.get("/api/Student", config);
+      const result = await axios.get(
+        "https://openaspect.azurewebsites.net/api/Student",
+        config
+      );
       const studentList = result.data;
       let studentUserNameList = [];
 
@@ -91,7 +94,11 @@ const Signup = () => {
         history.push("/signup");
       } else {
         try {
-          await axios.post("/api/Student", values, config);
+          await axios.post(
+            "https://openaspect.azurewebsites.net/api/Auth/register",
+            values,
+            config
+          );
           history.push("/dashboard");
           console.log("created a student account");
         } catch (error) {

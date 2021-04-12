@@ -1,12 +1,67 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
+import { useHistory } from "react-router";
 import { LinkContainer } from "react-router-bootstrap";
 
-export const Dashboard = () => {
+export const Dashboard = ({ studentId }) => {
+  const authenticated =
+    localStorage.getItem("id") &&
+    localStorage.getItem("token") &&
+    localStorage.getItem("expiration")
+      ? true
+      : false;
+
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
+  });
+
+  const history = useHistory();
+
+  if (authenticated) {
+    console.log("logged in");
+  } else {
+    console.log("not logged in");
+    history.push("/login");
+  }
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+
+  useEffect(() => {
+    if (studentId !== null) {
+      const getUserInfo = async () => {
+        const { data } = await axios.get(`/api/Student/${studentId}`);
+        console.log(data);
+        const { firstName, lastName, userName } = data;
+        setUserInfo({
+          firstName: firstName,
+          lastName: lastName,
+          userName: userName,
+        });
+      };
+      getUserInfo();
+    }
+  }, [studentId]);
+
+  const { firstName, lastName, userName } = userInfo;
+
   return (
     <Container>
       <h3>Dashboard</h3>
-      <p>Hello, User.</p>
+      <p className="mt-4 ml-2">
+        Hello, <strong>{`${firstName} ${lastName}`}.</strong>
+      </p>
+      <p className="mt-4 ml-2">
+        Your email address: <em>{userName}</em>.
+      </p>
 
       <LinkContainer to="/project-status">
         <Button className="my-2 mx-2">View Project Status</Button>

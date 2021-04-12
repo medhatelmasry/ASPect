@@ -1,8 +1,24 @@
 import React from "react";
-import { Container, Button, Table } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Container, Table } from "react-bootstrap";
+import { useHistory } from "react-router";
 
 const ProjectStatus = () => {
+  const authenticated =
+    localStorage.getItem("id") &&
+    localStorage.getItem("token") &&
+    localStorage.getItem("expiration")
+      ? true
+      : false;
+
+  const history = useHistory();
+
+  if (authenticated) {
+    console.log("logged in");
+  } else {
+    console.log("not logged in");
+    history.push("/login");
+  }
+
   return (
     <Container>
       <h3>Project Status</h3>
