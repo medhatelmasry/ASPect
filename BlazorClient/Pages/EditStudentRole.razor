@@ -36,7 +36,7 @@
 </EditForm>
 
 @code {
-    private async void updateOffering()
+    private async void updateOffering() 
     {
         string endpoint = $"{baseUrl}api/Student/{student.Id}";
         await httpClient.PutAsJsonAsync(endpoint, student);
@@ -51,7 +51,7 @@
     private ApplicationUser student = new ApplicationUser();
     ApplicationUser s;
 
-    public List<Offering> offering = new List<Offering>();
+    Offering[] offering;
 
     [Parameter]
     public string Id { get; set; }
@@ -69,10 +69,12 @@
         student.LastName = s.LastName;
         student.Id = s.Id;
         student.Email = s.Email;
+        StateHasChanged();
     }
 
     protected async Task loadOffering()
     {
-        offering = await httpClient.GetFromJsonAsync<List<Offering>>($"{baseUrl}api/Offering");
+        offering = await httpClient.GetFromJsonAsync<Offering[]>($"{baseUrl}api/Offering");
+        StateHasChanged();
     }
 } 
