@@ -10,6 +10,7 @@ using Web.Data;
 using Web.ViewModels;
 using Web.Models;
 using ASPectLibrary;
+using System;
 
 namespace Web.CmsControllers
 {
@@ -45,12 +46,29 @@ namespace Web.CmsControllers
 
                     IdentityUserRole<string> identityUserRole = _context.UserRoles
                     .Where(userRole => userRole.UserId == identityUser.Id)
-                    .First();
+                    .FirstOrDefault();
+                
+                   if (identityUserRole == null) {
+                        var roleId =  _context.Roles
+                        .Where(role => role.NormalizedName == Constants.ASPectRoles.Admin.RoleName)
+                        .First();
 
-                    ApplicationRole identityRole = await _roleManager
-                        .FindByIdAsync(identityUserRole.RoleId)
-                        .ConfigureAwait(false);
+                        var newInstructor = new IdentityUserRole<string>(){
+                            RoleId = roleId.Id,
+                            UserId = identityUser.Id
+                        };
 
+                        await _context.UserRoles.AddAsync(newInstructor);   
+                        await _context.SaveChangesAsync();
+                        identityUserRole = newInstructor;
+                    }
+      
+
+                    ApplicationRole identityRole = await _context.Roles
+                            .FindAsync(identityUserRole.RoleId)
+                            .ConfigureAwait(false);
+
+ 
                     models.Add(new UserRoleViewModel()
                     {
                         IdentityUser = identityUser,
@@ -179,10 +197,10 @@ namespace Web.CmsControllers
             {
                 var tempUserRole = _context.UserRoles.Where(userRole => userRole.UserId == id).First();
                 _context.UserRoles.Remove(tempUserRole);
+                 
             }
 
             _context.Users.Remove(user);
-
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
