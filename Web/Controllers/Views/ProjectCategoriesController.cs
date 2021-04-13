@@ -11,8 +11,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+
     public class ProjectCategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -50,18 +49,6 @@ namespace Web.Controllers
         public IActionResult Create()
         {
             return View();
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectCategory>>> GetProjectCategories()
-        {
-            var results = await _context.ProjectCategory.ToListAsync();
-
-            if (results.Count < 0) {
-                return NotFound();
-            } else {
-                return Ok(results);
-            }
         }
 
         // POST: ProjectCategories/Create

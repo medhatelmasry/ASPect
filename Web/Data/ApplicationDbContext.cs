@@ -162,6 +162,10 @@ namespace Web.Data
                 {
                     RoleId = studentRoleId,
                     UserId = studentUserId
+                },
+                new IdentityUserRole<string>() {
+                    RoleId = studentRoleId,
+                    UserId = studentUserId2
                 }
             );
 
