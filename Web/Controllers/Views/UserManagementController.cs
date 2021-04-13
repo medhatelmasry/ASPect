@@ -42,6 +42,7 @@ namespace Web.CmsControllers
             {
                 if (_context.UserRoles.Count() > 0)
                 {
+
                     IdentityUserRole<string> identityUserRole = _context.UserRoles
                     .Where(userRole => userRole.UserId == identityUser.Id)
                     .First();
