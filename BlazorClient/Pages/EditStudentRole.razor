@@ -1,30 +1,72 @@
-@page "/editstudents"
+@page "/editstudents/{Id}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
 
 <h1>Edit Student</h1>
 
-<div class="form-element">
+<EditForm Model="@student" OnValidSubmit="@updateOffering">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
     <div class="form-elements">
-        <label for="StudentID">Student ID</label>
-        <input type="text" placeholder="Student ID" value="A01181039"> 
-    </div>
-    <div class="form-elements">
-        <label for="TeamName">Team Name</label>
-        <input type="text" placeholder="Team Name" value="Stormfront"> 
-    </div>
-    <div class="form-elements">
-        <label for="ProjectCategory">Project Category</label>
-        <input type="text" placeholder="Project Category" value="COVID-19"> 
+        <label for="StudentID">Student ID:</label>
+        <p>@student.Id</p>
     </div>
     <div class="form-elements">
-        <label for="Roles">Roles</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected value="COMP-3717-Fall-2021">COMP-3717-Fall-2021</option>
-            <option value="COMP-3910-Fall-2021">COMP-3910-Fall-2021</option>
-            <option value="COMP-4870-Winter-2022">COMP-4870-Winter-2022</option>
-            <option value="COMP-4911-Winter-2022">COMP-4911-Winter-2022</option>
-        </select>
+        <label for="StudentEmail">Student Email:</label>
+        <p>@student.Email</p>
     </div>
-    <div>
-        <button class="btn btn-primary">Edit Student</button>
+    <div class="form-elements">
+        <label for="StudentName">Student Name:</label>
+        <p>@student.FirstName @student.LastName </p>
     </div>
-</div>
+
+    <div class="form-elements">
+        <label for="StudentOffering">Student's Offering</label>
+        <InputSelect @bind-Value="@student.Offerings">
+            @foreach (var item in offering)
+            {
+                <option value="@item.OfferingId">@item.Course.CourseTitle @item.Semester</option>
+            }
+        </InputSelect>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</EditForm>
+
+@code {
+    private async void updateOffering()
+    {
+        string endpoint = $"{baseUrl}api/Student/{student.Id}";
+        await httpClient.PutAsJsonAsync(endpoint, student);
+        StateHasChanged();
+        navigationManager.NavigateTo("/studentlist");
+    }
+}
+
+
+@functions {
+    string baseUrl = "https://localhost:5001/";
+    private ApplicationUser student = new ApplicationUser();
+    ApplicationUser s;
+
+    Offering[] offering;
+
+    [Parameter]
+    public string Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await load(Id);
+    }
+
+    protected async Task load(string id)
+    {
+        s = await httpClient.GetFromJsonAsync<ApplicationUser>($"{baseUrl}api/Student/{id}");
+        student.FirstName = s.FirstName;
+        student.LastName = s.LastName;
+        student.Id = s.Id;
+        student.Email = s.Email;
+
+        offering = await httpClient.GetFromJsonAsync<Offering[]>($"{baseUrl}api/Offering");
+    }
+} 

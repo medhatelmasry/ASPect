@@ -26,7 +26,7 @@ else
                     <td>@item.Id</td>
                     <td>@item.Email</td>
                     <td>@item.FirstName @item.LastName</td>
-                    <td><a type="submit" class="btn btn-primary" href="/editstudents">Edit Student</a></td>
+                    <td><a type="submit" class="btn btn-primary" href="/editstudents/@item.Id">Edit Student</a></td>
                 </tr>
             }
         </tbody>
@@ -35,6 +35,7 @@ else
 
 @functions {
     ApplicationUser[] users;
+    string baseUrl = "https://localhost:5001/";
 
     protected override async Task OnInitializedAsync()
     {
@@ -43,7 +44,7 @@ else
 
     protected async Task load()
     {
-        users = await httpClient.GetFromJsonAsync<ApplicationUser[]>($"{httpClient.BaseAddress}/Student");
+        users = await httpClient.GetFromJsonAsync<ApplicationUser[]>($"{baseUrl}api/Student");
         StateHasChanged();
     }
 }
