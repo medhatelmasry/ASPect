@@ -24,9 +24,11 @@
     <div class="form-elements">
         <label for="StudentOffering">Student's Offering</label>
         <InputSelect @bind-Value="@student.Offerings">
-            @foreach (var item in offering)
-            {
-                <option value="@item.OfferingId">@item.Course.CourseTitle @item.Semester</option>
+            @if(offering != null) {
+                @foreach (var item in offering)
+                {
+                    <option value="@item.OfferingId">@item.Course.CourseTitle @item.Semester</option>
+                }
             }
         </InputSelect>
     </div>
@@ -49,7 +51,7 @@
     private ApplicationUser student = new ApplicationUser();
     ApplicationUser s;
 
-    Offering[] offering;
+    public List<Offering> offering = new List<Offering>();
 
     [Parameter]
     public string Id { get; set; }
@@ -57,6 +59,7 @@
     protected override async Task OnInitializedAsync()
     {
         await load(Id);
+        await loadOffering();
     }
 
     protected async Task load(string id)
@@ -66,7 +69,10 @@
         student.LastName = s.LastName;
         student.Id = s.Id;
         student.Email = s.Email;
+    }
 
-        offering = await httpClient.GetFromJsonAsync<Offering[]>($"{baseUrl}api/Offering");
+    protected async Task loadOffering()
+    {
+        offering = await httpClient.GetFromJsonAsync<List<Offering>>($"{baseUrl}api/Offering");
     }
 } 
