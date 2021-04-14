@@ -29,7 +29,7 @@ namespace Web.Data
             .WithMany(p => p.Memberships)
             .HasForeignKey(mb => mb.ProjectId);
 
-            builder.Entity<Enrollment>().HasKey(er => new { er.EnrollmentId, er.CourseID, er.Id });
+            //builder.Entity<Enrollment>().HasKey(er => new { er.OfferingId, er.Id , er.EnrollmentId});
 
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
             string PASSWORD = "P@$$w0rd";
@@ -109,7 +109,6 @@ namespace Web.Data
             };
             //set memberUser password
             teacherUser.PasswordHash = ph.HashPassword(teacherUser, PASSWORD);
-
             /* ----------------- Add Student User ----------------- */
             string studentUserId = "363624a6-0978-4866-b5ee-b135a6fc3870";
             //create memberUser
@@ -163,6 +162,10 @@ namespace Web.Data
                 {
                     RoleId = studentRoleId,
                     UserId = studentUserId
+                },
+                new IdentityUserRole<string>() {
+                    RoleId = studentRoleId,
+                    UserId = studentUserId2
                 }
             );
 
@@ -184,7 +187,7 @@ namespace Web.Data
         public DbSet<PeerEvaluation> PeerEvaluations { get; set; }
         public DbSet<ProjectRequirement> ProjectRequirements { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
-
         public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Offering> Offerings { get; set; }
     }
 }

@@ -3,26 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASPectLibrary
 {
+    //An enrollment in an offering, a student ENROLLS to an OFFERING of a course
     public class Enrollment
     {
         [Key]
-        public int EnrollmentId { get; set; }
-
+        public int EnrollmentId { get; set; } 
+        public int OfferingId { get; set; }
+        [ForeignKey("OfferingId")]
+        public Offering Offering { get; set; }
         /// <summary>
-        /// Id of the ApplicationUser.
+        /// Id of the STUDENT (ApplicationUser).
         /// </summary>
         public string Id { get; set; }
-
         [ForeignKey("Id")]
-        public ApplicationUser User { get; set; }
-
-        public int CourseID { get; set; }
-
-        [ForeignKey("CourseID")]
-        public Course Course { get; set; }
-
-        public string Semester { get; set; }
-
-        public int Year { get; set; }
+        public ApplicationUser Student { get; set; }
     }
 }

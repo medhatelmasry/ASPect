@@ -61,10 +61,6 @@ namespace Web.Controllers
                 Project projDeserialized = System.Text.Json.JsonSerializer.Deserialize<Project>(projJson);
                 return projDeserialized;
             }
-
-
-
-            return project;
         }
 
         // PUT: api/Project/5

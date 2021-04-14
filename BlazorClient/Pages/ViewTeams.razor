@@ -1,0 +1,53 @@
+@page "/teams"
+@using ASPectLibrary
+@inject HttpClient httpClient
+@inject NavigationManager NavManager
+
+@if(courses == null)
+{
+	<p>Loading... courses might be null</p>
+}
+else
+{	
+<div class ="wholePage">
+	<h1>View Teams</h1>
+	<div class="courseSection"> 
+		@*Drop down*@
+		<label for="courses">Courses:</label>
+		<select name="courses">
+		 	@foreach (var c in courses)
+		 	{
+				<option value=@c.CourseID>@c.CourseTitle</option>
+			}
+		 </select>
+	</div>
+	<div class="teamSection">
+		
+	</div>
+	<div class="membersSection">
+
+	</div>
+</div>
+}
+
+@code {
+	Course[] courses;
+	//[Parameter]
+	//public string Id { get; set; }
+	//Project project;
+	//IEnumerable<ApplicationUser> team;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await loadCourses();
+		foreach(var c in courses)
+		{
+			Console.WriteLine(c.CourseTitle);
+		}
+	}
+
+	public async Task loadCourses()
+	{
+		courses = await httpClient.GetFromJsonAsync<Course[]>($"{httpClient.BaseAddress}/Courses");
+	}
+}

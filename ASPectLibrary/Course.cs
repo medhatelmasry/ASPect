@@ -28,5 +28,7 @@ namespace ASPectLibrary {
         public ApplicationUser User { get; set; }
 
         public ICollection<Enrollment> Enrollments { get; set; }
+
+        public List<Assignment> Assignments { get; set; }
     }
 }
