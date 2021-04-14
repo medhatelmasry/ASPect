@@ -78,7 +78,7 @@ const Signup = () => {
       console.log(values);
 
       const result = await axios.get(
-        "https://openaspect.azurewebsites.net/api/Student",
+        "https://localhost:5001/api/Student",
         config
       );
       const studentList = result.data;
@@ -95,7 +95,7 @@ const Signup = () => {
       } else {
         try {
           await axios.post(
-            "https://openaspect.azurewebsites.net/api/Auth/register",
+            "https://localhost:5001/api/Auth/register",
             values,
             config
           );

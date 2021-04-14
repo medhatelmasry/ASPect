@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Container, Table } from "react-bootstrap";
 import { useHistory } from "react-router";
+const Projects = (props) => {
+const [projects, setProjects] = useState([]);
 
-const ProjectStatus = () => {
+useEffect(() => {
+  getData()
+}, [])
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  },
+};
+const getData = async () => {
+  const { data } = await axios.get(`https://localhost:5001/api/Project/`,
+  config
+  );
+  setProjects(data);
+}
+
+
   const authenticated =
     localStorage.getItem("id") &&
-    localStorage.getItem("token") &&
-    localStorage.getItem("expiration")
+      localStorage.getItem("token") &&
+      localStorage.getItem("expiration")
       ? true
       : false;
 
@@ -18,47 +38,37 @@ const ProjectStatus = () => {
     console.log("not logged in");
     history.push("/login");
   }
-
+  const renderProjects = () => {
+    return (
+      <div>
+        {projects.map((e) => (
+          <Table striped bordered hover className="mt-4">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Team Name</th>
+                <th>App Name</th>
+                <th>App Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{e.projectId}</td>
+                <td>{e.teamName}</td>
+                <td>{e.appName}</td>
+                <td>{e.description}</td>
+              </tr>
+            </tbody>
+          </Table>))}
+      </div>
+    );
+  }
   return (
     <Container>
-      <h3>Project Status</h3>
-      <div className="mt-3">
-        <p>Project Name: sample project</p>
-        <p>Project Category: sample project category</p>
-      </div>
-
-      <Table striped bordered hover className="mt-4">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Task</th>
-            <th>Created Date</th>
-            <th>Due Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Task A</td>
-            <td>2021-01-01</td>
-            <td>2021-01-11</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Task B</td>
-            <td>2021-01-06</td>
-            <td>2021-02-01</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Task C</td>
-            <td>2021-01-22</td>
-            <td>2021-02-15</td>
-          </tr>
-        </tbody>
-      </Table>
+      <h3>Projects</h3>
+      {renderProjects()}
     </Container>
-  );
+  )
 };
 
-export default ProjectStatus;
+export default Projects;
