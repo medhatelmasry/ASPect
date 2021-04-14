@@ -17,10 +17,10 @@ namespace ASPectLibrary
         public string AppName { get; set; }
         public string Description { get; set; }
         public string AspNetUserId { get; set; }
-        public int CourseId { get; set; }
+        public int OfferingId { get; set; }
 
-        [ForeignKey("CourseId")]
-        public Course Course{ get; set; }
+        [ForeignKey("OfferingId")]
+        public Offering Offering{ get; set; }
 
         public IList<Membership> Memberships { get; set; }
     }
