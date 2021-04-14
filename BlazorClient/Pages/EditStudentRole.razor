@@ -48,7 +48,7 @@
 
 @code {
     public string OfferingId { get; set; }
-    private async void updateOffering()
+    private async void updateOffering() 
     {
         string endpoint = $"{baseUrl}api/Student/{student.Id}";
         await httpClient.PutAsJsonAsync(endpoint, student);
@@ -59,7 +59,6 @@
 
 
 @functions {
-    string baseUrl = "https://localhost:5001/";
     private ApplicationUser student = new ApplicationUser();
     ApplicationUser s;
 
@@ -76,7 +75,7 @@
 
     protected async Task load(string id)
     {
-        s = await httpClient.GetFromJsonAsync<ApplicationUser>($"{baseUrl}api/Student/{id}");
+        s = await httpClient.GetFromJsonAsync<ApplicationUser>($"{httpClient.BaseAddress}/Student/{id}");
         student.FirstName = s.FirstName;
         student.LastName = s.LastName;
         student.Id = s.Id;
@@ -87,7 +86,7 @@
 
     protected async Task loadOffering()
     {
-        offering = await httpClient.GetFromJsonAsync<Offering[]>($"{baseUrl}api/Offering");
+        offering = await httpClient.GetFromJsonAsync<Offering[]>($"{httpClient.BaseAddress}/Offering");
         StateHasChanged();
     }
 } 
