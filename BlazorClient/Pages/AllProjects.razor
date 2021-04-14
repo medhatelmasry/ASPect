@@ -17,8 +17,8 @@ else
 		<select name="offerings">
 		 	@foreach (var o in offerings)
 		 	{
-				 @*onClick is getting offeringID*@
-				<option onclick="@selectedOffering = @o">@o.Semester @o.Year @o.Course.CourseTitle</option> 
+				 @*onClick is getting Project[] based on the current Offering. Using lambda method*@
+				 <option @onclick="()=> loadProjects(o)">@o.Semester @o.Year @o.Course.CourseTitle</option> 
 			}
 		</select>
 	</div>
@@ -47,7 +47,7 @@ else
 	Offering[] offerings;
 	Offering selectedOffering;
 
-	//ICollection<Project> projects;
+	ICollection<Project> projects;
 	//[Parameter]
 	//public string Id { get; set; }
 	//Project project;
@@ -66,4 +66,10 @@ else
 	{
 		offerings = await httpClient.GetFromJsonAsync<Offering[]>("https://localhost:5001/api/Offering");
 	}
+
+	public void loadProjects(Offering offer)
+	{
+		projects = offer.Projects;
+	}
+
 }
