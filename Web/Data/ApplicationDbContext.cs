@@ -40,7 +40,7 @@ namespace Web.Data
             {
                 
                 Name = Constants.ASPectRoles.Admin.RoleName,
-                NormalizedName = Constants.ASPectRoles.Admin.RoleName,
+                NormalizedName = Constants.ASPectRoles.Admin.NormalizedName,
                 Description = Constants.ASPectRoles.Admin.RoleDesc,
                 Id = adminRoleId,
                 ConcurrencyStamp = adminRoleId,
@@ -51,7 +51,7 @@ namespace Web.Data
             var instructorRole = new ApplicationRole()
             {
                 Name = Constants.ASPectRoles.Instructor.RoleName,
-                NormalizedName = Constants.ASPectRoles.Instructor.RoleName,
+                NormalizedName = Constants.ASPectRoles.Instructor.NormalizedName,
                 Description = Constants.ASPectRoles.Instructor.RoleDesc,
                 Id = instructorRoleId,
                 ConcurrencyStamp = instructorRoleId,
@@ -62,7 +62,7 @@ namespace Web.Data
             var studentRole = new ApplicationRole()
             {
                 Name = Constants.ASPectRoles.Student.RoleName,
-                NormalizedName = Constants.ASPectRoles.Student.RoleName,
+                NormalizedName = Constants.ASPectRoles.Student.NormalizedName,
                 Description = Constants.ASPectRoles.Student.RoleDesc,
                 Id = studentRoleId,
                 ConcurrencyStamp = studentRoleId,
