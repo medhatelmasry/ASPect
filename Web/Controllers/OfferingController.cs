@@ -39,14 +39,19 @@ namespace Web.Controllers
             var results = await _context.Offerings
                                         .Include(o => o.Instructor)
                                         .Include(o => o.Course)
+                                        .Include(o => o.Projects)
                                         .Select(p => new {
                                             Course = p.Course,
                                             Instructor = p.Instructor.Id,
                                             Semester = p.Semester,
                                             Year = p.Year,
-                                            OfferingId = p.OfferingId
+                                            OfferingId = p.OfferingId,
+                                            Projects = p.Projects
                                         })
                                         .ToListAsync();
+
+            //Console.WriteLine(results[0].);
+            
 
             if (results.Count > 0) {
                 return Ok(results);
@@ -71,7 +76,7 @@ namespace Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Offering>> GetOffering(int id)
         {
-            var offering = await _context.Offerings.FindAsync(id);
+            var offering = await _context.Offerings.Include(o => o.Projects).FirstOrDefaultAsync(i => i.OfferingId == id);
 
             if (offering == null)
             {
