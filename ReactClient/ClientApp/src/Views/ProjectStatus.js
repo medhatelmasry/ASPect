@@ -2,26 +2,27 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Table } from "react-bootstrap";
 import { useHistory } from "react-router";
+
 const Projects = (props) => {
-const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([]);
 
-useEffect(() => {
-  getData()
-}, [])
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-  },
-};
-const getData = async () => {
-  const { data } = await axios.get(`https://localhost:5001/api/Project/`,
-  config
-  );
-  setProjects(data);
-}
-
+  useEffect(() => {
+    getData()
+  }, [])
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+  
+  const getData = async () => {
+    const { data } = await axios.get(`https://localhost:5001/api/Project/`,
+      config
+    );
+    setProjects(data);
+  }
 
   const authenticated =
     localStorage.getItem("id") &&
@@ -41,31 +42,44 @@ const getData = async () => {
   const renderProjects = () => {
     return (
       <div>
-        {projects.map((e) => (
-          <Table striped bordered hover className="mt-4">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Team Name</th>
-                <th>App Name</th>
-                <th>App Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{e.projectId}</td>
-                <td>{e.teamName}</td>
-                <td>{e.appName}</td>
-                <td>{e.description}</td>
-              </tr>
-            </tbody>
-          </Table>))}
+        {projects.map((p) => (
+          <div style={{border: '2px solid rgba(0, 0, 150, 0.4)', margin: '5px', padding: "10px", borderRadius: '10px'}}>
+              <h4>App Name</h4>
+              <h6>{p.appName}</h6>
+              <h4>App Description</h4>
+              <h6>{p.description}</h6>
+              <h4>Project ID</h4>
+              <h6>{p.projectId}</h6>
+              <h4>Team Name</h4>
+              <h6>{p.teamName}</h6>
+              <h4>Students</h4>
+              <Table striped bordered hover className="mt-4">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    p.memberships.map((e) => (
+                      <tr>
+                        <td>{e.student.firstName + " " + e.student.lastName}</td>
+                        <td>{e.student.email}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </Table>
+          </div>
+          
+        ))}
       </div>
     );
   }
   return (
     <Container>
-      <h3>Projects</h3>
+      <h1>Projects</h1>
       {renderProjects()}
     </Container>
   )

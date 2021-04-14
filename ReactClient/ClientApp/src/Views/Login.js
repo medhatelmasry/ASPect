@@ -35,20 +35,30 @@ const Login = () => {
       };
       // console.log(credentials);
       try {
-        await axios.post("/api/Auth/login", credentials, config).then((res) => {
-          // console.log(res.data);
-          const { token, expiration, hashPassword } = res.data;
-          localStorage.setItem("token", token);
-          localStorage.setItem("expiration", expiration);
-          localStorage.setItem("hashPassword", hashPassword);
-          const user = jwt(token);
-          const userId = user.sub[0];
-          console.log(userId);
-          localStorage.setItem("id", userId);
-        });
-        history.push("/dashboard");
-        window.location.reload(false);
-        console.log(`user: ${credentials.Username}. logged-in`);
+        await axios
+          .post("https://localhost:5001/api/Auth/login", credentials, config)
+          .then((res) => {
+            // console.log(res.data);
+            const { token, expiration, hashPassword } = res.data;
+            localStorage.setItem("token", token);
+            localStorage.setItem("expiration", expiration);
+            localStorage.setItem("hashPassword", hashPassword);
+            const user = jwt(token);
+            const userId = user.sub[0];
+            console.log(userId);
+            localStorage.setItem("id", userId);
+            axios
+              .get(`https://localhost:5001/api/Student/${userId}`, config)
+              .then((res) => {
+                console.log(res);
+                localStorage.setItem(
+                  "name",
+                  res.data.firstName + " " + res.data.lastName
+                );
+                localStorage.setItem("email", res.data.email);
+                history.push("/dashboard");
+              });
+          });
       } catch (error) {
         setError("Invalid Credentials");
         setShowAlert(true);
