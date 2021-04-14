@@ -42,7 +42,7 @@ namespace Web.Controllers
                                         .Include(o => o.Projects)
                                         .Select(p => new {
                                             Course = p.Course,
-                                            Instructor = p.Instructor.Id,
+                                            Instructor = p.Instructor,
                                             Semester = p.Semester,
                                             Year = p.Year,
                                             OfferingId = p.OfferingId,
