@@ -22,8 +22,19 @@
     </div>
 
     <div class="form-elements">
+        <label for="StudentEnrollment">Student Enrollments:</label>
+        @if(student.Enrollments != null)
+        {
+            @foreach (var item in student.Enrollments)
+            {
+                <p>@item.Offering.Course.CourseTitle @item.Offering.Semester</p>
+            }
+        }
+    </div>
+
+    <div class="form-elements">
         <label for="StudentOffering">Student's Offering</label>
-        <InputSelect @bind-Value="@student.Offerings">
+        <InputSelect id="offering" @bind-Value="OfferingId">
             @if(offering != null) {
                 @foreach (var item in offering)
                 {
@@ -36,7 +47,8 @@
 </EditForm>
 
 @code {
-    private async void updateOffering() 
+    public string OfferingId { get; set; }
+    private async void updateOffering()
     {
         string endpoint = $"{baseUrl}api/Student/{student.Id}";
         await httpClient.PutAsJsonAsync(endpoint, student);
@@ -69,6 +81,7 @@
         student.LastName = s.LastName;
         student.Id = s.Id;
         student.Email = s.Email;
+        student.Enrollments = s.Enrollments;
         StateHasChanged();
     }
 
