@@ -44,7 +44,7 @@ const Login = () => {
       try {
         await axios
           .post(
-            "https://openaspect.azurewebsites.net/api/Auth/login",
+            "https://localhost:5001/api/Auth/login",
             credentials,
             config
           )
