@@ -5,6 +5,7 @@ import CourseList from "../components/CourseList";
 import ProjectCategoryList from "../components/ProjectCategoryList";
 import { config } from "../util/config";
 import axios from "axios";
+import OfferingList from "../components/OfferingList";
 
 const CreateProject = () => {
   const authenticated =
@@ -34,23 +35,16 @@ const CreateProject = () => {
 
   useEffect(() => {
     const getInstructorNameByCourseID = async () => {
-      const instructorLists = (await axios.get(`/api/Instructor`, config)).data;
-      let instructorName;
-      instructorLists.map((instructorInfo) => {
-        // instructorInfo.enrollments.filter(
-        //   (enrollment) => enrollment.courseID === courseID
-        // );
-        // instructorName = instructorInfo;
-        // console.log(instructorName);
-        instructorInfo.enrollments.map((enrollment) => {
-          // console.log(enrollment.courseID);
-          if (enrollment.courseID === courseID) {
-            setAspNetUserId(enrollment.id);
-            setInstructorName(instructorInfo.firstName);
-          }
-        });
-      });
+      const { instructorID } = (
+        await axios.get(`/api/Courses/${courseID}`, config)
+      ).data;
+      const { firstName, lastName } = (
+        await axios.get(`/api/Instructor/${instructorID}`, config)
+      ).data;
+      const tempFullName = `${firstName} ${lastName}`;
+      setInstructorName(tempFullName);
     };
+
     getInstructorNameByCourseID();
   }, []);
 
@@ -88,6 +82,17 @@ const CreateProject = () => {
         <div className="panel panel-default mt-4 w-50">
           <form>
             <div className="form-group">
+              <label>Offering:</label>
+              <select
+                className="form-control"
+                // value={courseID}
+                // onChange={(event) => setCourseID(event.target.value)}
+              >
+                <OfferingList />
+              </select>
+            </div>
+
+            <div className="form-group">
               <label>Course Name:</label>
               <select
                 className="form-control"
@@ -120,12 +125,16 @@ const CreateProject = () => {
               />
             </div>
 
-            {/* <div className="form-group">
+            <div className="form-group">
               <label>Project Category:</label>
-              <select className="form-control">
+              <select
+                className="form-control"
+                value={projectCategoryId}
+                onChange={(event) => setProjectCategoryId(event.target.value)}
+              >
                 <ProjectCategoryList />
               </select>
-            </div> */}
+            </div>
 
             {/* <div className="form-group">
               <label>Team Members:</label>
