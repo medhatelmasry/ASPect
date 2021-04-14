@@ -8,6 +8,7 @@ import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
 import { emailRegex } from "../util/regex";
 import axios from "axios";
 import jwt from "jwt-decode";
+import { config } from "../util/config";
 
 const schema = Yup.object({
   email: Yup.string()
@@ -15,14 +16,6 @@ const schema = Yup.object({
     .matches(emailRegex, "Invalid"),
   password: Yup.string().required("Password is required"),
 });
-
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-  },
-};
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -42,23 +35,17 @@ const Login = () => {
       };
       // console.log(credentials);
       try {
-        await axios
-          .post(
-            "https://openaspect.azurewebsites.net/api/Auth/login",
-            credentials,
-            config
-          )
-          .then((res) => {
-            // console.log(res.data);
-            const { token, expiration, hashPassword } = res.data;
-            localStorage.setItem("token", token);
-            localStorage.setItem("expiration", expiration);
-            localStorage.setItem("hashPassword", hashPassword);
-            const user = jwt(token);
-            const userId = user.sub[0];
-            console.log(userId);
-            localStorage.setItem("id", userId);
-          });
+        await axios.post("/api/Auth/login", credentials, config).then((res) => {
+          // console.log(res.data);
+          const { token, expiration, hashPassword } = res.data;
+          localStorage.setItem("token", token);
+          localStorage.setItem("expiration", expiration);
+          localStorage.setItem("hashPassword", hashPassword);
+          const user = jwt(token);
+          const userId = user.sub[0];
+          console.log(userId);
+          localStorage.setItem("id", userId);
+        });
         history.push("/dashboard");
         window.location.reload(false);
         console.log(`user: ${credentials.Username}. logged-in`);

@@ -13,7 +13,7 @@ const ProjectStatus = () => {
   const history = useHistory();
 
   if (authenticated) {
-    console.log("logged in");
+    // console.log("logged in");
   } else {
     console.log("not logged in");
     history.push("/login");
