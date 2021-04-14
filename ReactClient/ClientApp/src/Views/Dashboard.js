@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Table } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { LinkContainer } from "react-router-bootstrap";
 
-export const Dashboard = ({ studentId }) => {
+export const Dashboard = (props) => {
+  const [assignments, setAssignments] = useState([]);
   const authenticated =
     localStorage.getItem("id") &&
     localStorage.getItem("token") &&
@@ -34,50 +35,56 @@ export const Dashboard = ({ studentId }) => {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
   };
+  
+  const getData = async () => {
+    console.log(props);
+        const { data } = await axios.get(`https://localhost:5001/api/Assignment/`);
+        setAssignments(data);
+    
+  }
 
   useEffect(() => {
-    if (studentId !== null) {
-      const getUserInfo = async () => {
-        const { data } = await axios.get(`/api/Student/${studentId}`);
-        console.log(data);
-        const { firstName, lastName, userName } = data;
-        setUserInfo({
-          firstName: firstName,
-          lastName: lastName,
-          userName: userName,
-        });
-      };
-      getUserInfo();
-    }
-  }, [studentId]);
+    getData()
+  }, []);
 
   const { firstName, lastName, userName } = userInfo;
-
+  const renderAssignments = () => {
+    return assignments.map((a) => (
+          <tr>
+            <td>{a.courseId}</td>
+            <td>{a.description}</td>
+            <td>{a.dateCreated}</td>
+            <td>{a.dueDate}</td>
+            </tr>
+        ),);
+      
+  }
   return (
     <Container>
       <h3>Dashboard</h3>
+      
       <p className="mt-4 ml-2">
-        Hello, <strong>{`${firstName} ${lastName}`}.</strong>
+        Hello, <strong>{localStorage.getItem("name")}.</strong>
       </p>
       <p className="mt-4 ml-2">
-        Your email address: <em>{userName}</em>.
+        Your email address: <em>{localStorage.getItem("email")}.</em>
       </p>
 
-      <LinkContainer to="/project-status">
-        <Button className="my-2 mx-2">View Project Status</Button>
-      </LinkContainer>
+      <h4>List of Assignments</h4>
+      <Table striped bordered hover className="mt-4">
+        <thead>
+          <tr>
+            <th>Course ID</th>
+            <th>Description</th>
+            <th>Assigned At</th>
+            <th>Due By</th>
+          </tr>
+        </thead>
+        <tbody>
+        {renderAssignments()}
 
-      <LinkContainer to="/create-project">
-        <Button className="my-2 mx-2">Create Project</Button>
-      </LinkContainer>
-
-      <LinkContainer to="/edit-student">
-        <Button className="my-2 mx-2">Edit Student Info</Button>
-      </LinkContainer>
-
-      <LinkContainer to="/peer-evaluation">
-        <Button className="my-2 mx-2">Peer Evaluation</Button>
-      </LinkContainer>
+        </tbody>
+      </Table>
     </Container>
-  );
-};
+  )
+};export default Dashboard;

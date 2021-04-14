@@ -16,13 +16,13 @@ const Projects = (props) => {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
   };
+  
   const getData = async () => {
     const { data } = await axios.get(`https://localhost:5001/api/Project/`,
       config
     );
     setProjects(data);
   }
-
 
   const authenticated =
     localStorage.getItem("id") &&
