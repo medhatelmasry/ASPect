@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web.Data.Migrations
 {
-    public partial class M1 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -255,36 +255,6 @@ namespace Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Project",
-                columns: table => new
-                {
-                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    TeamName = table.Column<string>(type: "TEXT", nullable: true),
-                    ProjectCategoryId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AppName = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    AspNetUserId = table.Column<string>(type: "TEXT", nullable: true),
-                    CourseId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Project", x => x.ProjectId);
-                    table.ForeignKey(
-                        name: "FK_Project_Course_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Course",
-                        principalColumn: "CourseID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Project_ProjectCategory_ProjectCategoryId",
-                        column: x => x.ProjectCategoryId,
-                        principalTable: "ProjectCategory",
-                        principalColumn: "ProjectCategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProjectRequirements",
                 columns: table => new
                 {
@@ -336,6 +306,36 @@ namespace Web.Data.Migrations
                         column: x => x.OfferingId,
                         principalTable: "Offerings",
                         principalColumn: "OfferingId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Project",
+                columns: table => new
+                {
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TeamName = table.Column<string>(type: "TEXT", nullable: true),
+                    ProjectCategoryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AppName = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    AspNetUserId = table.Column<string>(type: "TEXT", nullable: true),
+                    OfferingId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Project", x => x.ProjectId);
+                    table.ForeignKey(
+                        name: "FK_Project_Offerings_OfferingId",
+                        column: x => x.OfferingId,
+                        principalTable: "Offerings",
+                        principalColumn: "OfferingId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Project_ProjectCategory_ProjectCategoryId",
+                        column: x => x.ProjectCategoryId,
+                        principalTable: "ProjectCategory",
+                        principalColumn: "ProjectCategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -432,37 +432,37 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "3f9c89ec-e2ae-461f-89f5-b465b46b63f2", "3f9c89ec-e2ae-461f-89f5-b465b46b63f2", new DateTime(2021, 4, 12, 19, 41, 31, 101, DateTimeKind.Local).AddTicks(7040), "This is the administrator role.", "Administrator", "Administrator" });
+                values: new object[] { "516494ef-5790-484e-9ef5-366e8eced371", "516494ef-5790-484e-9ef5-366e8eced371", new DateTime(2021, 4, 13, 17, 4, 33, 466, DateTimeKind.Local).AddTicks(2615), "This is the administrator role.", "Administrator", "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "e9fa1153-8e94-4700-a795-863315845742", "e9fa1153-8e94-4700-a795-863315845742", new DateTime(2021, 4, 12, 19, 41, 31, 106, DateTimeKind.Local).AddTicks(8780), "This is the instructor role.", "Instructor", "Instructor" });
+                values: new object[] { "244210a2-efac-4ec9-b22b-7abb565a46b8", "244210a2-efac-4ec9-b22b-7abb565a46b8", new DateTime(2021, 4, 13, 17, 4, 33, 468, DateTimeKind.Local).AddTicks(6635), "This is the instructor role.", "Instructor", "Instructor" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "7c409d59-9870-470d-b326-408b6076f60b", "7c409d59-9870-470d-b326-408b6076f60b", new DateTime(2021, 4, 12, 19, 41, 31, 106, DateTimeKind.Local).AddTicks(8820), "This is the student role.", "Student", "Student" });
+                values: new object[] { "4661f65d-9f4c-49c3-bbe6-80309a71ca45", "4661f65d-9f4c-49c3-bbe6-80309a71ca45", new DateTime(2021, 4, 13, 17, 4, 33, 468, DateTimeKind.Local).AddTicks(6674), "This is the student role.", "Student", "Student" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3", 0, "e479c160-d3c4-405c-b335-e623ea938e59", "admin@aspect.com", true, "Adam", "Aldridge", false, null, "ADMIN@ASPECT.COM", "ADMIN@ASPECT.COM", "AQAAAAEAACcQAAAAEAbw3deEygx4sm7R21k+xWHDUIXo3fk8W6WKALNIbOZMH/oVWhSH9EmHc8rHvhU7IA==", null, false, "c4ef935b-a6e3-4e3c-be81-f651fa25710b", false, "admin@aspect.com" });
+                values: new object[] { "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3", 0, "02127a84-7a02-4a4e-b94c-5a1843e5e1b2", "admin@aspect.com", true, "Adam", "Aldridge", false, null, "ADMIN@ASPECT.COM", "ADMIN@ASPECT.COM", "AQAAAAEAACcQAAAAENZJRdnO4K2T3ywa+l6ZIx4axdC3fjy5egLP6uGiJ2QzjQslN00IEJjFfRU5+RXWGg==", null, false, "c49e369a-93a2-47ba-8286-eb158c99701c", false, "admin@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", 0, "eebe9bce-baa2-43c1-ac29-ec21e7c24485", "instructor@aspect.com", true, "Ted", "Smith", false, null, "INSTRUCTOR@ASPECT.COM", "INSTRUCTOR@ASPECT.COM", "AQAAAAEAACcQAAAAEAHdOSTiLLmW6zcg2pJOFa8coGuRnCymk6mFz12NTDQCAi/aJRzpyqpnB8qpRcQCtA==", null, false, "84b4fad3-c698-443c-bc0a-2e792009c7ba", false, "instructor@aspect.com" });
+                values: new object[] { "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", 0, "c5029b31-fad4-42de-9aba-0bb0e07b2b74", "instructor@aspect.com", true, "Ted", "Smith", false, null, "INSTRUCTOR@ASPECT.COM", "INSTRUCTOR@ASPECT.COM", "AQAAAAEAACcQAAAAENRURxVJiv5W6jTdH12HH4hNa+mnVFROLOBEP3jOhe6rb3JB4FZJg0zpIAVZFWUa9A==", null, false, "93bfc4b8-0a1c-4188-87ed-6aff7ee72983", false, "instructor@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "363624a6-0978-4866-b5ee-b135a6fc3870", 0, "325a87e8-3ebd-4faf-a4bc-25acf8132d7f", "student@aspect.com", true, "Mike", "Myers", false, null, "STUDENT@ASPECT.COM", "STUDENT@ASPECT.COM", "AQAAAAEAACcQAAAAEExp9q6cdUCBHhlX3EBtEoy0Aef0M89/BGAavZ4qxvozOc715Yrr/updgoUEI1ICgw==", null, false, "b5255cf2-7ab0-49e9-9381-94ccc8c66b77", false, "student@aspect.com" });
+                values: new object[] { "363624a6-0978-4866-b5ee-b135a6fc3870", 0, "41dfe7c6-f762-4906-b4a7-a332beafc9bb", "student@aspect.com", true, "Mike", "Myers", false, null, "STUDENT@ASPECT.COM", "STUDENT@ASPECT.COM", "AQAAAAEAACcQAAAAEFyPPzpcnDYAeGRg2MbLtH6UFeIJAN+DVDXcAtdKUDKlM4K2x7tG8bBgubo8w73ZHw==", null, false, "f9fa3a5f-de00-4338-9721-3e503f0fd5e9", false, "student@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "363624a6-1111-4866-b5ee-b135a6fc3870", 0, "7c6f2f96-84cf-471b-88cd-d30c3082afa3", "student2@aspect.com", true, "Mike2", "Myers2", false, null, "STUDENT2@ASPECT.COM", "STUDENT2@ASPECT.COM", "AQAAAAEAACcQAAAAEKaQjFzw34OK7JRTnE4081JXAUIjLeJ9lFiGAbH57OjHuwEbg5pYmYQLOHJKWFN1HA==", null, false, "d90b7e66-065f-494f-b366-1d9a59372472", false, "student2@aspect.com" });
+                values: new object[] { "363624a6-1111-4866-b5ee-b135a6fc3870", 0, "70504d9a-933b-4197-8a19-6c44cbafa61d", "student2@aspect.com", true, "Mike2", "Myers2", false, null, "STUDENT2@ASPECT.COM", "STUDENT2@ASPECT.COM", "AQAAAAEAACcQAAAAECp/9R3pxEkrVYMyNqPcZ5YLuM33QbpHOD7t+HlVLSJVetrashjAh4trYBYCjN2LOA==", null, false, "a9e03ad2-e0e0-4812-a276-e216a8ad4058", false, "student2@aspect.com" });
 
             migrationBuilder.InsertData(
                 table: "Course",
@@ -537,22 +537,22 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "3f9c89ec-e2ae-461f-89f5-b465b46b63f2", "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3" });
+                values: new object[] { "516494ef-5790-484e-9ef5-366e8eced371", "5bb3f1ca-d27c-4655-b8d6-6c2b3016f2d3" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "e9fa1153-8e94-4700-a795-863315845742", "9216a976-f1ba-4d73-aff6-f818b4b5c6a7" });
+                values: new object[] { "244210a2-efac-4ec9-b22b-7abb565a46b8", "9216a976-f1ba-4d73-aff6-f818b4b5c6a7" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "7c409d59-9870-470d-b326-408b6076f60b", "363624a6-0978-4866-b5ee-b135a6fc3870" });
+                values: new object[] { "4661f65d-9f4c-49c3-bbe6-80309a71ca45", "363624a6-0978-4866-b5ee-b135a6fc3870" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "7c409d59-9870-470d-b326-408b6076f60b", "363624a6-1111-4866-b5ee-b135a6fc3870" });
+                values: new object[] { "4661f65d-9f4c-49c3-bbe6-80309a71ca45", "363624a6-1111-4866-b5ee-b135a6fc3870" });
 
             migrationBuilder.InsertData(
                 table: "Offerings",
@@ -565,14 +565,9 @@ namespace Web.Data.Migrations
                 values: new object[] { 1, 2, "9216a976-f1ba-4d73-aff6-f818b4b5c6a7", "Fall", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
-                table: "Project",
-                columns: new[] { "ProjectId", "AppName", "AspNetUserId", "CourseId", "Description", "ProjectCategoryId", "TeamName" },
-                values: new object[] { 1, "Twitter", "363624a6-0978-4866-b5ee-b135a6fc3870", 1, "An app for tweeting", 1, "RA" });
-
-            migrationBuilder.InsertData(
-                table: "Project",
-                columns: new[] { "ProjectId", "AppName", "AspNetUserId", "CourseId", "Description", "ProjectCategoryId", "TeamName" },
-                values: new object[] { 2, "PlaneGo", "363624a6-0978-4866-b5ee-b135a6fc3870", 1, "It's like uber but for planes", 2, "Team Fly" });
+                table: "Enrollments",
+                columns: new[] { "EnrollmentId", "CourseID", "Id", "OfferingId" },
+                values: new object[] { 3, null, "363624a6-0978-4866-b5ee-b135a6fc3870", 2 });
 
             migrationBuilder.InsertData(
                 table: "Enrollments",
@@ -580,9 +575,19 @@ namespace Web.Data.Migrations
                 values: new object[] { 1, null, "363624a6-0978-4866-b5ee-b135a6fc3870", 1 });
 
             migrationBuilder.InsertData(
-                table: "Enrollments",
-                columns: new[] { "EnrollmentId", "CourseID", "Id", "OfferingId" },
-                values: new object[] { 2, null, "363624a6-0978-4866-b5ee-b135a6fc3870", 1 });
+                table: "Project",
+                columns: new[] { "ProjectId", "AppName", "AspNetUserId", "Description", "OfferingId", "ProjectCategoryId", "TeamName" },
+                values: new object[] { 3, "PlaneGo", "363624a6-0978-4866-b5ee-b135a6fc3870", "It's like uber but for planes", 2, 2, "Team Fly" });
+
+            migrationBuilder.InsertData(
+                table: "Project",
+                columns: new[] { "ProjectId", "AppName", "AspNetUserId", "Description", "OfferingId", "ProjectCategoryId", "TeamName" },
+                values: new object[] { 1, "Twitter", "363624a6-0978-4866-b5ee-b135a6fc3870", "An app for tweeting", 1, 1, "RA" });
+
+            migrationBuilder.InsertData(
+                table: "Project",
+                columns: new[] { "ProjectId", "AppName", "AspNetUserId", "Description", "OfferingId", "ProjectCategoryId", "TeamName" },
+                values: new object[] { 2, "PlaneGo", "363624a6-0978-4866-b5ee-b135a6fc3870", "It's like uber but for planes", 1, 2, "Team Fly" });
 
             migrationBuilder.InsertData(
                 table: "Memberships",
@@ -602,12 +607,12 @@ namespace Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "ProgressUpdates",
                 columns: new[] { "Id", "Date", "Issues", "LastWeekActivity", "NextWeekActivity", "ProjectId" },
-                values: new object[] { 1, new DateTime(2021, 4, 12, 19, 41, 31, 152, DateTimeKind.Local).AddTicks(250), "Schema may need to be reworked", "Finished DB Design", "Going to work on the API", 1 });
+                values: new object[] { 1, new DateTime(2021, 4, 13, 17, 4, 33, 500, DateTimeKind.Local).AddTicks(7922), "Schema may need to be reworked", "Finished DB Design", "Going to work on the API", 1 });
 
             migrationBuilder.InsertData(
                 table: "ProgressUpdates",
                 columns: new[] { "Id", "Date", "Issues", "LastWeekActivity", "NextWeekActivity", "ProjectId" },
-                values: new object[] { 2, new DateTime(2021, 4, 12, 19, 41, 31, 152, DateTimeKind.Local).AddTicks(2080), "Need to find solution for deployment", "Finished API Design", "Going to implement the API", 1 });
+                values: new object[] { 2, new DateTime(2021, 4, 13, 17, 4, 33, 500, DateTimeKind.Local).AddTicks(9049), "Need to find solution for deployment", "Finished API Design", "Going to implement the API", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -712,9 +717,9 @@ namespace Web.Data.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Project_CourseId",
+                name: "IX_Project_OfferingId",
                 table: "Project",
-                column: "CourseId");
+                column: "OfferingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Project_ProjectCategoryId",
@@ -766,13 +771,13 @@ namespace Web.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Offerings");
-
-            migrationBuilder.DropTable(
                 name: "Project");
 
             migrationBuilder.DropTable(
                 name: "Assignments");
+
+            migrationBuilder.DropTable(
+                name: "Offerings");
 
             migrationBuilder.DropTable(
                 name: "ProjectCategory");
