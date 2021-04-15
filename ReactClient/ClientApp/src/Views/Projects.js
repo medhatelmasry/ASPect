@@ -58,9 +58,9 @@ const ProjectList = (props) => {
                 <h4>Team Name</h4>
                 <h6>{p.teamName}</h6>
               </div>
-                <Button className="my-2 mx-2" onClick={() => gotoStatusPage(p.projectId)}>Project Status</Button>
+                
               <div style={{float: 'right', width: '25%'}}>
-
+                <Button className="my-2 mx-2" onClick={() => gotoStatusPage(p.projectId)}>Project Status</Button>
 
               </div>
               <h4>Students</h4>
