@@ -17,6 +17,7 @@ import ForgotPassword from "./Views/ForgotPassword";
 
 import "./custom.css";
 import PreviousProgressUpdates from "./Views/PreviousProgressUpdates";
+import CreateProgressUpdate from "./Views/CreateProgressUpdate";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -51,6 +52,7 @@ export default class App extends Component {
         />
         <Route exact path="/peer-evaluation" component={PeerEvaluation} />
         <Route exact path="/previous-progress-updates/:projectId" component={PreviousProgressUpdates} />
+        <Route exact path="/create-progress-update/:projectId" component={CreateProgressUpdate} />
       </Layout>
     );
   }
