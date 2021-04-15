@@ -65,7 +65,7 @@ const Login = () => {
               localStorage.setItem("name", res.data.firstName + " " + res.data.lastName);
               localStorage.setItem("email", res.data.email);
               history.push("/dashboard");
-              
+              window.location.reload(false);
             })
           });
         

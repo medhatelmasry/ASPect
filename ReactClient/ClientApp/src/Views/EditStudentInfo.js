@@ -125,7 +125,7 @@ const EditStudentInfo = ({ studentId }) => {
 
       try {
         await axios.put(
-          `https://openaspect.azurewebsites.net/api/Student/${studentId}`,
+          `https://localhost:5001/api/Student/${studentId}`,
           values,
           config
         );
