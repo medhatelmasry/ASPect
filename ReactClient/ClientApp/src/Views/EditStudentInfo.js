@@ -6,7 +6,7 @@ import { useFormik, FormikProvider, Form } from "formik";
 import { Button, Alert, Row } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
-import { nameRegex, emailRegex, passwordRegex } from "../util/regex";
+import { nameRegex } from "../util/regex";
 import axios from "axios";
 import { config } from "../util/config";
 
@@ -111,6 +111,8 @@ const EditStudentInfo = ({ studentId }) => {
       values.normalizedEmail = values.email.toUpperCase();
       // const passwordHash = await bcrypt.hash(values.password, 10);
       // values.passwordHash = passwordHash;
+      console.log(values.firstname, values.lastname);
+      localStorage.setItem("name", values.firstname + " " + values.lastname);
       console.log(values);
 
       try {

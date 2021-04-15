@@ -50,13 +50,14 @@ const Login = () => {
             axios
               .get(`https://localhost:5001/api/Student/${userId}`, config)
               .then((res) => {
-                console.log(res);
                 localStorage.setItem(
                   "name",
                   res.data.firstName + " " + res.data.lastName
                 );
                 localStorage.setItem("email", res.data.email);
                 history.push("/dashboard");
+                window.location.reload(false);
+                console.log(`user: ${credentials.Username}. logged-in`);
               });
           });
       } catch (error) {
