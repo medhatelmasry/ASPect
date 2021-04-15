@@ -23,19 +23,18 @@
     </div>
     <div class="form-elements">
         <label>Password</label>
-        <InputText placeholder="Password" id="password" @bind-Value="@model.Password" /> 
+        <InputText placeholder="Password" id="password" @bind-Value="@model.Password" />
     </div>
 
     <button type="submit" class="btn btn-success">Register</button>
 </EditForm>
 
 @functions {
-    string baseUrl = "https://localhost:5001/";
     RegisterViewModel model = new RegisterViewModel();
 
-    private async void HandleAdd()
+    private async void HandleAdd() 
     {
-        string endpoint = $"{baseUrl}api/Auth/register";
+        string endpoint = $"{httpClient.BaseAddress}/Auth/register";
         await httpClient.PostAsJsonAsync(endpoint, model);
         navigateManager.NavigateTo("/studentlist");
     }

@@ -35,7 +35,7 @@ namespace Web.Controllers
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             };
 
-            var studentsJson = JsonConvert.SerializeObject(await _context.Users.Include(u => u.Enrollments).ToListAsync(), options);
+            var studentsJson = JsonConvert.SerializeObject(await _context.Users.Include(u => u.Enrollments).ThenInclude(m => m.Offering).ThenInclude(m => m.Course).ToListAsync(), options);
             List<ApplicationUser> studentsDeserialized = System.Text.Json.JsonSerializer.Deserialize<List<ApplicationUser>>(studentsJson);
 
             return studentsDeserialized;
@@ -45,7 +45,7 @@ namespace Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ApplicationUser>> GetApplicationUser(string id)
         {
-            var applicationUser = await _context.Users.Include(u => u.Enrollments).FirstOrDefaultAsync(u => u.Id == id);
+            var applicationUser = await _context.Users.Include(u => u.Enrollments).ThenInclude(m => m.Offering).ThenInclude(m => m.Course).FirstOrDefaultAsync(u => u.Id == id);
 
             JsonSerializerSettings options = new()
             {
