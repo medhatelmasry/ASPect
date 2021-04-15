@@ -25,7 +25,21 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Membership>>> GetMemberships()
         {
-            return await _context.Memberships.ToListAsync();
+            var results = await _context.Memberships.Include(m  => m.Student).Include(m => m.Project).Select(m => new {
+                Id = m.Id,
+                Student = m.Student,
+                ProjectId = m.ProjectId,
+                Project = m.Project,
+            }).ToListAsync();
+            
+
+            
+            if (results.Count > 0) {
+                return Ok(results);
+            } else {
+                return NotFound();
+            }
+            //return await _context.Memberships.ToListAsync();
         }
 
         // GET: api/Membership/5
