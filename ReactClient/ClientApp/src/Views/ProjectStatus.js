@@ -30,13 +30,14 @@ const ProjectStatus = (props) => {
     setProjectUpdates(progressUpdates);
   };
 
+  console.log(localStorage.getItem("projectId"));
   const authenticated =
     localStorage.getItem("id") &&
     localStorage.getItem("token") &&
     localStorage.getItem("expiration")
       ? true
       : false;
-
+  
   const history = useHistory();
 
   if (authenticated) {
@@ -44,6 +45,12 @@ const ProjectStatus = (props) => {
   } else {
     console.log("not logged in");
     history.push("/login");
+  }
+
+  const authorized = localStorage.getItem("projectId") == props.match.params.projectId ? true: false;;
+  if (!authorized) {
+    console.log("not authorized");
+    history.push("/projects");
   }
 
 

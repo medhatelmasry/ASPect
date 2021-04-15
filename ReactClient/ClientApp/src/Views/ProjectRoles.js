@@ -53,7 +53,11 @@ const RoleList = (props) => {
     console.log("not logged in");
     history.push("/login");
   }
-
+  const authorized = localStorage.getItem("projectId") == props.match.params.projectId ? true: false;;
+  if (!authorized) {
+    console.log("not authorized");
+    history.push("/projects");
+  }
   const gotoAddMembership = (membership) => {
     localStorage.setItem("memberships", project.memberships)
     history.push("/project-member-add/" + props.match.params.projectId);

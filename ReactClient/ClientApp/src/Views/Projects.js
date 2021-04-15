@@ -47,6 +47,7 @@ const ProjectList = (props) => {
     history.push("/login");
   }
   const gotoStatusPage = (projectId) => {
+    localStorage.setItem("projectId", projectId);
     history.push("/project-status/" + projectId);
   }
   
