@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Table } from "react-bootstrap";
+import { Container, Table , Button} from "react-bootstrap";
 import { useHistory } from "react-router";
-
-const ProjectStatus = (props) => {
+const ProjectList = (props) => {
   const [projects, setProjects] = useState([]);
-
+  
   useEffect(() => {
     getData()
   }, [])
@@ -23,7 +22,7 @@ const ProjectStatus = (props) => {
     );
     setProjects(data);
   }
-
+  
   const authenticated =
     localStorage.getItem("id") &&
       localStorage.getItem("token") &&
@@ -39,19 +38,31 @@ const ProjectStatus = (props) => {
     console.log("not logged in");
     history.push("/login");
   }
+  const gotoStatusPage = (projectId) => {
+    console.log("heyo");
+    history.push("/projects/" + projectId);
+  }
   const renderProjects = () => {
+    
     return (
       <div>
         {projects.map((p) => (
           <div style={{border: '2px solid rgba(0, 0, 150, 0.4)', margin: '5px', padding: "10px", borderRadius: '10px'}}>
-              <h4>App Name</h4>
-              <h6>{p.appName}</h6>
-              <h4>App Description</h4>
-              <h6>{p.description}</h6>
-              <h4>Project ID</h4>
-              <h6>{p.projectId}</h6>
-              <h4>Team Name</h4>
-              <h6>{p.teamName}</h6>
+              <div style={{float: 'left', width: '75%'}}>
+                <h4>App Name</h4>
+                <h6>{p.appName}</h6>
+                <h4>App Description</h4>
+                <h6>{p.description}</h6>
+                <h4>Project ID</h4>
+                <h6>{p.projectId}</h6>
+                <h4>Team Name</h4>
+                <h6>{p.teamName}</h6>
+              </div>
+                <Button className="my-2 mx-2" onClick={() => gotoStatusPage(p.projectId)}>Project Status</Button>
+              <div style={{float: 'right', width: '25%'}}>
+
+
+              </div>
               <h4>Students</h4>
               <Table striped bordered hover className="mt-4">
                 <thead>
@@ -84,5 +95,4 @@ const ProjectStatus = (props) => {
     </Container>
   )
 };
-
-export default ProjectStatus;
+export default ProjectList;
