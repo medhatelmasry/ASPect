@@ -11,7 +11,7 @@ import bcrypt from "bcryptjs";
 import axios from "axios";
 
 const schema = Yup.object({
-  targetId: Yup.string()
+  Peer: Yup.string()
     .required("Must choose who to review"),
   rating: Yup.number()
     .required("Rating is required")
@@ -30,6 +30,7 @@ const config = {
 
 const PeerEvaluation = (props) => {
   const [students, setStudents] = useState([]);
+  const [projects, setProjects] = useState([]);
   const authenticated =
   localStorage.getItem("id") &&
   localStorage.getItem("token") &&
@@ -52,7 +53,7 @@ useEffect(() => {
   
     const getPeers = async () => {
     const result = await axios.get(
-      "https://localhost:5001/api/Membership",
+      "https://openaspect.azurewebsites.net/api/Membership",
       config
     );
     const membershipList = result.data;
@@ -80,16 +81,30 @@ useEffect(() => {
   const [showAlert, setShowAlert] = useState(false);
   const formik = useFormik({
     initialValues: {
-      peerEvaluationId: "",
-      targetId: "",
+      UserBeingEvaluatedId: "",
+      ProjectId:0,
+      UserEvaluatingId: "",
       rating: 0,
       comments: "",
       date: "",
     },
     onSubmit: async (values) => {
+      values.UserBeingEvaluatedId = values.Peer.substring(0, values.Peer.length - 1 );
+      values.ProjectId = values.Peer.substring(values.Peer.length - 1);
       values.date = new Date().toLocaleString();
-      values.peerEvaluationId = localStorage.getItem("id");
+      values.UserEvaluatingId = localStorage.getItem("id");
       console.log(values);
+      try {
+        await axios.post(
+          `https://openaspect.azurewebsites.net/api/PeerEvaluation`,
+          values,
+          config
+        );
+        history.push("/dashboard");
+        console.log("saved changes");
+      } catch (error) {
+        console.log(error);
+      }
     },
     validationSchema: schema, 
   });
@@ -112,26 +127,25 @@ useEffect(() => {
         )}
 
         <Form> 
-          <Field as="select" id="targetId" name="targetId">
+          <Field as="select" id="Peer" name="Peer">
           <option>Select a peer</option>
             {
               
               students.map((index) => {
                 
-                return <option key={index.id} value={index.id}>{index.id}
+                return <option key={index} value={index.id + index.projectId}>{index.id} Project: {index.projectId}
                 </option>
             }
             )}
           </Field>
-
+          <label htmlFor="rating">Rating 0-10</label>
           <Field
-            label="Rating"
             id="rating"
             name="rating"
             type="number"
           />
+          <label htmlFor="comments">Comments </label>
           <Field
-            label="Comments"
             id="comments"
             name="comments"
             type="text"
