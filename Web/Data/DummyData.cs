@@ -67,15 +67,18 @@ public static class DummyData
         List<Membership> memberships = new List<Membership>() {
         new Membership {
             Id = "363624a6-0978-4866-b5ee-b135a6fc3870", //student
-            ProjectId = 1
+            ProjectId = 1,
+            ProjectRole = "Project Manager",
         },
         new Membership {
             Id = "363624a6-1111-4866-b5ee-b135a6fc3870", //student
-            ProjectId = 1
+            ProjectId = 1,
+            ProjectRole = "Database Administrator",
         },
         new Membership {
             Id = "363624a6-0978-4866-b5ee-b135a6fc3870", //student
-            ProjectId = 2
+            ProjectId = 2,
+            ProjectRole = "Project Manager",
         }
     };
         return memberships;

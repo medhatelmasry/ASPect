@@ -6,9 +6,9 @@ import { useFormik, FormikProvider, Form } from "formik";
 import { Button, Alert, Row } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
-import { nameRegex, emailRegex, passwordRegex } from "../util/regex";
-import bcrypt from "bcryptjs";
+import { nameRegex } from "../util/regex";
 import axios from "axios";
+import { config } from "../util/config";
 
 const schema = Yup.object({
   // email: Yup.string()
@@ -40,14 +40,6 @@ const schema = Yup.object({
   //   }),
 });
 
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-  },
-};
-
 const EditStudentInfo = ({ studentId }) => {
   const history = useHistory();
   const authenticated =
@@ -75,16 +67,14 @@ const EditStudentInfo = ({ studentId }) => {
   useEffect(() => {
     if (studentId !== null) {
       const getUserInfo = async () => {
-        await axios
-          .get(`https://openaspect.azurewebsites.net/api/Student/${studentId}`)
-          .then((res) => {
-            const { firstName, lastName, userName } = res.data;
-            setUserInfo({
-              firstName: firstName,
-              lastName: lastName,
-              userName: userName,
-            });
+        await axios.get(`/api/Student/${studentId}`).then((res) => {
+          const { firstName, lastName, userName } = res.data;
+          setUserInfo({
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
           });
+        });
       };
       getUserInfo();
     }
@@ -121,14 +111,13 @@ const EditStudentInfo = ({ studentId }) => {
       values.normalizedEmail = values.email.toUpperCase();
       // const passwordHash = await bcrypt.hash(values.password, 10);
       // values.passwordHash = passwordHash;
+      console.log(values.firstname, values.lastname);
+      localStorage.setItem("name", values.firstname + " " + values.lastname);
       console.log(values);
 
       try {
-        await axios.put(
-          `https://openaspect.azurewebsites.net/api/Student/${studentId}`,
-          values,
-          config
-        );
+
+        await axios.put(`/api/Student/${studentId}`, values, config);
         history.push("/dashboard");
         console.log("saved changes");
       } catch (error) {

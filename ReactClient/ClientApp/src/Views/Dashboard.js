@@ -28,41 +28,31 @@ export const Dashboard = (props) => {
     history.push("/login");
   }
 
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  };
-  
-  const getData = async () => {
-    console.log(props);
-        const { data } = await axios.get(`https://localhost:5001/api/Assignment/`);
-        setAssignments(data);
-    
-  }
-
   useEffect(() => {
-    getData()
+    const getData = async () => {
+      const { data } = await axios.get(
+        `https://localhost:5001/api/Assignment/`
+      );
+      setAssignments(data);
+    };
+    getData();
   }, []);
 
-  const { firstName, lastName, userName } = userInfo;
   const renderAssignments = () => {
-    return assignments.map((a) => (
-          <tr>
-            <td>{a.courseId}</td>
-            <td>{a.description}</td>
-            <td>{a.dateCreated}</td>
-            <td>{a.dueDate}</td>
-            </tr>
-        ),);
-      
-  }
+    return assignments.map((a, index) => (
+      <tr key={index}>
+        <td>{a.courseId}</td>
+        <td>{a.description}</td>
+        <td>{a.dateCreated}</td>
+        <td>{a.dueDate}</td>
+      </tr>
+    ));
+  };
+
   return (
     <Container>
       <h3>Dashboard</h3>
-      
+
       <p className="mt-4 ml-2">
         Hello, <strong>{localStorage.getItem("name")}.</strong>
       </p>
@@ -70,7 +60,20 @@ export const Dashboard = (props) => {
         Your email address: <em>{localStorage.getItem("email")}.</em>
       </p>
 
-      <h4>List of Assignments</h4>
+
+      <LinkContainer to="/create-project">
+        <Button className="my-2 mx-2">Create Project</Button>
+      </LinkContainer>
+
+      <LinkContainer to="/edit-student">
+        <Button className="my-2 mx-2">Edit Student Info</Button>
+      </LinkContainer>
+
+      <LinkContainer to="/peer-evaluation">
+        <Button className="my-2 mx-2">Peer Evaluation</Button>
+      </LinkContainer>
+
+      <h4 className="mt-4">List of Assignments</h4>
       <Table striped bordered hover className="mt-4">
         <thead>
           <tr>
@@ -80,11 +83,9 @@ export const Dashboard = (props) => {
             <th>Due By</th>
           </tr>
         </thead>
-        <tbody>
-        {renderAssignments()}
-
-        </tbody>
+        <tbody>{renderAssignments()}</tbody>
       </Table>
     </Container>
-  )
-};export default Dashboard;
+  );
+};
+export default Dashboard;

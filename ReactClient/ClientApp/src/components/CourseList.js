@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { config } from "../util/config";
 
 const CourseList = () => {
   const [CourseLists, setCourseLists] = useState([]);
@@ -7,7 +8,7 @@ const CourseList = () => {
   useEffect(() => {
     const getCourses = async () => {
       try {
-        const { data } = await axios.get(`https://localhost:5001/api/Courses`);
+        const { data } = await axios.get(`/api/Courses`, config);
         setCourseLists(data);
       } catch (error) {
         console.log(error);
@@ -16,14 +17,15 @@ const CourseList = () => {
     getCourses();
   }, []);
 
-  return CourseLists.map((CourseList) => {
-    console.log(CourseList);
-    return (
-      <option key={CourseList.courseID} value={CourseList.courseID}>
-        {CourseList.courseTitle}
-      </option>
-    );
-  });
+  return (
+    <>
+      {CourseLists.map((CourseList) => (
+        <option key={CourseList.courseID} value={CourseList.courseID}>
+          {CourseList.courseTitle}
+        </option>
+      ))}
+    </>
+  );
 };
 
 export default CourseList;

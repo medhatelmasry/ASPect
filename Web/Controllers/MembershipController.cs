@@ -30,6 +30,7 @@ namespace Web.Controllers
                 Student = m.Student,
                 ProjectId = m.ProjectId,
                 Project = m.Project,
+                ProjectRole = m.ProjectRole,
             }).ToListAsync();
             
 

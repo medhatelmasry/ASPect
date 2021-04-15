@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Table } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { BrowserRouter as useParams} from "react-router-dom";
+import { BrowserRouter as useParams } from "react-router-dom";
 
 const PreviousProgressUpdates = (props) => {
   const [progressUpdates, setProgressUpdates] = useState([]);
@@ -26,9 +26,9 @@ const PreviousProgressUpdates = (props) => {
     let temp = data.progressUpdates;
     let progressUpdates = [];
     temp.forEach((update) => {
-      if(update.complete){
+      if (update.complete) {
         progressUpdates.push(update);
-      } 
+      }
     });
     setProgressUpdates(progressUpdates);
   }
@@ -65,11 +65,11 @@ const PreviousProgressUpdates = (props) => {
             {
               progressUpdates.map((p) => (
                 <tr>
-                  <td>{p.ProjectId}</td>
-                  <td>{p.LastWeekActivity}</td>
-                  <td>{p.NextWeekActivity}</td>
-                  <td>{p.Issues}</td>
-                  <td>{p.Date}</td>
+                  <td>{p.projectId}</td>
+                  <td>{p.lastWeekActivity}</td>
+                  <td>{p.nextWeekActivity}</td>
+                  <td>{p.issues}</td>
+                  <td>{p.date}</td>
                 </tr>
               ))
             }

@@ -11,13 +11,9 @@ import bcrypt from "bcryptjs";
 import axios from "axios";
 
 const schema = Yup.object({
-  Peer: Yup.string()
+  id: Yup.string()
     .required("Must choose who to review"),
-  rating: Yup.number()
-    .required("Rating is required")
-    .min(0)
-    .max(10),
-  comments: Yup.string(),
+  projectRole: Yup.string(),
 });
 
 const config = {
@@ -28,9 +24,8 @@ const config = {
   },
 };
 
-const PeerEvaluation = (props) => {
+const ProjectMemberAdd = (props) => {
   const [students, setStudents] = useState([]);
-  const [projects, setProjects] = useState([]);
   const authenticated =
   localStorage.getItem("id") &&
   localStorage.getItem("token") &&
@@ -46,33 +41,35 @@ if (authenticated) {
   //console.log("not logged in");
   //history.push("/login");
 }
-let studentIdList = [];
-let projectIdList = [];
-let targetIdList = [];
+let studentList = [];
 useEffect(() => {
   
     const getPeers = async () => {
-    const result = await axios.get(
-      "https://localhost:5001/api/Membership",
+    const { data } = await axios.get(
+      "https://localhost:5001/api/Student",
       config
     );
-    const membershipList = result.data;
-    membershipList.forEach((membership) => {
-      if(membership.id === localStorage.getItem("id")){
-        projectIdList.push(membership.projectId);
-      } else {
-        studentIdList.push(membership);
+    const studentList = data;
+    const temp = await axios.get(
+      "https://localhost:5001/api/Project/" + props.match.params.projectId,
+      config
+    );
+    const memberships = temp.data.memberships;
+    console.log(memberships);
+    const validStudents = [];
+    studentList.forEach((student) => {
+      let valid = true;
+      memberships.forEach((membership) => {
+        if (membership.student.id === student.id) {
+          valid = false;
+        }
+      })
+      if (valid) {
+        validStudents.push(student);
       }
     });
-    studentIdList.forEach((student) => {
-      projectIdList.forEach((project) => {
-        if(student.projectId === project){
-          targetIdList.push(student);
-        }
-      });
-    });
-    console.log(targetIdList);
-    setStudents(studentIdList);
+    
+    setStudents(validStudents);
   }
   getPeers();
 }, []);
@@ -81,26 +78,20 @@ useEffect(() => {
   const [showAlert, setShowAlert] = useState(false);
   const formik = useFormik({
     initialValues: {
-      UserBeingEvaluatedId: "",
-      ProjectId:0,
-      UserEvaluatingId: "",
-      rating: 0,
-      comments: "",
-      date: "",
+      projectId: props.match.params.projectId,
+      id: "",
+      projectRole: "",
     },
     onSubmit: async (values) => {
-      values.UserBeingEvaluatedId = values.Peer.substring(0, 36);
-      values.ProjectId = values.Peer.substring(36);
-      values.date = new Date().toLocaleString();
-      values.UserEvaluatingId = localStorage.getItem("id");
       console.log(values);
+
       try {
         await axios.post(
-          `https://localhost:5001/api/PeerEvaluation`,
+          `https://localhost:5001/api/Membership`,
           values,
           config
         );
-        history.push("/dashboard");
+        history.push("/project-members/" + props.match.params.projectId);
         console.log("saved changes");
       } catch (error) {
         console.log(error);
@@ -126,43 +117,30 @@ useEffect(() => {
           </Alert>
         )}
 
-        <Form> 
+        <Form>
           
-          <Field as="select" id="Peer" name="Peer">
-          <br/>
-          <option>Select a peer</option>
+          <Field as="select" id="id" name="id">
+            <option>Select a Peer</option>
             {
-              
               students.map((index) => {
                 
-                return <option key={index} value={index.id + index.projectId}>{index.student.firstName} {index.student.lastName} Project: {index.projectId}
+                return <option value={index.id}>{index.firstName + " " + index.lastName}
                 </option>
             }
             )}
           </Field>
-          <br/>
-          <label htmlFor="rating">Rating 0-10</label>
-          <br/>
-          <Field
-            id="rating"
-            name="rating"
-            type="number"
+          <TextInputLiveFeedback
+            label="Project Role"
+            id="projectRole"
+            name="projectRole"
+            type="projectRole"
           />
-          <br/>
-          <label htmlFor="comments">Comments </label>
-          <br/>
-          <Field
-            as="textarea"
-            id="comments"
-            name="comments"
-          />
-          <br/>
 
           <Button type="submit" variant="primary" block className="rounded">
-            Save Changes
+            Add Member
           </Button>
 
-          <LinkContainer to="/dashboard">
+          <LinkContainer to={"/project-members/" + props.match.params.projectId}>
             <Button variant="light" block className="rounded">
               <u>Cancel</u>
             </Button>
@@ -193,4 +171,4 @@ useEffect(() => {
 
 //         [ForeignKey("ProjectId")]
 //         public Project Project { get; set; }
-export default PeerEvaluation;
+export default ProjectMemberAdd;
