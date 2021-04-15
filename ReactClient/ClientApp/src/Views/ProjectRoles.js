@@ -84,7 +84,10 @@ const RoleList = (props) => {
       </div>
         
       <div style={{float: 'right', width: '25%'}}>
-        <Button className="my-2 mx-2" onClick={() => gotoAddMembership()}>Add Member</Button>
+        {role.projectRole === "Project Manager" && 
+              <Button className="my-2 mx-2" onClick={() => gotoAddMembership()}>Add Member</Button>
+        }
+        
 
       </div>
       
