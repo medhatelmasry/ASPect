@@ -1,30 +1,111 @@
-@page "/editstudents"
+@page "/editstudents/{Id}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
 
 <h1>Edit Student</h1>
 
-<div class="form-element">
+<EditForm Model="@student" OnValidSubmit="@updateOffering">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
     <div class="form-elements">
-        <label for="StudentID">Student ID</label>
-        <input type="text" placeholder="Student ID" value="A01181039"> 
+        <label for="StudentID">Student ID:</label>
+        <p>@student.Id</p>
     </div>
     <div class="form-elements">
-        <label for="TeamName">Team Name</label>
-        <input type="text" placeholder="Team Name" value="Stormfront"> 
+        <label for="StudentEmail">Student Email:</label>
+        <p>@student.Email</p>
     </div>
     <div class="form-elements">
-        <label for="ProjectCategory">Project Category</label>
-        <input type="text" placeholder="Project Category" value="COVID-19"> 
+        <label for="StudentName">Student Name:</label>
+        <p>@student.FirstName @student.LastName </p>
     </div>
+
     <div class="form-elements">
-        <label for="Roles">Roles</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected value="COMP-3717-Fall-2021">COMP-3717-Fall-2021</option>
-            <option value="COMP-3910-Fall-2021">COMP-3910-Fall-2021</option>
-            <option value="COMP-4870-Winter-2022">COMP-4870-Winter-2022</option>
-            <option value="COMP-4911-Winter-2022">COMP-4911-Winter-2022</option>
+        <label for="StudentEnrollment">Student Enrollments:</label>
+        @if(student.Enrollments != null)
+        {
+            @foreach (var item in student.Enrollments)
+            {
+                <p>@item.Offering.Course.CourseTitle @item.Offering.Semester</p>
+            }
+        }
+    </div>
+
+    <div class="form-elements">
+        <label for="StudentOffering">Student's Offering</label>
+        <select @onchange="UpdateOfferingId">
+            @if(offering != null) {
+                @foreach (var item in offering)
+                {
+                    <option value="@item.OfferingId">@item.Course.CourseTitle @item.Semester</option>
+                }
+            }
         </select>
     </div>
-    <div>
-        <button class="btn btn-primary">Edit Student</button>
-    </div>
-</div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</EditForm>
+
+@code {
+    public int OfferingId = 1;
+
+    private async void updateOffering()
+    {
+        Console.WriteLine("Update offering works");
+
+        // Creating an enrollment
+        // Add enrollment to database
+
+        Enrollment e = new Enrollment
+        {
+            // EnrollmentId = 1,
+            //The students id
+            Id = Id,
+            OfferingId = OfferingId,
+        };
+
+        await httpClient.PostAsJsonAsync<Enrollment>($"{httpClient.BaseAddress}/Enrollment", e);
+
+        navigationManager.NavigateTo("/studentlist");
+    }
+}
+
+
+@functions {
+    private ApplicationUser student = new ApplicationUser();
+    ApplicationUser s;
+
+    Offering[] offering;
+
+    [Parameter]
+    public string Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await load(Id);
+        await loadOffering();
+    }
+
+    protected async Task load(string id)
+    {
+        s = await httpClient.GetFromJsonAsync<ApplicationUser>($"{httpClient.BaseAddress}/Student/{id}");
+        student.FirstName = s.FirstName;
+        student.LastName = s.LastName;
+        student.Id = s.Id;
+        student.Email = s.Email;
+        student.Enrollments = s.Enrollments;
+        StateHasChanged();
+    }
+
+    protected async Task loadOffering()
+    {
+        offering = await httpClient.GetFromJsonAsync<Offering[]>($"{httpClient.BaseAddress}/Offering");
+        StateHasChanged();
+    }
+
+    void UpdateOfferingId(ChangeEventArgs e)
+    {
+        OfferingId = Int32.Parse(e.Value.ToString());
+        Console.WriteLine("Offering Id: " + OfferingId);
+    }
+} 

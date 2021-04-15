@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,6 +24,7 @@ namespace ASPectLibrary
         public string Id { get; set; }
 
         [ForeignKey("Id")]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)] 
         public ApplicationUser Instructor { get; set; }
         public int CourseID { get; set; }
         [ForeignKey("CourseID")]

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ASPectLibrary;
 using Web.Data;
+using Microsoft.AspNetCore.Cors;
 
 namespace Web.Controllers
 {
@@ -14,6 +15,7 @@ namespace Web.Controllers
         A Controller with basic CRUD operations for the Offering Model.
         Can be accessed at baseUrl/api/Offering
     */
+    [EnableCors("CORSPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class OfferingController : ControllerBase
