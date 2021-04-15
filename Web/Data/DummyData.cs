@@ -1,40 +1,49 @@
-using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using ASPectLibrary;
-using System;
+using Microsoft.EntityFrameworkCore;
 
-public static class DummyData {
-  public static void Seed (this ModelBuilder modelBuilder) {
-      modelBuilder.Entity<Course>().HasData (
-          GetCourses()
-      );
-      modelBuilder.Entity<ProgressUpdate>().HasData (
-          GetProgressUpdates()
-      );
-      modelBuilder.Entity<Project>().HasData (
-          GetProjects()
-      );
-      modelBuilder.Entity<ProjectCategory>().HasData (
-          GetProjectCategories()
-      );
-      modelBuilder.Entity<ProjectRole>().HasData (
-          GetProjectRoles()
-      );
-      modelBuilder.Entity<Membership>().HasData (
-          GetMemberships()
-      );
-      modelBuilder.Entity<Offering>().HasData (
-          GetOfferings()
-      );
-      modelBuilder.Entity<Enrollment>().HasData (
-          GetEnrollments()
-      );
+public static class DummyData
+{
+    public static void Seed(this ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Course>().HasData(
+            GetCourses()
+        );
+        modelBuilder.Entity<ProgressUpdate>().HasData(
+            GetProgressUpdates()
+        );
+        modelBuilder.Entity<Project>().HasData(
+            GetProjects()
+        );
+        modelBuilder.Entity<ProjectCategory>().HasData(
+            GetProjectCategories()
+        );
+        modelBuilder.Entity<ProjectRole>().HasData(
+            GetProjectRoles()
+        );
+        modelBuilder.Entity<Membership>().HasData(
+            GetMemberships()
+        );
+        modelBuilder.Entity<Offering>().HasData(
+            GetOfferings()
+        );
+        modelBuilder.Entity<Enrollment>().HasData(
+            GetEnrollments()
+        );
+        modelBuilder.Entity<Assignment>().HasData(
+            GetAssignments()
+        );
+        modelBuilder.Entity<ProjectRequirement>().HasData(
+            GetRequirements()
+        );
 
-  }
+    }
 
 
-public static List<Course> GetCourses () {
-    List<Course> courses = new List<Course> () {
+    public static List<Course> GetCourses()
+    {
+        List<Course> courses = new List<Course>() {
         new Course {
             CourseID = 1,
             CourseTitle = "COMP3800 - Practicum",
@@ -53,25 +62,27 @@ public static List<Course> GetCourses () {
         return courses;
     }
 
-    public static List<Membership> GetMemberships () {
-    List<Membership> memberships = new List<Membership> () {
+    public static List<Membership> GetMemberships()
+    {
+        List<Membership> memberships = new List<Membership>() {
         new Membership {
             Id = "363624a6-0978-4866-b5ee-b135a6fc3870", //student
             ProjectId = 1
-        }, 
+        },
         new Membership {
             Id = "363624a6-1111-4866-b5ee-b135a6fc3870", //student
             ProjectId = 1
-        }, 
+        },
         new Membership {
             Id = "363624a6-0978-4866-b5ee-b135a6fc3870", //student
-            ProjectId = 2          
+            ProjectId = 2
         }
     };
         return memberships;
     }
-    public static List<ProgressUpdate> GetProgressUpdates () {
-        List <ProgressUpdate> progressUpdates = new List<ProgressUpdate> () {
+    public static List<ProgressUpdate> GetProgressUpdates()
+    {
+        List<ProgressUpdate> progressUpdates = new List<ProgressUpdate>() {
             new ProgressUpdate {
                 Id = 1,
                 Date = DateTime.Now,
@@ -79,7 +90,7 @@ public static List<Course> GetCourses () {
                 NextWeekActivity = "Going to work on the API",
                 Issues = "Schema may need to be reworked",
                 ProjectId = 1
-            }, 
+            },
             new ProgressUpdate {
                 Id = 2,
                 Date = DateTime.Now,
@@ -92,8 +103,9 @@ public static List<Course> GetCourses () {
         return progressUpdates;
     }
 
-    public static List<Project> GetProjects () {
-        List <Project> projects = new List<Project> () {
+    public static List<Project> GetProjects()
+    {
+        List<Project> projects = new List<Project>() {
             new Project {
                 ProjectId = 1,
                 TeamName = "RA",
@@ -126,8 +138,9 @@ public static List<Course> GetCourses () {
         return projects;
     }
 
-    public static List<ProjectCategory> GetProjectCategories () {
-        List <ProjectCategory> projectCategories = new List<ProjectCategory> () {
+    public static List<ProjectCategory> GetProjectCategories()
+    {
+        List<ProjectCategory> projectCategories = new List<ProjectCategory>() {
             new ProjectCategory {
                 ProjectCategoryId = 1,
                 ProjectCategoryName = "Blockchain"
@@ -140,8 +153,9 @@ public static List<Course> GetCourses () {
         return projectCategories;
     }
 
-    public static List<ProjectRole> GetProjectRoles () {
-        List <ProjectRole> projectRoles = new List<ProjectRole> () {
+    public static List<ProjectRole> GetProjectRoles()
+    {
+        List<ProjectRole> projectRoles = new List<ProjectRole>() {
             new ProjectRole {
                 Id = "Arch",
                 RoleName = "Software Architect"
@@ -164,29 +178,30 @@ public static List<Course> GetCourses () {
             },
             new ProjectRole {
                 Id = "SA",
-                RoleName = "System Administrator" 
+                RoleName = "System Administrator"
             },
             new ProjectRole {
                 Id = "FE",
-                RoleName = "Front End Developer" 
+                RoleName = "Front End Developer"
             },
             new ProjectRole {
                 Id = "BE",
-                RoleName = "Back End Developer" 
+                RoleName = "Back End Developer"
             },
             new ProjectRole {
                 Id = "QA",
-                RoleName = "Quality Assurance" 
+                RoleName = "Quality Assurance"
             },
             new ProjectRole {
                 Id = "TE",
-                RoleName = "Software Tester" 
+                RoleName = "Software Tester"
             }
         };
         return projectRoles;
     }
 
-    public static List<Offering> GetOfferings () {
+    public static List<Offering> GetOfferings()
+    {
 
         List<Offering> list = new List<Offering>() {
             new Offering {
@@ -207,7 +222,8 @@ public static List<Course> GetCourses () {
         return list;
     }
 
-    public static List<Enrollment> GetEnrollments () {
+    public static List<Enrollment> GetEnrollments()
+    {
 
         List<Enrollment> list = new List<Enrollment>() {
             new Enrollment {
@@ -224,6 +240,48 @@ public static List<Course> GetCourses () {
             }
         };
 
+        return list;
+    }
+
+    public static List<Assignment> GetAssignments()
+    {
+        List<Assignment> list = new List<Assignment>() {
+                new Assignment() {
+                    AssignmentId = 1,
+                    DateCreated = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(7),
+                    description = "Create a CRUD application",
+                    courseId = 1
+                }
+        };
+        return list;
+    }
+
+    public static List<ProjectRequirement> GetRequirements()
+    {
+        List<ProjectRequirement> list = new List<ProjectRequirement>() {
+                new ProjectRequirement() {
+                    Id = 1,
+                    DateCreated = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(3),
+                    Requirement = "Setup a WebAPI",
+                    AssignmentId = 1,
+                },
+                new ProjectRequirement() {
+                    Id = 2,
+                    DateCreated = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(6),
+                    Requirement = "Setup a client",
+                    AssignmentId = 1,
+                },
+                new ProjectRequirement() {
+                    Id = 3,
+                    DateCreated = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(7),
+                    Requirement = "Test your application",
+                    AssignmentId = 1,
+                }
+        };
         return list;
     }
 }

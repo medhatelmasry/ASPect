@@ -89,8 +89,8 @@ useEffect(() => {
       date: "",
     },
     onSubmit: async (values) => {
-      values.UserBeingEvaluatedId = values.Peer.substring(0, values.Peer.length - 1 );
-      values.ProjectId = values.Peer.substring(values.Peer.length - 1);
+      values.UserBeingEvaluatedId = values.Peer.substring(0, 36);
+      values.ProjectId = values.Peer.substring(36);
       values.date = new Date().toLocaleString();
       values.UserEvaluatingId = localStorage.getItem("id");
       console.log(values);
@@ -133,7 +133,7 @@ useEffect(() => {
               
               students.map((index) => {
                 
-                return <option key={index} value={index.id + index.projectId}>{index.id} Project: {index.projectId}
+                return <option key={index} value={index.id + index.projectId}>{index.UserBeingEvaluated.FirstName} {index.UserBeingEvaluated.LastName} Project: {index.projectId}
                 </option>
             }
             )}

@@ -26,7 +26,7 @@ export class Home extends Component {
             <strong>(private) Dashboard</strong> routing: /dashboard
           </p>
           <p>
-            <strong>(private) ProjectStatus</strong> routing: /project-status
+            <strong>(private) Projects</strong> routing: /projects
           </p>
           <p>
             <strong>(private) CreateProject</strong> routing: /create-project
