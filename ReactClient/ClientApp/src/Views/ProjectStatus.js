@@ -15,13 +15,18 @@ const ProjectStatus = (props) => {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
   };
-let { id } = useParams();
-console.log(id);
   const getData = async () => {
-    const { data } = await axios.get(`https://localhost:5001/api/ProgressUpdate/`,
+    const { data } = await axios.get(`https://localhost:5001/api/Project/${props.match.params.projectId}`,
       config
     );
-    setProjectUpdates(data);
+    let temp = data.progressUpdates;
+    let progressUpdates = [];
+    temp.forEach((update) => {
+      if(!update.complete){
+        progressUpdates.push(update);
+      } 
+    });
+    setProjectUpdates(progressUpdates);
   }
 
   const authenticated =
