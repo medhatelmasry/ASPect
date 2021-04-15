@@ -57,7 +57,7 @@ namespace Web.Controllers
             {
                 return NotFound();
             } else {
-                var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ThenInclude(m => m.Student).FirstOrDefaultAsync(i => i.ProjectId == id), options);
+                var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ThenInclude(m => m.Student).Include(i => i.ProgressUpdates).FirstOrDefaultAsync(i => i.ProjectId == id), options);
                 Project projDeserialized = System.Text.Json.JsonSerializer.Deserialize<Project>(projJson);
                 return projDeserialized;
             }
