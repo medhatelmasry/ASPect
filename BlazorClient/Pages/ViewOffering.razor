@@ -22,7 +22,7 @@ else
 					<td>@proj.ProjectId</td>
 					<td>@proj.TeamName</td>
 					<td>@proj.AppName</td>
-					<a href="/projects/@proj.ProjectId">View Project</a>
+					<button type="button"><a href="/projects/@proj.ProjectId">View Project</a></button>
 				</tr>
 			}
 		</table>
@@ -39,6 +39,6 @@ else
     }
     public async Task loadOffering()
     {
-        offering = await httpClient.GetFromJsonAsync<ASPectLibrary.Offering>($"https://localhost:5001/api/Offering/{Id}");
+        offering = await httpClient.GetFromJsonAsync<ASPectLibrary.Offering>($"{httpClient.BaseAddress}/Offering/{Id}");
     }
 }
