@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web.Data;
 
 namespace Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210415050036_M1")]
+    partial class M1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,9 +355,6 @@ namespace Web.Data.Migrations
                     b.Property<int?>("CourseID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProjectRole")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id", "ProjectId");
 
                     b.HasIndex("CourseID");
@@ -468,9 +467,6 @@ namespace Web.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Complete")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
@@ -496,8 +492,7 @@ namespace Web.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Complete = false,
-                            Date = new DateTime(2021, 4, 14, 23, 51, 55, 397, DateTimeKind.Local).AddTicks(6118),
+                            Date = new DateTime(2021, 4, 14, 22, 0, 35, 164, DateTimeKind.Local).AddTicks(1190),
                             Issues = "Schema may need to be reworked",
                             LastWeekActivity = "Finished DB Design",
                             NextWeekActivity = "Going to work on the API",
@@ -506,8 +501,7 @@ namespace Web.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Complete = false,
-                            Date = new DateTime(2021, 4, 14, 23, 51, 55, 397, DateTimeKind.Local).AddTicks(8210),
+                            Date = new DateTime(2021, 4, 14, 22, 0, 35, 164, DateTimeKind.Local).AddTicks(4070),
                             Issues = "Need to find solution for deployment",
                             LastWeekActivity = "Finished API Design",
                             NextWeekActivity = "Going to implement the API",
@@ -958,7 +952,7 @@ namespace Web.Data.Migrations
             modelBuilder.Entity("ASPectLibrary.ProgressUpdate", b =>
                 {
                     b.HasOne("ASPectLibrary.Project", "Project")
-                        .WithMany("ProgressUpdates")
+                        .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1073,8 +1067,6 @@ namespace Web.Data.Migrations
             modelBuilder.Entity("ASPectLibrary.Project", b =>
                 {
                     b.Navigation("Memberships");
-
-                    b.Navigation("ProgressUpdates");
                 });
 #pragma warning restore 612, 618
         }
