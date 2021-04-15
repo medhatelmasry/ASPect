@@ -38,7 +38,7 @@ export default class App extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/projects" component={ProjectList} />
-        <Route exact path="/projectstatus/:projectId" component={ProjectStatus} />
+        <Route exact path="/project-status/:projectId" component={ProjectStatus} />
         <Route exact path="/project-members/:projectId" component={ProjectRoleList} />
         <Route exact path="/project-member-add/:projectId" component={ProjectMemberAdd} />
         <Route exact path="/create-project" component={CreateProject} />

@@ -59,10 +59,10 @@ const RoleList = (props) => {
     history.push("/project-member-add/" + props.match.params.projectId);
   }
 
-  const gotoEditMembership = (membership) => {
-    localStorage.setItem("memberships", project.memberships)
-    history.push("/project-member-edit/" + membership.id);
-  }
+  // const gotoEditMembership = (membership) => {
+  //   localStorage.setItem("memberships", project.memberships)
+  //   history.push("/project-member-edit/" + membership.id);
+  // }
 
   const deleteMember = (membership) => {
     axios.delete(`https://localhost:5001/api/Membership/${membership.id}/${props.match.params.projectId}`,
@@ -98,9 +98,9 @@ const RoleList = (props) => {
             {role.projectRole === "Project Manager" && 
                 <th></th>
               }
-              {role.projectRole === "Project Manager" && 
+              {/* {role.projectRole === "Project Manager" && 
                 <th></th>
-              }
+              } */}
             
           </tr>
         </thead>
@@ -109,9 +109,9 @@ const RoleList = (props) => {
             <tr>
               <td>{m.student.firstName + " " + m.student.lastName}</td>
               <td>{m.projectRole}</td>
-              {role.projectRole === "Project Manager" && 
+              {/* {role.projectRole === "Project Manager" && 
                 <td><Button className="my-2 mx-2" onClick={() => gotoEditMembership(m)}>Edit Role</Button></td>
-              }
+              } */}
               {role.projectRole === "Project Manager" && 
                 <td><Button className="my-2 mx-2" onClick={() => deleteMember(m)}>Delete Role</Button></td>
               }

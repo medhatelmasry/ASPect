@@ -39,7 +39,7 @@ const ProjectList = (props) => {
     history.push("/login");
   }
   const gotoStatusPage = (projectId) => {
-    history.push("/projectstatus/" + projectId);
+    history.push("/project-status/" + projectId);
   }
   
   const renderProjects = () => {

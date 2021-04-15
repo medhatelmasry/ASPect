@@ -120,6 +120,7 @@ useEffect(() => {
         <Form>
           
           <Field as="select" id="id" name="id">
+            <option>Select a Peer</option>
             {
               students.map((index) => {
                 
@@ -136,10 +137,10 @@ useEffect(() => {
           />
 
           <Button type="submit" variant="primary" block className="rounded">
-            Save Changes
+            Add Member
           </Button>
 
-          <LinkContainer to="/dashboard">
+          <LinkContainer to={"/project-members/" + props.match.params.projectId}>
             <Button variant="light" block className="rounded">
               <u>Cancel</u>
             </Button>
