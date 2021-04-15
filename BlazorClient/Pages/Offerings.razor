@@ -46,6 +46,6 @@ else
     }
     public async Task loadOfferings()
     {
-        offerings = await httpClient.GetFromJsonAsync<ASPectLibrary.Offering[]>("https://localhost:5001/api/Offering");
+        offerings = await httpClient.GetFromJsonAsync<ASPectLibrary.Offering[]>($"{httpClient.BaseAddress}/Student");
     }
 }
