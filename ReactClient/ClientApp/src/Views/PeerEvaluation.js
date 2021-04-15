@@ -53,7 +53,7 @@ useEffect(() => {
   
     const getPeers = async () => {
     const result = await axios.get(
-      "https://openaspect.azurewebsites.net/api/Membership",
+      "https://localhost:5001/api/Membership",
       config
     );
     const membershipList = result.data;
@@ -96,7 +96,7 @@ useEffect(() => {
       console.log(values);
       try {
         await axios.post(
-          `https://openaspect.azurewebsites.net/api/PeerEvaluation`,
+          `https://localhost:5001/api/PeerEvaluation`,
           values,
           config
         );
@@ -133,7 +133,7 @@ useEffect(() => {
               
               students.map((index) => {
                 
-                return <option key={index} value={index.id + index.projectId}>{index.UserBeingEvaluated.FirstName} {index.UserBeingEvaluated.LastName} Project: {index.projectId}
+                return <option key={index} value={index.id + index.projectId}>{index.student.firstName} {index.student.lastName} Project: {index.projectId}
                 </option>
             }
             )}

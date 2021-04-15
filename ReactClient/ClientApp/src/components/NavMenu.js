@@ -48,7 +48,7 @@ const NavMenu = () => {
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/projects">
-                    Dashboard
+                    Projects
                   </NavLink>
                 </NavItem>
 
