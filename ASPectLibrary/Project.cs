@@ -24,5 +24,6 @@ namespace ASPectLibrary
 
         public IList<Membership> Memberships { get; set; }
         //Needs a list of progress updates
+        public IList<ProgressUpdate> ProgressUpdates { get; set; }
     }
 }

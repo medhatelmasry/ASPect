@@ -15,5 +15,7 @@ namespace ASPectLibrary {
 
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
+
+        public bool Complete { get; set; }
     }
 }

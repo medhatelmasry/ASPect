@@ -34,6 +34,11 @@ namespace Web.Data
             .WithMany(p => p.Projects)
             .HasForeignKey(o => o.OfferingId); 
 
+            builder.Entity<ProgressUpdate>()
+            .HasOne<Project>(p => p.Project)
+            .WithMany(p => p.ProgressUpdates)
+            .HasForeignKey(o => o.ProjectId); 
+
             //builder.Entity<Enrollment>().HasKey(er => new { er.OfferingId, er.Id , er.EnrollmentId});
 
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
