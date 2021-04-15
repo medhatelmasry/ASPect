@@ -20,7 +20,15 @@ const ProjectList = (props) => {
     const { data } = await axios.get(`https://localhost:5001/api/Project/`,
       config
     );
-    setProjects(data);
+    const projects = [];
+    data.forEach((project) => {
+      project.memberships.forEach((member) => {
+        if (member.student.id === localStorage.getItem("id"))
+        projects.push(project);
+      })
+    });
+
+    setProjects(projects);
   }
   
   const authenticated =
@@ -58,7 +66,6 @@ const ProjectList = (props) => {
                 <h4>Team Name</h4>
                 <h6>{p.teamName}</h6>
               </div>
-
                 <Button className="my-8 mx-8" onClick={() => gotoStatusPage(p.projectId)}>Project Status</Button>
               <div style={{float: 'right', width: '25%'}}>
               </div>
