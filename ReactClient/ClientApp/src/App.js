@@ -5,7 +5,7 @@ import { Home } from "./Views/Home";
 import { Dashboard } from "./Views/Dashboard";
 import Login from "./Views/Login";
 import Signup from "./Views/Signup";
-import ProjectStatus from "./Views/ProjectStatus";
+import ProjectList from "./Views/Projects";
 import PeerEvaluation from "./Views/PeerEvaluation";
 import CreateProject from "./Views/CreateProject";
 import EditStudentInfo from "./Views/EditStudentInfo";
@@ -30,7 +30,7 @@ export default class App extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
-        <Route exact path="/project-status" component={ProjectStatus} />
+        <Route exact path="/projects" component={ProjectList} />
         <Route exact path="/create-project" component={CreateProject} />
         <Route
           exact
