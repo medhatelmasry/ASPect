@@ -7,6 +7,7 @@ import Login from "./Views/Login";
 import Signup from "./Views/Signup";
 import ProjectList from "./Views/Projects";
 import ProjectStatus from "./Views/ProjectStatus";
+import ProjectRoleList from "./Views/ProjectRoles";
 import PeerEvaluation from "./Views/PeerEvaluation";
 import CreateProject from "./Views/CreateProject";
 import EditStudentInfo from "./Views/EditStudentInfo";
@@ -35,6 +36,7 @@ export default class App extends Component {
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/projects" component={ProjectList} />
         <Route exact path="/projectstatus/:projectId" component={ProjectStatus} />
+        <Route exact path="/projectroles/:projectId" component={ProjectRoleList} />
         <Route exact path="/create-project" component={CreateProject} />
         <Route
           exact

@@ -116,6 +116,18 @@ _Student Applciation Login View_
 
 <br />
 
+_Assignments screen_
+
+<img src="https://cdn.discordapp.com/attachments/814651656075608105/832159866193838080/Screen_Shot_2021-04-15_at_12.45.07_AM.png" width="80%"/>
+
+<br />
+
+_Viewing Requirements of an Assignment_
+
+<img src="https://cdn.discordapp.com/attachments/814651656075608105/832159782990643200/unknown.png" width="80%"/>
+
+<br />
+
 #
 
 ## <span id="07">Tools</span>
