@@ -23,5 +23,6 @@ namespace ASPectLibrary
         public Offering Offering{ get; set; }
 
         public IList<Membership> Memberships { get; set; }
+        //Needs a list of progress updates
     }
 }
