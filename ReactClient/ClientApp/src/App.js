@@ -8,10 +8,13 @@ import Signup from "./Views/Signup";
 import ProjectList from "./Views/Projects";
 import ProjectStatus from "./Views/ProjectStatus";
 import ProjectRoleList from "./Views/ProjectRoles";
+import ProjectMemberAdd from "./Views/ProjectAddRole";
 import PeerEvaluation from "./Views/PeerEvaluation";
 import CreateProject from "./Views/CreateProject";
 import EditStudentInfo from "./Views/EditStudentInfo";
 import ForgotPassword from "./Views/ForgotPassword";
+
+
 import "./custom.css";
 import PreviousProgressUpdates from "./Views/PreviousProgressUpdates";
 import CreateProgressUpdate from "./Views/CreateProgressUpdate";
@@ -35,8 +38,9 @@ export default class App extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/projects" component={ProjectList} />
-        <Route exact path="/projectstatus/:projectId" component={ProjectStatus} />
-        <Route exact path="/projectroles/:projectId" component={ProjectRoleList} />
+        <Route exact path="/project-status/:projectId" component={ProjectStatus} />
+        <Route exact path="/project-members/:projectId" component={ProjectRoleList} />
+        <Route exact path="/project-member-add/:projectId" component={ProjectMemberAdd} />
         <Route exact path="/create-project" component={CreateProject} />
         <Route
           exact

@@ -39,7 +39,7 @@ const ProjectList = (props) => {
     history.push("/login");
   }
   const gotoStatusPage = (projectId) => {
-    history.push("/projectstatus/" + projectId);
+    history.push("/project-status/" + projectId);
   }
   
   const renderProjects = () => {
@@ -58,6 +58,7 @@ const ProjectList = (props) => {
                 <h4>Team Name</h4>
                 <h6>{p.teamName}</h6>
               </div>
+
                 <Button className="my-8 mx-8" onClick={() => gotoStatusPage(p.projectId)}>Project Status</Button>
               <div style={{float: 'right', width: '25%'}}>
               </div>

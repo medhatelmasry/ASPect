@@ -60,9 +60,6 @@ export const Dashboard = (props) => {
         Your email address: <em>{localStorage.getItem("email")}.</em>
       </p>
 
-      <LinkContainer to="/project-status">
-        <Button className="my-2 mx-2">View Project Status</Button>
-      </LinkContainer>
 
       <LinkContainer to="/create-project">
         <Button className="my-2 mx-2">Create Project</Button>

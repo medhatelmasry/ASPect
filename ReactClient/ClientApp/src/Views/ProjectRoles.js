@@ -54,9 +54,15 @@ const RoleList = (props) => {
     history.push("/login");
   }
 
-  const gotoEditMembership = (membership) => {
-    history.push("/project-member-edit/" + membership.id);
+  const gotoAddMembership = (membership) => {
+    localStorage.setItem("memberships", project.memberships)
+    history.push("/project-member-add/" + props.match.params.projectId);
   }
+
+  // const gotoEditMembership = (membership) => {
+  //   localStorage.setItem("memberships", project.memberships)
+  //   history.push("/project-member-edit/" + membership.id);
+  // }
 
   const deleteMember = (membership) => {
     axios.delete(`https://localhost:5001/api/Membership/${membership.id}/${props.match.params.projectId}`,
@@ -69,11 +75,19 @@ const RoleList = (props) => {
   return (
     <Container>
       <h1> Project Members</h1>
-      <br/>
-      <h3>{role.projectRole}</h3>
-      <br/>
-      <h3>{memberships.length + 1}</h3>
-      <h6>members</h6>
+      <div style={{float: 'left', width: '75%'}}>
+        <br/>
+        <h3>{role.projectRole}</h3>
+        <br/>
+        <h3>{memberships.length + 1}</h3>
+        <h6>members</h6>
+      </div>
+        
+      <div style={{float: 'right', width: '25%'}}>
+        <Button className="my-2 mx-2" onClick={() => gotoAddMembership()}>Add Member</Button>
+
+      </div>
+      
       <br></br>
       <h1>Other Members</h1>
       <Table striped bordered hover className="mt-4">
@@ -84,9 +98,9 @@ const RoleList = (props) => {
             {role.projectRole === "Project Manager" && 
                 <th></th>
               }
-              {role.projectRole === "Project Manager" && 
+              {/* {role.projectRole === "Project Manager" && 
                 <th></th>
-              }
+              } */}
             
           </tr>
         </thead>
@@ -95,13 +109,11 @@ const RoleList = (props) => {
             <tr>
               <td>{m.student.firstName + " " + m.student.lastName}</td>
               <td>{m.projectRole}</td>
-              {role.projectRole === "Project Manager" && 
+              {/* {role.projectRole === "Project Manager" && 
                 <td><Button className="my-2 mx-2" onClick={() => gotoEditMembership(m)}>Edit Role</Button></td>
-                
-              }
+              } */}
               {role.projectRole === "Project Manager" && 
                 <td><Button className="my-2 mx-2" onClick={() => deleteMember(m)}>Delete Role</Button></td>
-                
               }
               
             </tr>

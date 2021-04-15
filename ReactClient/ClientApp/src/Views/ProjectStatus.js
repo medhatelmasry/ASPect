@@ -65,11 +65,15 @@ const ProjectStatus = (props) => {
   const gotoPreviousProgressPage = (projectId) => {
     history.push("/previous-progress-updates/" + projectId);
   }
+  const gotoMemberPage = (projectId) => {
+    history.push("/project-members/" + projectId);
+  }
   return (
     <Container>
       <h1>Weekly Status</h1>
       <Button className="my-8 mx-8" onClick={() => gotoCreateStatusPage(props.match.params.projectId)}>Create New Status</Button>
       <Button className="my-8 mx-8" onClick={() => gotoPreviousProgressPage(props.match.params.projectId)}>View Previous Status Updates</Button>
+      <Button className="my-8 mx-8" onClick={() => gotoMemberPage(props.match.params.projectId)}>View Team Members</Button>
       <Table striped bordered hover className="mt-4">
         <thead>
           <tr>
