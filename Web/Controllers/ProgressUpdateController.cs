@@ -36,11 +36,14 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<IActionResult> PostProgressUpdate(ProgressUpdate progressUpdate)
         {
-            try {
+            try
+            {
                 _context.ProgressUpdates.Add(progressUpdate);
                 await _context.SaveChangesAsync();
                 return Accepted();
-            } catch {
+            }
+            catch
+            {
                 return NotFound();
             }
         }
@@ -52,7 +55,7 @@ namespace Web.Controllers
         /// Returns: A 202, OK
         ///            404, If ProgressUpdate not found
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProgressUpdate(int id) 
+        public async Task<IActionResult> DeleteProgressUpdate(int id)
         {
             var progressUpdate = await _context.ProgressUpdates.FindAsync(id);
 
@@ -60,18 +63,29 @@ namespace Web.Controllers
 
             _context.ProgressUpdates.Remove(progressUpdate);
             await _context.SaveChangesAsync();
-            
+
             return Accepted();
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> SetCompleted(int id)
+        {
+            var progressUpdate = await _context.ProgressUpdates.FindAsync(id);
 
+            if (progressUpdate == null) { return NotFound(); }
+            progressUpdate.Complete = true;
+            _context.ProgressUpdates.Update(progressUpdate);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
         /// PUT
         /// Updates a ProgressUpdate in the DB
         /// 
         /// Returns: A 202, OK
         ///            404, if ProgressUpdate not found
         [HttpPut]
-        public async Task<IActionResult> UpdateProgressUpdate(ProgressUpdate progressUpdate) 
+        public async Task<IActionResult> UpdateProgressUpdate(ProgressUpdate progressUpdate)
         {
             var newPU = await _context.ProgressUpdates.FindAsync(progressUpdate.Id);
 
@@ -79,7 +93,7 @@ namespace Web.Controllers
 
             _context.ProgressUpdates.Update(progressUpdate);
             await _context.SaveChangesAsync();
-            
+
             return Ok();
         }
     }

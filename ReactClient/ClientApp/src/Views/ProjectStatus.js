@@ -45,6 +45,20 @@ const ProjectStatus = (props) => {
     console.log("not logged in");
     history.push("/login");
   }
+
+
+
+  const markComplete = async (progressUpdate)=>{
+
+    console.log(progressUpdate);
+    const { result } = await axios.put(
+      `https://localhost:5001/api/progressupdate/${progressUpdate.id}`,
+      config
+    );
+    window.location.reload(false);
+  } 
+
+
   const gotoCreateStatusPage = (projectId) => {
     history.push("/create-progress-update/" + projectId);
   }
@@ -64,6 +78,7 @@ const ProjectStatus = (props) => {
             <th>Next Week Activity</th>
             <th>Issues</th>
             <th>Date</th>
+            <th>Complete?</th>
           </tr>
         </thead>
         <tbody>
@@ -74,6 +89,7 @@ const ProjectStatus = (props) => {
               <td>{p.nextWeekActivity}</td>
               <td>{p.issues}</td>
               <td>{p.date}</td>
+              <td><input type="checkbox" onClick={() => markComplete(p)}/></td>
             </tr>
           ))}
         </tbody>

@@ -127,7 +127,9 @@ useEffect(() => {
         )}
 
         <Form> 
+          
           <Field as="select" id="Peer" name="Peer">
+          <br/>
           <option>Select a peer</option>
             {
               
@@ -138,18 +140,23 @@ useEffect(() => {
             }
             )}
           </Field>
+          <br/>
           <label htmlFor="rating">Rating 0-10</label>
+          <br/>
           <Field
             id="rating"
             name="rating"
             type="number"
           />
+          <br/>
           <label htmlFor="comments">Comments </label>
+          <br/>
           <Field
+            as="textarea"
             id="comments"
             name="comments"
-            type="text"
           />
+          <br/>
 
           <Button type="submit" variant="primary" block className="rounded">
             Save Changes

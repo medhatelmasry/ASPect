@@ -59,7 +59,6 @@ const PreviousProgressUpdates = (props) => {
               <th>Next Week Activity</th>
               <th>Issues</th>
               <th>Date</th>
-              <th>Complete?</th>
             </tr>
           </thead>
           <tbody>
@@ -71,7 +70,6 @@ const PreviousProgressUpdates = (props) => {
                   <td>{p.nextWeekActivity}</td>
                   <td>{p.issues}</td>
                   <td>{p.date}</td>
-                  <td></td>
                 </tr>
               ))
             }
