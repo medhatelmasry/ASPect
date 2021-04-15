@@ -113,10 +113,10 @@ namespace Web.Controllers
         }
 
         // DELETE: api/Membership/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMembership(string id)
+        [HttpDelete("{id}/{projectId}")]
+        public async Task<IActionResult> DeleteMembership(string id, int projectId)
         {
-            var membership = await _context.Memberships.FindAsync(id);
+            var membership = await _context.Memberships.FindAsync(id, projectId);
             if (membership == null)
             {
                 return NotFound();
