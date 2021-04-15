@@ -32,7 +32,7 @@
 @functions {
     RegisterViewModel model = new RegisterViewModel();
 
-    private async void HandleAdd()
+    private async void HandleAdd() 
     {
         string endpoint = $"{httpClient.BaseAddress}/Auth/register";
         await httpClient.PostAsJsonAsync(endpoint, model);
