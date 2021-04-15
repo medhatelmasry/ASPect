@@ -26,6 +26,7 @@ const config = {
 
 const ProjectMemberAdd = (props) => {
   const [students, setStudents] = useState([]);
+  const [roles, setRoles] = useState([]);
   const authenticated =
   localStorage.getItem("id") &&
   localStorage.getItem("token") &&
@@ -118,7 +119,7 @@ useEffect(() => {
         )}
 
         <Form>
-          
+          <h2>Add a Member</h2>
           <Field as="select" id="id" name="id">
             <option>Select a Peer</option>
             {
@@ -129,13 +130,21 @@ useEffect(() => {
             }
             )}
           </Field>
-          <TextInputLiveFeedback
-            label="Project Role"
-            id="projectRole"
-            name="projectRole"
-            type="projectRole"
-          />
-
+          <br/>
+          <br/>
+          <Field as="select" id="projectRole" name="projectRole">
+          <option>Select a Role</option>
+           <option value="Project Manager">Project Manager</option>
+            <option value="Database Administrator">Database Administrator</option>
+            <option value="UI/UX Designer">UI/UX Designer</option>
+            <option value="Software Developer">Software Developer</option>
+            <option value="System Administrator">System Administrator</option>
+            <option value="Front End Developer">Front End Developer</option>
+            <option value="Back End Developer">Back End Developer</option>
+            <option value="Quality Assurance">Quality Assurance</option>
+            <option value="Software Tester">Software Tester</option>
+          </Field>
+            <br></br>
           <Button type="submit" variant="primary" block className="rounded">
             Add Member
           </Button>
