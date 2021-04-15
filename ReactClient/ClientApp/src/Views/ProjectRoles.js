@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Table, Button} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { Container, Table, Button } from "react-bootstrap";
 import { useHistory, useParams } from "react-router";
 
 const RoleList = (props) => {
@@ -25,9 +26,9 @@ const RoleList = (props) => {
     let tempRole = {};
     const isPM = false;
     data.memberships.forEach((membership) => {
-      console.log(membership.student.id + " " +  localStorage.getItem("id"));
-      if(membership.student.id === localStorage.getItem("id")){
-        
+      console.log(membership.student.id + " " + localStorage.getItem("id"));
+      if (membership.student.id === localStorage.getItem("id")) {
+
         tempRole = membership
       } else {
         tempMemberships.push(membership);
@@ -53,7 +54,7 @@ const RoleList = (props) => {
     console.log("not logged in");
     history.push("/login");
   }
-  const authorized = localStorage.getItem("projectId") == props.match.params.projectId ? true: false;;
+  const authorized = localStorage.getItem("projectId") == props.match.params.projectId ? true : false;;
   if (!authorized) {
     console.log("not authorized");
     history.push("/projects");
@@ -79,22 +80,22 @@ const RoleList = (props) => {
   return (
     <Container>
       <h1> Project Members</h1>
-      <div style={{float: 'left', width: '75%'}}>
-        <br/>
+      <div style={{ float: 'left', width: '75%' }}>
+        <br />
         <h3>{role.projectRole}</h3>
-        <br/>
+        <br />
         <h3>{memberships.length + 1}</h3>
         <h6>members</h6>
       </div>
-        
-      <div style={{float: 'right', width: '25%'}}>
-        {role.projectRole === "Project Manager" && 
-              <Button className="my-2 mx-2" onClick={() => gotoAddMembership()}>Add Member</Button>
+
+      <div style={{ float: 'right', width: '25%' }}>
+        {role.projectRole === "Project Manager" &&
+          <Button className="my-2 mx-2" onClick={() => gotoAddMembership()}>Add Member</Button>
         }
-        
+
 
       </div>
-      
+
       <br></br>
       <h1>Other Members</h1>
       <Table striped bordered hover className="mt-4">
@@ -102,13 +103,13 @@ const RoleList = (props) => {
           <tr>
             <th>Name</th>
             <th>Role</th>
-            {role.projectRole === "Project Manager" && 
-                <th></th>
-              }
-              {/* {role.projectRole === "Project Manager" && 
+            {role.projectRole === "Project Manager" &&
+              <th></th>
+            }
+            {/* {role.projectRole === "Project Manager" && 
                 <th></th>
               } */}
-            
+
           </tr>
         </thead>
         <tbody>
@@ -119,14 +120,19 @@ const RoleList = (props) => {
               {/* {role.projectRole === "Project Manager" && 
                 <td><Button className="my-2 mx-2" onClick={() => gotoEditMembership(m)}>Edit Role</Button></td>
               } */}
-              {role.projectRole === "Project Manager" && 
+              {role.projectRole === "Project Manager" &&
                 <td><Button className="my-2 mx-2" onClick={() => deleteMember(m)}>Delete Role</Button></td>
               }
-              
+
             </tr>
           ))}
         </tbody>
       </Table>
+      <LinkContainer to={"/project-status/" + props.match.params.projectId}>
+        <Button variant="light" block className="rounded">
+          <u>Return</u>
+        </Button>
+      </LinkContainer>
     </Container>
   )
 };

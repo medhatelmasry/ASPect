@@ -57,7 +57,7 @@ const CreateProgressUpdate = (props) => {
           values,
           config
         );
-        history.push("/projectstatus/" + id);
+        history.push("/project-status/" + id);
         console.log("saved changes");
       } catch (error) {
         console.log(error);

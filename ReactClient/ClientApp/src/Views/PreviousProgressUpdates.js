@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { useHistory } from "react-router";
 import { BrowserRouter as useParams } from "react-router-dom";
 
@@ -82,6 +83,12 @@ const PreviousProgressUpdates = (props) => {
     <Container>
       <h1>Previous Progress Updates</h1>
       {renderProgress()}
+      <br></br>
+      <LinkContainer to={"/project-status/" + props.match.params.projectId}>
+            <Button variant="light" block className="rounded">
+              <u>Return</u>
+            </Button>
+          </LinkContainer>
     </Container>
   )
 };
