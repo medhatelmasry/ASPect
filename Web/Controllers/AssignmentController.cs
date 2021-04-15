@@ -48,7 +48,6 @@ namespace Web.Controllers
             }
 
             var results = await _context.Assignments.Where(x => x.courseId == id).ToListAsync();
-
             if (results.Count > 0) {
                 return Ok(results);
             } else {

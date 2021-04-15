@@ -1,0 +1,49 @@
+@page "/assignments"
+@using ASPectLibrary
+@inject HttpClient httpClient
+@inject NavigationManager NavManager
+
+@if (assignments == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="assignments-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        @foreach (var item in assignments)
+            {
+                <tr>
+                    <td>@item.AssignmentId</td>
+                    <td>@item.description</td>
+                    <button @onclick="@(() => ViewRequirements(@item.AssignmentId))">View requirements</button>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+@code {
+    IEnumerable<Assignment> assignments;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await load();
+    }
+
+    protected void ViewRequirements(int AssignmentId)
+    {
+        NavManager.NavigateTo($"/requirements/{AssignmentId}");
+    }
+
+    protected async Task load()
+    {
+        assignments = await httpClient.GetFromJsonAsync<List<Assignment>>($"{httpClient.BaseAddress}/Assignment");
+    }
+}

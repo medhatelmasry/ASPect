@@ -1,0 +1,46 @@
+@page "/requirements/{AssignmentId:int}"
+@using ASPectLibrary
+@inject HttpClient httpClient
+@inject NavigationManager NavManager
+
+@if (requirements == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="team-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Due date</th>
+            </tr>
+        </thead>
+        @foreach (var item in requirements)
+            {
+                <tr>
+                    <td>@item.Requirement</td>
+                    <td>@item.DueDate</td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int AssignmentId { get; set; }
+    IEnumerable<ProjectRequirement> requirements;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await load();
+    }
+
+    protected async Task load()
+    {
+        requirements = await
+        httpClient.GetFromJsonAsync<List<ProjectRequirement>>($"{httpClient.BaseAddress}/ProjectRequirement");
+    }
+}

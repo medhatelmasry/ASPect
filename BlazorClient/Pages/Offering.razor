@@ -1,0 +1,51 @@
+@page "/offering"
+@inject HttpClient httpClient
+@inject NavigationManager NavManager
+
+@if (offerings == null)
+{
+    <p>Loading... check console</p>
+}
+else
+{
+    <h1>View Offerings</h1>
+    <div class="offeringSection">
+        <table>
+            <tr>
+                <th>Offering ID</th>
+                <th>Semester</th>
+                <th>Year</th>
+                <th>Course</th>
+                <th>More info</th>
+            </tr>
+            @foreach (var o in offerings)
+            {
+                <tr>
+                    <td>@o.OfferingId</td>
+                    <td>@o.Semester</td>
+                    <td>@o.Year</td>
+                    <td>@o.Course</td>
+                    <td>
+                        @*.Using lambda method*@
+                        <a href="/offering/@o.OfferingId">View Offering</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+@code {
+    ASPectLibrary.Offering[] offerings;
+    protected override async Task OnInitializedAsync()
+    {
+        await loadOfferings();
+        foreach (var o in offerings)
+        {
+            Console.WriteLine(o.OfferingId);
+        }
+    }
+    public async Task loadOfferings()
+    {
+        offerings = await httpClient.GetFromJsonAsync<ASPectLibrary.Offering[]>("https://localhost:5001/api/Offering");
+    }
+}

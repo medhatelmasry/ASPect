@@ -1,0 +1,44 @@
+@page "/offering/{id}"
+@inject HttpClient httpClient
+@inject NavigationManager NavManager
+
+@if (offering == null)
+{
+    <p>Loading... check console</p>
+}
+else
+{
+    <h1>@offering.Semester @offering.Year @offering.Course</h1>
+    <div class="oneOffering">
+		<table>
+			<tr>
+				<th>Project ID</th>
+				<th>Team Name</th>
+				<th>App Name</th>
+			</tr>
+			@foreach (var proj in @offering.Projects) @*making a row for every project*@
+			{
+				<tr>
+					<td>@proj.ProjectId</td>
+					<td>@proj.TeamName</td>
+					<td>@proj.AppName</td>
+					<button type="button" href="/projects/@proj.ProjectId">View Project</button>
+				</tr>
+			}
+		</table>
+	</div>
+}
+@code {
+    [Parameter]
+	public string Id { get; set; }
+    ASPectLibrary.Offering offering;
+    protected override async Task OnInitializedAsync()
+    {
+        await loadOffering();
+        Console.WriteLine(offering.OfferingId);
+    }
+    public async Task loadOffering()
+    {
+        offering = await httpClient.GetFromJsonAsync<ASPectLibrary.Offering>($"https://localhost:5001/api/Offering/{Id}");
+    }
+}
