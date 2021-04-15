@@ -8,6 +8,7 @@ import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
 import { nameRegex, emailRegex, passwordRegex } from "../util/regex";
 import bcrypt from "bcryptjs";
 import axios from "axios";
+import { config } from "../util/config";
 
 const schema = Yup.object({
   email: Yup.string()
@@ -39,14 +40,6 @@ const schema = Yup.object({
     }),
 });
 
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-  },
-};
-
 const Signup = () => {
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
@@ -77,10 +70,7 @@ const Signup = () => {
       values.passwordHash = passwordHash;
       console.log(values);
 
-      const result = await axios.get(
-        "https://localhost:5001/api/Student",
-        config
-      );
+      const result = await axios.get("/api/Student", config);
       const studentList = result.data;
       let studentUserNameList = [];
 
@@ -94,11 +84,7 @@ const Signup = () => {
         history.push("/signup");
       } else {
         try {
-          await axios.post(
-            "https://localhost:5001/api/Auth/register",
-            values,
-            config
-          );
+          await axios.post("/api/Auth/register", values, config);
           history.push("/dashboard");
           console.log("created a student account");
         } catch (error) {

@@ -6,8 +6,8 @@ import { useHistory, useParams } from "react-router";
 const ProjectStatus = (props) => {
   const [progressUpdates, setProjectUpdates] = useState([]);
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -16,35 +16,35 @@ const ProjectStatus = (props) => {
     },
   };
   const getData = async () => {
-    const { data } = await axios.get(`https://localhost:5001/api/Project/${props.match.params.projectId}`,
+    const { data } = await axios.get(
+      `https://localhost:5001/api/Project/${props.match.params.projectId}`,
       config
     );
     let temp = data.progressUpdates;
     let progressUpdates = [];
     temp.forEach((update) => {
-      if(!update.complete){
+      if (!update.complete) {
         progressUpdates.push(update);
-      } 
+      }
     });
     setProjectUpdates(progressUpdates);
-  }
+  };
 
   const authenticated =
     localStorage.getItem("id") &&
-      localStorage.getItem("token") &&
-      localStorage.getItem("expiration")
+    localStorage.getItem("token") &&
+    localStorage.getItem("expiration")
       ? true
       : false;
 
   const history = useHistory();
 
   if (authenticated) {
-    console.log("logged in");
+    // console.log("logged in");
   } else {
     console.log("not logged in");
     history.push("/login");
   }
-
   return (
     <Container>
       <h1>Tasks</h1>
@@ -65,7 +65,7 @@ const ProjectStatus = (props) => {
         </tbody>
       </Table>
     </Container>
-  )
+  );
 };
 
 export default ProjectStatus;
