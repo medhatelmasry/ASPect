@@ -64,7 +64,7 @@ namespace Web
 
       services.AddAuthentication(option =>
       {
-        option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        // option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
       }).AddJwtBearer(options =>
@@ -80,7 +80,6 @@ namespace Web
           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SigningKey"]))
         };
       });
-
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,10 +105,8 @@ namespace Web
       app.UseAuthentication();
       app.UseAuthorization();
 
-            app.UseCors("CORSPolicy");
-
-      context.Database.Migrate();
       app.UseCors("CORSPolicy");
+      context.Database.Migrate();
 
       app.UseEndpoints(endpoints =>
       {
